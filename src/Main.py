@@ -1,3 +1,5 @@
+from time import sleep
+
 from LearningService import LearningService
 
 if __name__ == "__main__":
@@ -10,5 +12,4 @@ if __name__ == "__main__":
         LearningService().start()
     else:
         print "Switched to test mode"
-
 
