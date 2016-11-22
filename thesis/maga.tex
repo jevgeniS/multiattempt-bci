@@ -1,0 +1,405 @@
+\documentclass[12pt]{article}
+
+
+
+% A package for setting layout and margins for your thesis 
+\usepackage[a4paper]{geometry}
+
+
+% Use package babel for English or Estonian 
+% If you use Estonian make sure that Estonian hyphenation is installed 
+% - hypen-estonian or eehyp packages
+\usepackage[estonian, english]{babel} 
+% \usepackage[english]{babel}
+% \usepackage[estonian]{babel}
+%
+%
+% When you write in Estonian then you want to use text with right character set
+% By default LaTeX does not know what to do with õäöu letters. You have to specify
+% a correct input and font encoding. For that you have to Google the Web     
+%
+% For TexShop under MacOS X. The right lines are 
+%\usepackage[applemac]{inputenc}
+\usepackage[T1]{fontenc}
+%
+% For Windows and Linux the right magic lines are   
+% \usepackage[latin1]{inputenc}
+% \usepackage[latin5]{inputenc}
+% \usepackage[T1]{fontenc}
+
+
+% General packages for math in general, theorems and symbols 
+% Read ftp://ftp.ams.org/ams/doc/amsmath/short-math-guide.pdf for further information
+\usepackage{amsmath} 
+\usepackage{amsthm}
+\usepackage{amssymb}
+
+% Optional calligraphic fonts    
+% \usepackage[mathscr]{eucal}
+
+% Packages for building tables and tabulars 
+\usepackage{array}
+\usepackage{tabu}   % Wide lines in tables
+\usepackage{xspace} % Non-eatable spaces in macros
+
+% Including graphical images and setting the figure directory
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+
+% Packages for getting clickable links in PDF file
+\usepackage{hyperref}
+\usepackage[all]{hypcap}
+
+
+% Packages for defining colourful text together with some colours
+\usepackage{color}
+\usepackage{xcolor} 
+%\definecolor{dkgreen}{rgb}{0,0.6,0}
+%\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+
+% Standard package for drawing algorithms
+% Since the thesis in article format we must define \chapter for
+% the package algorithm2e (otherwise obscure errors occur) 
+\let\chapter\section
+\usepackage[ruled, vlined, linesnumbered]{algorithm2e}
+
+% Fix a  set of keywords which you use inside algorithms
+\SetKw{True}{true}
+\SetKw{False}{false}
+\SetKwData{typeInt}{Int}
+\SetKwData{typeRat}{Rat}
+\SetKwData{Defined}{Defined}
+\SetKwFunction{parseStatement}{parseStatement}
+
+
+% Nice todo notes
+\usepackage{todonotes}
+
+
+% Proper way to create coloured code listings
+\usepackage{listings}
+\lstset{ 
+  %language=python,                % the language of the code
+  language=C++,
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  %numbers=left,                   % where to put the line-numbers
+  %numberstyle=\footnotesize,      % the size of the fonts that are used for the line-numbers
+  numberstyle=\tiny\color{gray}, 
+  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line 
+                                   % will be numbered
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  backgroundcolor=\color{white},   % choose the background color. You must add \usepackage{color}
+  showspaces=false,                % show spaces adding particular underscores
+  showstringspaces=false,          % underline spaces within strings
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  frame = lines,
+  %frame=single,                   % adds a frame around the code
+  rulecolor=\color{black},		   % if not set, the frame-color may be changed on line-breaks within 
+                                   % not-black text (e.g. commens (green here))
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  captionpos=b,                    % sets the caption-position to bottom
+  breaklines=true,                 % sets automatic line breaking
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  %title=\lstname,                 % show the filename of files included with \lstinputlisting;
+                                   % also try caption instead of title
+                                   % also try caption instead of title
+  keywordstyle=\color{blue},       % keyword style
+  commentstyle=\color{dkgreen},    % comment style
+  stringstyle=\color{mauve},       % string literal style
+  escapeinside={\%*}{*)},          % if you want to add a comment within your code
+  morekeywords={*,game, fun}       % if you want to add more keywords to the set
+}
+
+
+% Obscure packages to write logic formulae and program semantics
+% Unless you do a bachelor thesis on program semantics or static code analysis you do not need that
+% http://logicmatters.net/resources/ndexamples/proofsty3.html <= writing type rules => use semantic::inference
+% ftp://tug.ctan.org/tex-archive/macros/latex/contrib/semantic/semantic.pdf
+\usepackage{proof}
+\usepackage{semantic} 
+\setlength{\inferLineSkip}{4pt}
+\def\predicatebegin #1\predicateend{$\Gamma \vdash #1$}
+
+% If you really want to draw figures in LaTeX use packages tikz or pstricks
+% However, getting a corresponding illustrations is really painful  
+
+
+% Define your favorite macros that you use inside the thesis 
+% Name followed by non-removable space
+\newcommand{\proveit}{ProveIt\xspace}
+
+% Macros that make sure that the math mode is set
+\newcommand{\typeF}[1] {\ensuremath{\mathsf{type_{#1}}}\xspace}
+\newcommand{\opDiv}{\ensuremath{\backslash \mathsf{div}}\xspace} 
+
+% Nice Todo box
+\newcommand{\TODO}{\todo[inline]}
+
+% A way to define theorems and lemmata
+\newtheorem{theorem}{Theorem}
+
+
+
+
+
+
+
+
+%%% BEGIN DOCUMENT
+\begin{document}
+
+% BEGIN TITLE PAGE
+\thispagestyle{empty}
+\begin{center}
+
+\large
+UNIVERSITY OF TARTU\\[2mm]
+Institute of Computer Science\\
+Computer Science Curriculum\\[2mm]
+
+%\vspace*{\stretch{5}}
+\vspace{25mm}
+
+\Large Jevgeni Savostkin
+
+\vspace{4mm}
+
+\huge Improving accuracy of BCI with multiple simultaneous users
+
+%\vspace*{\stretch{7}}
+\vspace{20mm}
+
+\Large Master's Thesis (30 ECTS)
+
+\end{center}
+
+\vspace{2mm}
+
+\begin{flushright}
+ {
+ \setlength{\extrarowheight}{5pt}
+ \begin{tabular}{r l} 
+  \sffamily Supervisor: & \sffamily Ilya Kuzovkin, MSc \\ 
+  \sffamily Supervisor: & \sffamily Raul Vicente, PhD 
+ \end{tabular}
+ }
+\end{flushright}
+
+%\vspace*{\stretch{3}}
+\vspace{10mm}
+
+%{\noindent Author: .................................................................................... ``.....'' ..........\hskip16pt 2048}
+\vspace{2mm}
+
+
+%{\noindent Supervisor: ............................................................................... ``.....'' ..........\hskip16pt 2048}
+
+\vspace{2mm}
+
+%{\noindent Supervisor: ............................................................................... ``.....'' ..........\hskip16pt 2048}
+
+\vspace{8mm}
+
+
+\vfill
+\centerline{Tartu 2017}
+
+% END TITLE PAGE
+
+% If the thesis is printed on both sides of the page then 
+% the second page must be must be empty. Comment this out
+% if you print only to one side of the page comment this out
+% \newpage
+% \thispagestyle{empty}    
+% \phantom{Text to fill the page}
+% END OF EXTRA PAGE WITHOUT NUMBER
+
+\newpage
+\selectlanguage{english}
+\noindent\textbf{\large Improving accuracy of BCI with multiple simultaneous users}
+\vspace*{2ex}
+{\flushleft{\textbf{Abstract:}} }
+
+Brain-computer interface (BCI) is a computer system for extracting brain electronic neural signals and using them to control computer applications. Beside measuring, BCI converts raw signals to digital data and maps the data to the exact computer commands. Unfortunately, the probability of the right command prediction is usually below 100\% and therefore it could be improved.
+
+This is a problem for BCI systems, since they will not be widely trusted and used until the prediction accuracy is relatively low. There are many existing solutions which provide increase of the prediction accuracy mainly based on a single BCI device usage and trying out different algorithms. Our solution will try to solve the problem from the different angle. It will show how simultaneously used BCI by several users could make predictions better.
+
+The solution described in a thesis is based on Condorcet's jury theorem. It means that if we have single events which probability is more than 50\%, then by combining them together the total probability for these events will rise. Furthermore, a prediction should happen online that will distinguish it from the existing researches. This work shows the actual results (prediction accuracies) using the technique which is described and compared to the earlier and similarly calculated projects.
+
+The BCI technology is relatively young direction. In order to fully integrate it to our ordinary life the contribution from the scientist and engineers is required for composing and choosing the most reliable system with the components. The following work represents a contribution to the brain computer interface field.
+
+
+\vspace*{3ex}
+{\flushleft{\textbf{Keywords:}}}
+BCI, Multiuser BCI, Random Forests
+\vspace*{3ex}
+
+%\noindent\textbf{CERCS:}\TODO{CERCS code and name:~\url{https://www.etis.ee/Portal/Classifiers/Details/d3717f7b-bec8-4cd9-8ea4-c89cd56ca46e}}
+
+\selectlanguage{english}
+
+\newpage
+\tableofcontents
+
+\newpage
+\section{Introduction}
+\paragraph{Motivation}~\\
+
+Many health issues can disrupt the neuromuscular channels which brain uses to communicate with different parts of organism. Channels are used to control muscles and pass the feelings. With these controls, a human can successfully participate in an ordinary life, controlling the surrounded environment. Amyotrophic lateral sclerosis (ALS), brainstem stroke, brain or spinal cord injury, cerebral palsy, muscular dystrophies, multiple sclerosis, and numerous other diseases cause problems in neural channels or the muscle control performance. There are three ways how to restore muscle disabilities. The first is to increase capability of the existing neural channels. Which means to use existing well-functioning muscles to fulfill suffering ones (e.g use of hand movements to produce artificial speech). The second one is to use control signal measurement systems (electromyography) in order to record signals sent to muscles, translate them and repeat the action in a prosthesis. The last option is to attach to a brain non-muscular communication module as a control channel which is BCI.\cite{bci_jonathan}
+
+Unfortunately, BCI systems have relatively low prediction accuracy, which makes nowadays their implementations too “raw”. There a lot of ways how BCI data is handled in order to get better results, but none of them are perfectly accurate.
+\paragraph{Scope}~\\
+
+This work consists of creating a BCI application which will communicate with Emotiv EPOC headset and try to predict user distinct thoughts about the subjects provided by the application. The application will work in two modes. The first teaching mode for obtaining test data samples to “learn” and give better output results in future, which is necessary to perform for every new user. The second testing mode for checking the accuracy of prediction by the algorithm. When a single user session will give a relatively high accuracy, a multiple user session will be run with expectations to get higher results. The results from single and multi-user sessions will be recorded and compared to the expected.
+\paragraph{Research problem}~\\
+
+Research problem states that multiuser session measuring could bring better prediction result than single user. It also provides comparison of the results to theoretically calculated ones and the other collaborative (multiuser) BCI projects.
+\paragraph{Contribution}~\\
+
+Implement an application to get measurements first of all from a single device. Select and teach a machine to process the results. Calculate the theoretical prediction accuracy for multiuser sessions based on single user session results. Run of multiuser sessions with validating results and compare them to the theoretical values.
+\paragraph{Structure}~\\
+Current thesis structure is as follows:
+
+\begin{itemize}
+\item Background / State of the Art - significant technologies which are used in current work are described along with comparison to similar projects
+\item Contribution - list of work done, grouped by the domains of the system followed with meaningful details
+\item Validation - test sessions with output results described
+\item Discussion - difference to theoretical model and limitations of the system are provided
+\item Conclusion - sum up of the goal, expected and actual results with brief explanations and future adaptation propositions
+\end{itemize}
+
+\newpage
+\section{Background / State of the Art} 
+
+\subsection{BCI}
+
+Brain-computer interface (BCI) is an interface that does not require muscle control from user to communicate with a device. It requires user to think about the distinct target. The interface records electroencephalographic (EEG) signals from the scalp surface which represents our brain activity. These signals have low amplitude (usually measured in microvolts) whereas frequencies above 30 Hz have especially low values which tends to zero.\cite{bci_vidal}
+
+The signals could be translated into a control commands for the certain devices, what is especially useful for the people suffering from lock-in (e.g. Brainstem stroke, or severe polyneuropathy) or lack of muscle control.  BCI systems could give such people a possibility to answer simple question quickly, control the environment, perform word processing or even operate a neuroprosthetics or orthosis.
+There are two types of BCI available: one way and two way. In case of one way type, a computer is accepting signals from the measuring device. Two way system deals with exchange of information between both sides.\cite{bci_shivangi}
+\paragraph{}
+BCI system structure could be divided into the four modules\cite{bci_shivangi}:
+\begin{enumerate}
+\item Source Module
+This module digitizes and saves signals coming from brain without handling them. This component knows how to obtain data from the sensors and store it to the specifically formatted file. This data samples are usually mapped to the sensor names (every sensor located on the scalp has it's own name determined by location) and event classificator. 
+\item Signal Processing Module
+This module is responsible for conversion of raw data signals into something more meaningful for controlled machine or the commands. Conversion is divided on two stages: feature extraction and feature translation. The extraction considers receive a data from source module and prepare it for translation module which means obtain of the signal properties like frequency domain values for the given sensors. The feature translation is an algorithm which determines which control signal was sent with a given signal data. 
+\item User Application Module:
+Next to signal processing module an application module takes the control signal to perform operations in an application. Usually an application has it's own graphical interface which allows user to select and think about some sort of targets like letters, images, icons or directions. A user could also give his feedback about the prediction validity through the application. The feedback could be given orally or tactilely. 
+\item Operator Module
+It is a module which defines system constants and parameters like learning mode length, targets or any kind of signal processing variables. In addition, this module could plot the information on graphics without knowing of the input data nature. This allows a user to see real-time feedback about happening events.
+\end{enumerate}
+
+BCI use is a skill which requires practicing. An algorithm which translates the signal features to the control signal should ``learn'' to output with the more accuracy. A learning is performed based on the feedback user gives to it. That means, a user should participate in the algorithm teaching for many sessions. In addition, a user should try to think in the same way he do it usually during the sessions. Otherwise, it might get a negative impact when subject feels some sort of distractions. These exercises require concentration and it takes time to get used to it.
+
+\subsection{Emotiv EPOC}
+
+To obtain a raw signal data from the scalp we use Emotiv EPOC BCI headset. It is a multi-channel wireless (communicates using Bluetooth) headset with 14 channels (sensors) for the following international locations: AF3, F7, F3, FC5, T7, P7, O1, O2, P8, T8, FC6, F4, F8, AF4. The device converts an analog signal to a digital with a 14 bits resolution and 128 Hz sampling rate. This suite can monitor the user's emotional state in real time.\cite{emotiv}
+
+It comes with the out of the box softwares Control Panel and TestBench which visualize the features based on the signal. The Control Panel software outputs recognized emotional states, facial expressions and mental commands. With TestBench it is possible to see a raw or EEG signal regarding distinct channels. In addition it provides a signal quality for the sensors and the connection status between the headset and Bluetooth receiver.
+\subsection{Short Time Fourier Transform}
+
+In a features extraction level a raw complex signal wave should be decomposed to the subwaves. Subwaves helps to construct a frequency domain representation of the complex signal where frequencies and respective amplitudes are mapped together. Although in terms of spectral analysis Fourier Transform is dominating, in case of nonstationary signals where EEG signal belongs better to use short time Fourier transform (STFT).\cite{alfahoum_fft}
+
+In STFT, a signal is split on datasets (frames) with N samples, where N represents a window length. This frames overlap with 50\% between each other. Before the Fourier transform a Hanning window is applied to reduce aliasing of the signal. Finally, after Fourier transform within STFT the result is outputted.
+
+\subsection{Random Forests algorithm}
+
+As described above, the goal of translation phase is to understand what control signal has been described with signal features received from the extraction phase. That means we should classify our data samples, where the classes would be a set of targets a user should deal with. There are many classification machine learning algorithms available. 
+
+A machine learning algorithm itself is a data-driven algorithm, that predicts in which data group a new input value belongs. These decisions are made based on the existing data samples which are grouped by some property. There exist two types of algorithms: supervised and unsupervised. A supervised algorithm deals with labeled (classified) data samples, so that groups of data have own class label, whereas an unclassified algorithm does not know anything about the data as well as the classes. Unsupervised algorithm is a good way to analyse the data without knowing it well and what to get from it. However, in our case we know that we should recognize the targets and thus, we will choose supervised type.
+
+For the classification we will use Random Forest algorithm which is the most suitable for the work with EEG data, according to the \cite{masso}. It shows better classification accuracy and performance than the other modern algorithms. It's accuracy dominates over the other algorithms in case of parameter optimization, which we plan to do as well. 
+
+A Random Forest Tree is an adaptation of Decision Tree algorithm developed by Leo Breiman and Adele Cutler, where instead of using single tree, a bunch of trees are used. Every one of these trees is generated by using randomly selected subsets of the existing data samples. Finally, each of every tree is handled separately to find out it's predicted class and with a majority vote from every tree a final result is defined. Random Forest model does not overfit. Using the right kind of randomness brings accuracy in solving classification and regression problems, however regression problems have lower accuracy.\cite{breiman_rf}
+
+\subsection{Collaborative Brain-Computer Interface}
+
+Yijun Wang {\it et.al} describes in \cite{collaborative_wang} a technique which has similar approach to this work. The main idea of their work to use collaborative EEG input data for predictions. They made a decision-making experiment using multiple users (subjects) thinking about the same targets simultaneously. Subjects must make Go (target) or NoGo (non-target) decisions in scope of their application. 
+
+The application shows them images where are animal images (target) and others (non-target). With a period of 20ms one of the shown images is flashing and the subjects must make a decision about does it belong to a target group or not. The decision is done by pressing or releasing a button, thus a motor inhibition process was invoked (movement-related signal). 
+
+Every subject had to train the algorithm and test it in a single user mode. Subjects managed to reach mean classification accuracy of 75.8\% with using mean response time (reaction time) 377 ms. Already this pointed on reliable prediction with single-trial usage. A collaborative classification was tried considering 5,10,15 subjects simultaneously which resulted 91.4\%, 97.6\% and 99.1\% accuracy respectively. This clearly shows improvement over the single-trial classification. 
+
+In case of multi-user approach a weighted voting system was used, where a subject with a better prediction statistics got more weight and influenced the output result more in the future classifications. This is the technique what our solution will use along with collaborative classification. However, our goal is to create an online system, which means reading and processing the data ``on the fly''. It also brings difference in implementation and software architecture aspects. Our implementation will use more classes of targets (not only 2 as in the article above) which makes EEG data processing more complex task. Finally, our way is to use optimized Random Forests classification algorithm which according to \cite{masso} could bring the more precise result, than support vector machine (SVM) algorithm which is used in animal classifications.
+
+\newpage
+\section{Contribution}
+
+\newpage
+\section{Validation}
+
+\newpage
+\section{Discussion}
+
+\newpage
+\section{Conclusion}
+
+\newpage
+\begin{thebibliography}{9}
+
+\bibitem{bci_jonathan}
+Wolpaw JR, Birbaumer N, McFarland DJ, Pfurtscheller G, Vaughan TM.
+Brain-computer interfaces for communication and control. Clin Neurophysiol. 2002 
+Jun;113(6):767-91. Review.
+\bibitem{bci_vidal}
+Vidal JJ. Toward direct brain-computer communication. Annu Rev Biophys Bioeng.
+1973;2:157-80. Review.
+\bibitem{bci_shivangi}
+Shivangi Miglanim, Surbhi Gupta.  International Journal of Emerging Research in Management \&Technology
+ISSN: 2278-9359 (Volume-2, Issue-8)
+Brain Computer Interface. 
+August 2013
+\bibitem{emotiv}
+https://www.emotiv.com/epoc/
+\bibitem{alfahoum_fft}
+Al-Fahoum AS, Al-Fraihat AA. Methods of EEG Signal Features Extraction Using Linear Analysis in Frequency and Time-Frequency Domains. ISRN Neuroscience. 2014;2014:730218.
+\bibitem{masso}
+Madis Masso, Empirical Comparison of Machine Learning Algorithms Based on EEG Data. 2016
+\bibitem{breiman_rf}
+Breiman, L. Machine Learning (2001) 45: 5. 
+\bibitem{collaborative_wang}
+Wang, Yijun, and Tzyy-Ping Jung. ``A Collaborative Brain-Computer Interface for Improving Human Performance.'' Ed. Pedro Antonio Valdes-Sosa. PLoS ONE 6.5 (2011): e20422. PMC. Web. 10 Nov. 2016.
+\end{thebibliography}
+
+%\bibliography{bachelor-thesis}
+
+\appendix
+\pagebreak
+\section*{\small Non-exclusive licence to reproduce thesis and make thesis public}
+
+
+I, Jevgeni Savostkin (date of birth: 13th of March 1990),
+
+\begin{tabbing}
+\= Xiii\=\kill
+\>1. \> herewith grant the University of Tartu a free permit (non-exclusive licence) to:\\\\ 
+
+\>1.1\> 
+\begin{minipage}[t]{14.2cm}
+reproduce, for the purpose of preservation and making available to the public, including for addition to the DSpace digital archives until expiry of the term of validity of the copyright, and
+\end{minipage}
+\\\\
+\>1.2 
+\begin{minipage}[t]{14.2cm}
+make available to the public via the web environment of the University of Tartu, including via the DSpace digital archives until expiry of the term of validity of the copyright,\\ 
+
+Improving accuracy of BCI with multiple simultaneous users\\   
+
+supervised by Ilya Kuzovkin and Raul Vicente
+
+\end{minipage}\\\\ 
+\>2. \>I am aware of the fact that the author retains these rights.\\\\
+\>3. \>
+\begin{minipage}[t]{14.2cm}
+I certify that granting the non-exclusive licence does not infringe the intellectual property rights or rights arising from the Personal Data Protection Act. 
+\end{minipage}\\
+\end{tabbing}
+
+\noindent
+Tartu, dd.mm.yyyy
+
+
+\end{document}

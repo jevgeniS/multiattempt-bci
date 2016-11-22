@@ -10,6 +10,8 @@ class RawDataTransformer:
         self.raw_data = raw_data
 
     def plain_fft_transform(self, visualize=False):
+        print
+        print self.raw_data
         yf = fft(self.raw_data)
         n = len(self.raw_data)
         print "Length " + str(n)

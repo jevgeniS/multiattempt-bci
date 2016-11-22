@@ -1,0 +1,26 @@
+\select@language {english}
+\select@language {english}
+\select@language {english}
+\contentsline {section}{\numberline {1}Introduction}{4}{section.1}
+\contentsline {section}{\numberline {2}Title of Section 2}{5}{section.2}
+\contentsline {subsection}{\numberline {2.1}Title of Subsection 1}{5}{subsection.2.1}
+\contentsline {subsubsection}{\numberline {2.1.1}Title of Subsubsection 1}{5}{subsubsection.2.1.1}
+\contentsline {subsubsection}{\numberline {2.1.2}Title of Subsubsection 2}{5}{subsubsection.2.1.2}
+\contentsline {subsection}{\numberline {2.2}Title of Subsection 2}{5}{subsection.2.2}
+\contentsline {paragraph}{Type rules for integers.}{5}{section*.5}
+\contentsline {paragraph}{Type rules for rational numbers.}{5}{section*.6}
+\contentsline {subsection}{\numberline {2.3}How to use references}{5}{subsection.2.3}
+\contentsline {paragraph}{Cross-references to figures, tables and other document elements.}{5}{section*.7}
+\contentsline {paragraph}{Citations.}{6}{section*.8}
+\contentsline {section}{\numberline {3}How to add figures and pictures to your thesis}{7}{section.3}
+\contentsline {section}{\numberline {4}Other Ways to Represent Data}{10}{section.4}
+\contentsline {subsection}{\numberline {4.1}Tables}{10}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Lists}{10}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Math mode}{10}{subsection.4.3}
+\contentsline {paragraph}{Inference Rules}{10}{section*.9}
+\contentsline {subsection}{\numberline {4.4}algorithm2e}{11}{subsection.4.4}
+\contentsline {subsection}{\numberline {4.5}Pseudocode}{11}{subsection.4.5}
+\contentsline {subsection}{\numberline {4.6}Frame Around Information}{11}{subsection.4.6}
+\contentsline {section}{\numberline {5}Conclusion}{12}{section.5}
+\contentsline {section}{\numberline {6}Eestikeelne pealkiri}{13}{section.6}
+\select@language {english}
