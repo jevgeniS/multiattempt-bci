@@ -1,56 +1,49 @@
-import time
-from math import floor
-
-from emokit.emotiv import Emotiv
+from multiprocessing import Process, Queue
 
 import constants as c
-from processing.RawDataTransformer import RawDataTransformer
+from src.emotiv.Reader import Reader
+from src.emotiv.Sampler import Sampler
+from src.processing.RawDataTransformer import RawDataTransformer
+from src.util.DataStorer import DataStorer
+from src.util.TimeStampGenerator import get_timestamp
 
+
+def emotiv_start_reader(queue):
+    Reader.read(queue)
 
 class LearningService(object):
+    def select_target(self):
+        print "Select target typing the number of a target"
+        for key in c.TARGETS.keys():
+            print key + ":" + c.TARGETS[key]
+        answer = raw_input()
+
+        return c.TARGETS[answer]
+
+
     def start(self):
-        print "Please concentrate on the following for " + str(c.USER_TRAINING_DURATION_S) + "s :"
-        task = c.CLASSIFICATOR_LEFT
-        print task
+        target = self.select_target()
+        print "Please concentrate on the '"+target+"' for " + str(c.USER_TRAINING_DURATION_S) + "s :"
 
-        s = self.__get_sensor_results
-        RawDataTransformer(s["AF3"]).plain_fft_transform(True)
+        packet_queue = Queue()
+        process = Process(target=emotiv_start_reader, args=(packet_queue,))
+        process.start()
+        raw_data = Sampler(packet_queue).get_samples(10)
+        process.terminate()
+        freq_domains = RawDataTransformer(raw_data).transform()
+        windows_number = len(freq_domains.values()[0])
+        ts = get_timestamp()
+        samples = []
+        for w in range(windows_number):
+            sample = [target]
+            for sensor in freq_domains:
+                sample += freq_domains[sensor][w]
+            samples.append(sample)
+
+        DataStorer.store(samples, ts)
 
 
-        print ("Sample length " + str(len(s)))
 
 
 
-
-
-    @property
-    def __get_sensor_results(self):
-        result = []
-        with Emotiv(display_output=True, verbose=True, is_research=False, write_values=False,
-                    write_encrypted=True) as headset:
-
-            time.sleep(c.USER_TRAINING_DURATION_S)
-            headset.stop()
-            while True:
-                packet = headset.dequeue()
-                if packet is None:
-                    break
-                if packet is not None:
-                    result.append(packet)
-
-            result_by_sensors = {}
-            for sensor_name in c.SENSORS:
-                samples = []
-                for r in result:
-                    sample = getattr(r, sensor_name)[0]
-                    samples.append(sample)
-                result_by_sensors[sensor_name] = samples
-
-            return result_by_sensors
-
-    def __ft_window_samples(self, result):
-        ft_window_width_time = 0.2
-        ft_windows_per_training = c.USER_TRAINING_DURATION_S / ft_window_width_time
-        ft_window_width_samples = int(floor(len(result) / ft_windows_per_training))
-        return ft_window_width_samples
 

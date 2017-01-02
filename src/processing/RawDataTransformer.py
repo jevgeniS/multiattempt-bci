@@ -1,42 +1,63 @@
 from math import floor
 
-import matplotlib.pyplot as plt
-from numpy.fft import fft, fftfreq
+
+import numpy as np
+from numpy.fft import fft
+from scipy.signal import detrend
 from wyrm.processing import stft
+
+from .. import constants as c
 
 
 class RawDataTransformer:
     def __init__(self, raw_data):
         self.raw_data = raw_data
 
-    def plain_fft_transform(self, visualize=False):
-        print
-        print self.raw_data
-        yf = fft(self.raw_data)
-        n = len(self.raw_data)
-        print "Length " + str(n)
-        print (min(self.raw_data))
-        print (max(self.raw_data))
-        n_frequencies_below_niquist = int(floor(n / 2.0))
-        freqs = fftfreq(n, 1.0/128.0)[:n_frequencies_below_niquist]
+    def transform(self):
+        sensors_data = self.get_sensor_results()
+        result = {}
+        for sensor in sensors_data:
+            signal_data = sensors_data[sensor]
+            freqs, amplitudes = self.window_fft_transform(signal_data)
+            signal_freq_domains = []
+            for i, val in enumerate(amplitudes):
+                signal_freq_domain = self.get_freq_domain(val, freqs)
+                signal_freq_domains.append(signal_freq_domain)
+
+            result[sensor] = signal_freq_domains
+
+        return result
 
 
-        if visualize:
-            fig, ax = plt.subplots()
-            ax.plot(freqs[1:], abs(yf[:n_frequencies_below_niquist])[1:])
+    def get_freq_domain(self, amplitudes, freqs):
+        freq_values = []
+        for i in range(c.EEG_MIN_FREQ, c.EEG_MAX_FREQ):
+            amplitude =np.interp(i, freqs, amplitudes)
+            rounded_amplitude = round(amplitude, c.AMPLITUDE_VALUE_DIGITS_AFTER_ZERO)
+            freq_values.append(rounded_amplitude)
+        return freq_values
 
-            plt.grid()
-            plt.show()
 
-    def window_fft_transform(self, visualize=False):
-        #Does not work properly
-        yf = stft(self.raw_data, 200)[0]
-        n=len(yf)
-        n_frequencies_below_niquist = int(floor(n / 2.0))
-        freqs = fftfreq(n)[:n_frequencies_below_niquist]
+    def get_sensor_results(self):
+        result_by_sensors = {}
+        for sensor_name in c.SENSORS:
+            samples = []
+            for r in self.raw_data:
+                sample = getattr(r, sensor_name)[0]
+                samples.append(sample)
+            result_by_sensors[sensor_name] = samples
 
-        if visualize:
-            fig, ax = plt.subplots()
-            ax.plot(freqs, abs(yf[:n_frequencies_below_niquist]))
-            plt.grid()
-            plt.show()
+        return result_by_sensors
+
+
+    def window_fft_transform(self, signal_data):
+        window_size_s = 1
+        window_size = int(window_size_s/1*128.0)
+        freqs = np.linspace(0, 128/2, window_size)
+        all_windows_results = stft(signal_data, window_size)
+        amplitudes = []
+        for i, val in enumerate(all_windows_results):
+            amplitudes.append(abs(val))
+
+        return freqs, amplitudes
+
