@@ -8,7 +8,7 @@
 \contentsline {paragraph}{Contribution}{5}{section*.5}
 \contentsline {paragraph}{Structure}{5}{section*.6}
 \contentsline {section}{\numberline {2}Background / State of the Art}{6}{section.2}
-\contentsline {subsection}{\numberline {2.1}BCI}{6}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.1}Brain-computer interface}{6}{subsection.2.1}
 \contentsline {paragraph}{}{6}{section*.7}
 \contentsline {subsection}{\numberline {2.2}Emotiv EPOC}{7}{subsection.2.2}
 \contentsline {subsection}{\numberline {2.3}Short Time Fourier Transform}{7}{subsection.2.3}

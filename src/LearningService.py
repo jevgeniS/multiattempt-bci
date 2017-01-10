@@ -1,5 +1,7 @@
 from multiprocessing import Process, Queue
 
+import winsound
+
 import constants as c
 from src.emotiv.Reader import Reader
 from src.emotiv.Sampler import Sampler
@@ -28,7 +30,7 @@ class LearningService(object):
         packet_queue = Queue()
         process = Process(target=emotiv_start_reader, args=(packet_queue,))
         process.start()
-        raw_data = Sampler(packet_queue).get_samples(10)
+        raw_data = Sampler(packet_queue).get_samples(c.USER_TRAINING_DURATION_S)
         process.terminate()
         freq_domains = RawDataTransformer(raw_data).transform()
         windows_number = len(freq_domains.values()[0])
@@ -40,7 +42,11 @@ class LearningService(object):
                 sample += freq_domains[sensor][w]
             samples.append(sample)
 
-        DataStorer.store(samples, ts)
+        winsound.MessageBeep()
+        answer = raw_input("Type X do skip save of current try")
+
+        if answer != 'X':
+            DataStorer.store(samples, ts)
 
 
 

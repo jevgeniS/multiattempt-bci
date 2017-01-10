@@ -166,7 +166,7 @@ Computer Science Curriculum\\[2mm]
 
 \vspace{4mm}
 
-\huge Improving accuracy of BCI with multiple simultaneous users
+\huge Improving accuracy of brain-computer interface with multiple tries
 
 %\vspace*{\stretch{7}}
 \vspace{20mm}
@@ -218,22 +218,22 @@ Computer Science Curriculum\\[2mm]
 
 \newpage
 \selectlanguage{english}
-\noindent\textbf{\large Improving accuracy of BCI with multiple simultaneous users}
+\noindent\textbf{\large Improving accuracy of brain-computer interface with multiple tries}
 \vspace*{2ex}
 {\flushleft{\textbf{Abstract:}} }
 
 Brain-computer interface (BCI) is a computer system for extracting brain electronic neural signals and using them to control computer applications. Beside measuring, BCI converts raw signals to digital data and maps the data to the exact computer commands. Unfortunately, the probability of the right command prediction is usually below 100\% and therefore it could be improved.
 
-This is a problem for BCI systems, since they will not be widely trusted and used until the prediction accuracy is relatively low. There are many existing solutions which provide increase of the prediction accuracy mainly based on a single BCI device usage and trying out different algorithms. Our solution will try to solve the problem from the different angle. It will show how simultaneously used BCI by several users could make predictions better.
+This is a problem for BCI systems, since they will not be widely trusted and used until the prediction accuracy is relatively low. There are many existing solutions which provide increase of the prediction accuracy mainly based on trying out different classification techniques and algorithms. Our research question is to understand how many tries it is required during test to improve the accuracy upto 99.9\%.
 
 The solution described in a thesis is based on Condorcet's jury theorem. It means that if we have single events which probability is more than 50\%, then by combining them together the total probability for these events will rise. Furthermore, a prediction should happen online that will distinguish it from the existing researches. This work shows the actual results (prediction accuracies) using the technique which is described and compared to the earlier and similarly calculated projects.
 
-The BCI technology is relatively young direction. In order to fully integrate it to our ordinary life the contribution from the scientist and engineers is required for composing and choosing the most reliable system with the components. The following work represents a contribution to the brain computer interface field.
+The BCI technology is relatively young direction. In order to fully integrate it to our ordinary life the contribution from the scientist and engineers is required for composing and choosing the most reliable system with the components. The following work represents a contribution to the brain-computer interface field.
 
 
 \vspace*{3ex}
 {\flushleft{\textbf{Keywords:}}}
-BCI, Multiuser BCI, Random Forests
+Brain-computer interface, Random Forests
 \vspace*{3ex}
 
 %\noindent\textbf{CERCS:}\TODO{CERCS code and name:~\url{https://www.etis.ee/Portal/Classifiers/Details/d3717f7b-bec8-4cd9-8ea4-c89cd56ca46e}}
@@ -249,16 +249,16 @@ BCI, Multiuser BCI, Random Forests
 
 Many health issues can disrupt the neuromuscular channels which brain uses to communicate with different parts of organism. Channels are used to control muscles and pass the feelings. With these controls, a human can successfully participate in an ordinary life, controlling the surrounded environment. Amyotrophic lateral sclerosis (ALS), brainstem stroke, brain or spinal cord injury, cerebral palsy, muscular dystrophies, multiple sclerosis, and numerous other diseases cause problems in neural channels or the muscle control performance. There are three ways how to restore muscle disabilities. The first is to increase capability of the existing neural channels. Which means to use existing well-functioning muscles to fulfill suffering ones (e.g use of hand movements to produce artificial speech). The second one is to use control signal measurement systems (electromyography) in order to record signals sent to muscles, translate them and repeat the action in a prosthesis. The last option is to attach to a brain non-muscular communication module as a control channel which is BCI.\cite{bci_jonathan}
 
-Unfortunately, BCI systems have relatively low prediction accuracy, which makes nowadays their implementations too “raw”. There a lot of ways how BCI data is handled in order to get better results, but none of them are perfectly accurate.
+Unfortunately, BCI systems have relatively low prediction accuracy, which makes nowadays their implementations too "raw". There a lot of ways how BCI data is handled in order to get better results, but none of them are perfectly accurate.
 \paragraph{Scope}~\\
 
-This work consists of creating a BCI application which will communicate with Emotiv EPOC headset and try to predict user distinct thoughts about the subjects provided by the application. The application will work in two modes. The first teaching mode for obtaining test data samples to “learn” and give better output results in future, which is necessary to perform for every new user. The second testing mode for checking the accuracy of prediction by the algorithm. When a single user session will give a relatively high accuracy, a multiple user session will be run with expectations to get higher results. The results from single and multi-user sessions will be recorded and compared to the expected.
+This work consists of creating a BCI application which will communicate with Emotiv EPOC headset and try to predict user distinct thoughts about the subjects provided by the application. The application will work in two modes. The first teaching mode for obtaining test data samples to "learn" and give better output results in future, which is necessary to perform for every new user. The second testing mode is for checking the accuracy of prediction by the algorithm. When the predictions based on a single measurements will give a relatively high accuracy, a multi-measurement session will be run. A multi-measurement mode considers asking a subject to concentrate on a target for more than one time, which gives more classification samples. Expected to get higher results with increase of classification samples number. An ensemble voting algorithm will be used to select the most suitable output. The results from single and multi-try sessions will be recorded and compared to the expected.
 \paragraph{Research problem}~\\
 
-Research problem states that multiuser session measuring could bring better prediction result than single user. It also provides comparison of the results to theoretically calculated ones and the other collaborative (multiuser) BCI projects.
+Research problem states that multiple try measuring could bring better prediction result than single. It also provides comparison of the results to theoretically calculated ones.
 \paragraph{Contribution}~\\
 
-Implement an application to get measurements first of all from a single device. Select and teach a machine to process the results. Calculate the theoretical prediction accuracy for multiuser sessions based on single user session results. Run of multiuser sessions with validating results and compare them to the theoretical values.
+Implement an application to get measurements first of all from a single try. Select and teach a machine to process the results. Calculate the theoretical prediction accuracy for multiple try sessions based on single try session results. Run of multiple try sessions with validating results and compare them to the theoretical values.
 \paragraph{Structure}~\\
 Current thesis structure is as follows:
 
@@ -273,7 +273,7 @@ Current thesis structure is as follows:
 \newpage
 \section{Background / State of the Art} 
 
-\subsection{BCI}
+\subsection{Brain-computer interface}
 
 Brain-computer interface (BCI) is an interface that does not require muscle control from user to communicate with a device. It requires user to think about the distinct target. The interface records electroencephalographic (EEG) signals from the scalp surface which represents our brain activity. These signals have low amplitude (usually measured in microvolts) whereas frequencies above 30 Hz have especially low values which tends to zero.\cite{bci_vidal}
 
@@ -386,7 +386,7 @@ reproduce, for the purpose of preservation and making available to the public, i
 \begin{minipage}[t]{14.2cm}
 make available to the public via the web environment of the University of Tartu, including via the DSpace digital archives until expiry of the term of validity of the copyright,\\ 
 
-Improving accuracy of BCI with multiple simultaneous users\\   
+Improving accuracy of brain-computer interface with multiple tries\\   
 
 supervised by Ilya Kuzovkin and Raul Vicente
 
