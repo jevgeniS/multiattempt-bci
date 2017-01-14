@@ -6,6 +6,9 @@
 \BOOKMARK [2][-]{subsection.2.4}{Random Forests algorithm}{section.2}% 6
 \BOOKMARK [2][-]{subsection.2.5}{Collaborative Brain-Computer Interface}{section.2}% 7
 \BOOKMARK [1][-]{section.3}{Contribution}{}% 8
-\BOOKMARK [1][-]{section.4}{Validation}{}% 9
-\BOOKMARK [1][-]{section.5}{Discussion}{}% 10
-\BOOKMARK [1][-]{section.6}{Conclusion}{}% 11
+\BOOKMARK [2][-]{subsection.3.1}{Application overview}{section.3}% 9
+\BOOKMARK [3][-]{subsubsection.3.1.1}{Raw data reader}{subsection.3.1}% 10
+\BOOKMARK [3][-]{subsubsection.3.1.2}{Preprocessing}{subsection.3.1}% 11
+\BOOKMARK [1][-]{section.4}{Validation}{}% 12
+\BOOKMARK [1][-]{section.5}{Discussion}{}% 13
+\BOOKMARK [1][-]{section.6}{Conclusion}{}% 14

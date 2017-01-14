@@ -4,7 +4,7 @@
 \contentsline {section}{\numberline {1}Introduction}{4}{section.1}
 \contentsline {paragraph}{Motivation}{4}{section*.2}
 \contentsline {paragraph}{Scope}{4}{section*.3}
-\contentsline {paragraph}{Research problem}{4}{section*.4}
+\contentsline {paragraph}{Research problem}{5}{section*.4}
 \contentsline {paragraph}{Contribution}{5}{section*.5}
 \contentsline {paragraph}{Structure}{5}{section*.6}
 \contentsline {section}{\numberline {2}Background / State of the Art}{6}{section.2}
@@ -15,6 +15,9 @@
 \contentsline {subsection}{\numberline {2.4}Random Forests algorithm}{8}{subsection.2.4}
 \contentsline {subsection}{\numberline {2.5}Collaborative Brain-Computer Interface}{8}{subsection.2.5}
 \contentsline {section}{\numberline {3}Contribution}{10}{section.3}
-\contentsline {section}{\numberline {4}Validation}{11}{section.4}
-\contentsline {section}{\numberline {5}Discussion}{12}{section.5}
-\contentsline {section}{\numberline {6}Conclusion}{13}{section.6}
+\contentsline {subsection}{\numberline {3.1}Application overview}{10}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Raw data reader}{11}{subsubsection.3.1.1}
+\contentsline {subsubsection}{\numberline {3.1.2}Preprocessing}{11}{subsubsection.3.1.2}
+\contentsline {section}{\numberline {4}Validation}{13}{section.4}
+\contentsline {section}{\numberline {5}Discussion}{14}{section.5}
+\contentsline {section}{\numberline {6}Conclusion}{15}{section.6}

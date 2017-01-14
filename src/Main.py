@@ -59,16 +59,17 @@ def plot():
     Plotter(target).plot_avg(data)
 
 
+
 if __name__ == "__main__":
-    #plot()
-    #train()
-    #exit()
+    plot()
+    exit()
     answer = raw_input("If you want to continue with learning mode please type '1', with training mode '2'")
     if answer == "1":
         print "Switched to learning mode"
         learn()
     if answer == "2":
         print "Switched to training mode"
+        #train()
         TrainingService().start()
     else:
         print "Switched to test mode"

@@ -29,10 +29,14 @@ class Plotter:
         counter = 0
         for sensor in sensors_data:
             counter += 1
-            subplot = figure.add_subplot(4, 4, counter)
+            subplot = figure.add_subplot(5, 3, counter)
+            subplot.xlabel("Hz")
+            subplot.ylabel("uV")
             subplot.set_title(sensor)
             values = sensors_data[sensor]
             subplot.bar(range(constants.EEG_MIN_FREQ, len(values)+1), values, alpha=0.5)
+
         plt.suptitle(self.plot_name)
+        plt.tight_layout()
         plt.show()
 

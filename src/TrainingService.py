@@ -8,15 +8,15 @@ from src.util.DataStorer import DataStorer
 class TrainingService(object):
     def start(self):
         data = DataStorer.read()
-        n = 100
+        n = 7
         count = 0
         learner = RFTLearner()
 
         step = 0
 
         for i in range(n):
-            #train_data, test_data = self.split_data_percent(data, step)
-            train_data, test_data = self.split_data(data)
+            train_data, test_data = self.split_data_percent(data, step)
+            #train_data, test_data = self.split_data(data)
             step += 10
             learner.setup_classifier(train_data)
             accuracy = learner.get_accuracy(test_data)
@@ -37,7 +37,6 @@ class TrainingService(object):
 
     def split_data_percent(self, data, test_data_start_percent):
 
-        test_data_start_percent = test_data_start_percent
         test_data_start = int(test_data_start_percent/100.0*len(data))
         test_data_percent = 100 - int(constants.TRAINING_DATA_PERCENTAGE)
         test_data_len = int(test_data_percent/100.0*len(data))

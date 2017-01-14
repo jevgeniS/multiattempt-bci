@@ -224,9 +224,9 @@ Computer Science Curriculum\\[2mm]
 
 Brain-computer interface (BCI) is a computer system for extracting brain electronic neural signals and using them to control computer applications. Beside measuring, BCI converts raw signals to digital data and maps the data to the exact computer commands. Unfortunately, the probability of the right command prediction is usually below 100\% and therefore it could be improved.
 
-This is a problem for BCI systems, since they will not be widely trusted and used until the prediction accuracy is relatively low. There are many existing solutions which provide increase of the prediction accuracy mainly based on trying out different classification techniques and algorithms. Our research question is to understand how many tries it is required during test to improve the accuracy upto 99.9\%.
+This is a problem for BCI systems, since they will not be widely trusted and used until the prediction accuracy is relatively low. There are many existing solutions which provide increase of the prediction accuracy mainly based on trying out different classification techniques and algorithms. Existing methods focus mostly on a training part of the system. Our approach is to try to improve the accuracy upto 99.9\% experimenting with test part algorithms and to determine how many tries it is required during the test mode to reach the desired provided accuracy.
 
-The solution described in a thesis is based on Condorcet's jury theorem. It means that if we have single events which probability is more than 50\%, then by combining them together the total probability for these events will rise. Furthermore, a prediction should happen online that will distinguish it from the existing researches. This work shows the actual results (prediction accuracies) using the technique which is described and compared to the earlier and similarly calculated projects.
+The solution described in a thesis is based on Condorcet's jury theorem. It means that if we have single events which probability is more than 50\%, then by combining them together the total probability for these events will rise. This work shows the actual results (prediction accuracies) and provides their comparison using the ensemble techniques based on the Condorcet's jury theorem. It also describes the dependency of the number of test mode measurements and accuracies.
 
 The BCI technology is relatively young direction. In order to fully integrate it to our ordinary life the contribution from the scientist and engineers is required for composing and choosing the most reliable system with the components. The following work represents a contribution to the brain-computer interface field.
 
@@ -252,13 +252,13 @@ Many health issues can disrupt the neuromuscular channels which brain uses to co
 Unfortunately, BCI systems have relatively low prediction accuracy, which makes nowadays their implementations too "raw". There a lot of ways how BCI data is handled in order to get better results, but none of them are perfectly accurate.
 \paragraph{Scope}~\\
 
-This work consists of creating a BCI application which will communicate with Emotiv EPOC headset and try to predict user distinct thoughts about the subjects provided by the application. The application will work in two modes. The first teaching mode for obtaining test data samples to "learn" and give better output results in future, which is necessary to perform for every new user. The second testing mode is for checking the accuracy of prediction by the algorithm. When the predictions based on a single measurements will give a relatively high accuracy, a multi-measurement session will be run. A multi-measurement mode considers asking a subject to concentrate on a target for more than one time, which gives more classification samples. Expected to get higher results with increase of classification samples number. An ensemble voting algorithm will be used to select the most suitable output. The results from single and multi-try sessions will be recorded and compared to the expected.
+This work consists of creating a BCI application which will communicate with Emotiv EPOC headset and try to predict user distinct thoughts about the targets provided by the application. The application will work in two modes. The first learning mode for obtaining test data samples to "teach" an algorithm and give better output results in future. This is necessary step to perform for every new user (subject). The second testing mode is for checking the accuracy of prediction by the algorithm. When the predictions based on a single measurements will give a relatively high accuracy, a multi-measurement session will be run. A multi-measurement mode considers taking into account several classification results made in a row and choose the most suitable with ensemble voting algorithms. Expected to get higher results with increase of the number of classification samples participating in voting. The results from single and multi-try sessions will be recorded and compared to the expected. The application will be available to work in offline (classification will be done after the dataset is recorded) and online modes (classification will be done instantly after sensors data is recorded).
 \paragraph{Research problem}~\\
 
-Research problem states that multiple try measuring could bring better prediction result than single. It also provides comparison of the results to theoretically calculated ones.
+Multi-measurement could bring better prediction result than single. The objective is to determine how multi-measurement mode's accuracies differ from single-measurement's and how the number of classification samples will improve the statistics. The results will be compared to theoretically calculated ones.
 \paragraph{Contribution}~\\
 
-Implement an application to get measurements first of all from a single try. Select and teach a machine to process the results. Calculate the theoretical prediction accuracy for multiple try sessions based on single try session results. Run of multiple try sessions with validating results and compare them to the theoretical values.
+Implement an application to get measurements first of all from a single try. Select and teach the system to process the results. Calculate the theoretical prediction accuracy for multi-try sessions based on single try session results. Run of multi-try sessions with validating results and compare them to the theoretical values.
 \paragraph{Structure}~\\
 Current thesis structure is as follows:
 
@@ -296,7 +296,7 @@ BCI use is a skill which requires practicing. An algorithm which translates the 
 
 \subsection{Emotiv EPOC}
 
-To obtain a raw signal data from the scalp we use Emotiv EPOC BCI headset. It is a multi-channel wireless (communicates using Bluetooth) headset with 14 channels (sensors) for the following international locations: AF3, F7, F3, FC5, T7, P7, O1, O2, P8, T8, FC6, F4, F8, AF4. The device converts an analog signal to a digital with a 14 bits resolution and 128 Hz sampling rate. This suite can monitor the user's emotional state in real time.\cite{emotiv}
+To obtain a raw signal data from the scalp we use Emotiv EPOC BCI headset. It is a multi-channel wireless (communicates using Bluetooth) headset with 14 channels (sensors) for the following international locations: AF3, F7, F3, FC5, T7, P7, O1, O2, P8, T8, FC6, F4, F8, AF4. The device converts an analog signal to a digital with a 14 bits resolution and 128 Hz sampling rate. The bandwith is 0.2 - 45 Hz. This suite can monitor the user's emotional state in real time.\cite{emotiv}
 
 It comes with the out of the box softwares Control Panel and TestBench which visualize the features based on the signal. The Control Panel software outputs recognized emotional states, facial expressions and mental commands. With TestBench it is possible to see a raw or EEG signal regarding distinct channels. In addition it provides a signal quality for the sensors and the connection status between the headset and Bluetooth receiver.
 \subsection{Short Time Fourier Transform}
@@ -323,10 +323,48 @@ The application shows them images where are animal images (target) and others (n
 
 Every subject had to train the algorithm and test it in a single user mode. Subjects managed to reach mean classification accuracy of 75.8\% with using mean response time (reaction time) 377 ms. Already this pointed on reliable prediction with single-trial usage. A collaborative classification was tried considering 5,10,15 subjects simultaneously which resulted 91.4\%, 97.6\% and 99.1\% accuracy respectively. This clearly shows improvement over the single-trial classification. 
 
-In case of multi-user approach a weighted voting system was used, where a subject with a better prediction statistics got more weight and influenced the output result more in the future classifications. This is the technique what our solution will use along with collaborative classification. However, our goal is to create an online system, which means reading and processing the data ``on the fly''. It also brings difference in implementation and software architecture aspects. Our implementation will use more classes of targets (not only 2 as in the article above) which makes EEG data processing more complex task. Finally, our way is to use optimized Random Forests classification algorithm which according to \cite{masso} could bring the more precise result, than support vector machine (SVM) algorithm which is used in animal classifications.
+In case of multi-user approach a weighted voting system was used, where a subject with a better prediction statistics got more weight and influenced the output result more in the future classifications. This is the technique what our solution will use along with multi-try classification. Our goal is to use multiple tries of a single user instead of single tries of several users as the related work tends to do. Our way is to use optimized Random Forests classification algorithm which according to \cite{masso} could bring the more precise result, than support vector machine (SVM) algorithm which is used in animal classifications. Finally, a single user approach has wider fields of use and less complex in implementation as a multi-user technique.
 
 \newpage
 \section{Contribution}
+
+\subsection{Application overview}
+
+For fulfilling goals in the related topic a custom application was written using Python 2.7 programming language. The application contains the following components:
+\begin{itemize}
+\item Raw data reader - connects to a BCI headset over Bluetooth and reads raw data
+\item Preprocessor -  does Short-time Fourier transform of a bulk raw data and determines signal amplitudes for desired frequencies (features)
+\item Data storer - stores preprocessed data to a file system (e.g CSV file)
+\item Classificator - a machine learning algorithm which teaches classificator and uses it to predict preprocessed a target based on features
+\item Voting handler - in case of multi-try sessions it is used to select the right answer
+\item Main application - provides a command-line user interface to select application modes and run necessary components
+\end{itemize}
+
+\begin{figure} [ht]
+\begin{center}
+\includegraphics[width=0.8\textwidth]{application}
+\caption{Application component model}
+\label{fig:fnCompModel}
+\end{center}
+\end{figure}
+
+\subsubsection{Raw data reader}
+
+This component is required to poll the Emotiv EPOC headset and store sent data to a temporary buffer. The communication between computer and headset is established over a Bluetooth Smart network through a USB dongle provided from the manufacturer. Emokit\cite{emokit} open-source library with minor changes is used to read the data coming to USB dongle from a headset, decrypt and encode it. Polling is done in an infinite loop. Taking into account sampling frequency of the device - 128 Hz, every ~8 ms a new signal is received from the headset and stored in a queue.
+
+\subsubsection{Preprocesor}
+
+During preprocessing a set of raw samples is converted to a frequency domain representation. To do this the Short Time Fourier Transform is used with a sliding window. Sliding window technique allows to capture more precisely non-constant signals. Sliding window length equals to 1 s with 0.5 s overlapping. These factors increase the number of samples to:\[2*N-1\] where N is the original number of samples.
+
+According to Emotiv EPOC specifications\cite{emotiv} 45 Hz is the maximum bandwidth value for the signal. In our implementation we use 1 - 45 Hz for the frequency range.
+
+\begin{figure} 
+\begin{center}
+\includegraphics[width=0.8\textwidth]{left_amplitudes}
+\caption{A sample frequency domain plot while concentrating on "Left" target.}
+\end{center}
+\end{figure}
+
 
 \newpage
 \section{Validation}
@@ -353,7 +391,7 @@ ISSN: 2278-9359 (Volume-2, Issue-8)
 Brain Computer Interface. 
 August 2013
 \bibitem{emotiv}
-https://www.emotiv.com/epoc/
+https://www.emotiv.com/files/Emotiv-EPOC-Product-Sheet-2014.pdf
 \bibitem{alfahoum_fft}
 Al-Fahoum AS, Al-Fraihat AA. Methods of EEG Signal Features Extraction Using Linear Analysis in Frequency and Time-Frequency Domains. ISRN Neuroscience. 2014;2014:730218.
 \bibitem{masso}
@@ -362,6 +400,8 @@ Madis Masso, Empirical Comparison of Machine Learning Algorithms Based on EEG Da
 Breiman, L. Machine Learning (2001) 45: 5. 
 \bibitem{collaborative_wang}
 Wang, Yijun, and Tzyy-Ping Jung. ``A Collaborative Brain-Computer Interface for Improving Human Performance.'' Ed. Pedro Antonio Valdes-Sosa. PLoS ONE 6.5 (2011): e20422. PMC. Web. 10 Nov. 2016.
+\bibitem{emokit}
+https://github.com/openyou/emokit
 \end{thebibliography}
 
 %\bibliography{bachelor-thesis}
