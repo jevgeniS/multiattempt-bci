@@ -4,7 +4,7 @@
 
 % A package for setting layout and margins for your thesis 
 \usepackage[a4paper]{geometry}
-
+\usepackage{float}
 
 % Use package babel for English or Estonian 
 % If you use Estonian make sure that Estonian hyphenation is installed 
@@ -166,7 +166,7 @@ Computer Science Curriculum\\[2mm]
 
 \vspace{4mm}
 
-\huge Improving accuracy of brain-computer interface with multiple tries
+\huge Improving accuracy of brain-computer interface with multiple trials
 
 %\vspace*{\stretch{7}}
 \vspace{20mm}
@@ -218,13 +218,13 @@ Computer Science Curriculum\\[2mm]
 
 \newpage
 \selectlanguage{english}
-\noindent\textbf{\large Improving accuracy of brain-computer interface with multiple tries}
+\noindent\textbf{\large Improving accuracy of brain-computer interface with multiple trials}
 \vspace*{2ex}
 {\flushleft{\textbf{Abstract:}} }
 
 Brain-computer interface (BCI) is a computer system for extracting brain electronic neural signals and using them to control computer applications. Beside measuring, BCI converts raw signals to digital data and maps the data to the exact computer commands. Unfortunately, the probability of the right command prediction is usually below 100\% and therefore it could be improved.
 
-This is a problem for BCI systems, since they will not be widely trusted and used until the prediction accuracy is relatively low. There are many existing solutions which provide increase of the prediction accuracy mainly based on trying out different classification techniques and algorithms. Existing methods focus mostly on a training part of the system. Our approach is to try to improve the accuracy upto 99.9\% experimenting with test part algorithms and to determine how many tries it is required during the test mode to reach the desired provided accuracy.
+This is a problem for BCI systems, since they will not be widely trusted and used until the prediction accuracy is relatively low. There are many existing solutions which provide increase of the prediction accuracy mainly based on trying out different classification techniques and algorithms. Existing methods focus mostly on a training part of the system. Our approach is to try to improve the accuracy upto 99.9\% experimenting with test part algorithms and to determine how many trials it is required during the test mode to reach the desired provided accuracy.
 
 The solution described in a thesis is based on Condorcet's jury theorem. It means that if we have single events which probability is more than 50\%, then by combining them together the total probability for these events will rise. This work shows the actual results (prediction accuracies) and provides their comparison using the ensemble techniques based on the Condorcet's jury theorem. It also describes the dependency of the number of test mode measurements and accuracies.
 
@@ -252,19 +252,19 @@ Many health issues can disrupt the neuromuscular channels which brain uses to co
 Unfortunately, BCI systems have relatively low prediction accuracy, which makes nowadays their implementations too "raw". There a lot of ways how BCI data is handled in order to get better results, but none of them are perfectly accurate.
 \paragraph{Scope}~\\
 
-This work consists of creating a BCI application which will communicate with Emotiv EPOC headset and try to predict user distinct thoughts about the targets provided by the application. The application will work in two modes. The first learning mode for obtaining test data samples to "teach" an algorithm and give better output results in future. This is necessary step to perform for every new user (subject). The second testing mode is for checking the accuracy of prediction by the algorithm. When the predictions based on a single measurements will give a relatively high accuracy, a multi-measurement session will be run. A multi-measurement mode considers taking into account several classification results made in a row and choose the most suitable with ensemble voting algorithms. Expected to get higher results with increase of the number of classification samples participating in voting. The results from single and multi-try sessions will be recorded and compared to the expected. The application will be available to work in offline (classification will be done after the dataset is recorded) and online modes (classification will be done instantly after sensors data is recorded).
+This work consists of creating a BCI application which will communicate with Emotiv EPOC headset and try to predict user distinct thoughts about the targets provided by the application. The application will work in two modes. The first learning mode for obtaining test data samples to "teach" an algorithm and give better output results in future. This is necessary step to perform for every new user (subject). The second testing mode is for checking the accuracy of prediction by the algorithm. When the predictions based on a single measurements will give a relatively high accuracy, a multi-measurement session will be run. A multi-measurement mode considers taking into account several classification results made in a row and choose the most suitable with ensemble voting algorithms. Expected to get higher results with increase of the number of classification samples participating in voting. The results from single and multi-trial sessions will be recorded and compared to the expected. The application will be available to work in offline (classification will be done after the dataset is recorded) and online modes (classification will be done instantly after sensors data is recorded).
 \paragraph{Research problem}~\\
 
 Multi-measurement could bring better prediction result than single. The objective is to determine how multi-measurement mode's accuracies differ from single-measurement's and how the number of classification samples will improve the statistics. The results will be compared to theoretically calculated ones.
 \paragraph{Contribution}~\\
 
-Implement an application to get measurements first of all from a single try. Select and teach the system to process the results. Calculate the theoretical prediction accuracy for multi-try sessions based on single try session results. Run of multi-try sessions with validating results and compare them to the theoretical values.
+Implement an application to get measurements first of all from a single trial. Select and teach the system to process the results. Calculate the theoretical prediction accuracy for multi-trial sessions based on single try session results. Run of multi-trial sessions with validating results and compare them to the theoretical values.
 \paragraph{Structure}~\\
 Current thesis structure is as follows:
 
 \begin{itemize}
 \item Background / State of the Art - significant technologies which are used in current work are described along with comparison to similar projects
-\item Contribution - list of work done, grouped by the domains of the system followed with meaningful details
+\item Contribution - detailed overview of the idea, list of work done, grouped by the domains of the system followed with meaningful details
 \item Validation - test sessions with output results described
 \item Discussion - difference to theoretical model and limitations of the system are provided
 \item Conclusion - sum up of the goal, expected and actual results with brief explanations and future adaptation propositions
@@ -335,13 +335,44 @@ The application shows them images where are animal images (target) and others (n
 
 Every subject had to train the algorithm and test it in a single user mode. Subjects managed to reach mean classification accuracy of 75.8\% with using mean response time (reaction time) 377 ms. Already this pointed on reliable prediction with single-trial usage. A collaborative classification was tried considering 5,10,15 subjects simultaneously which resulted 91.4\%, 97.6\% and 99.1\% accuracy respectively. This clearly shows improvement over the single-trial classification. 
 
-In case of multi-user approach a weighted voting system was used, where a subject with a better prediction statistics got more weight and influenced the output result more in the future classifications. This is the technique what our solution will use along with multi-try classification. Our goal is to use multiple tries of a single user instead of single tries of several users as the related work tends to do. Our way is to use optimized Random Forests classification algorithm which according to \cite{masso} could bring the more precise result, than support vector machine (SVM) algorithm which is used in animal classifications. Finally, a single user approach has wider fields of use and less complex in implementation as a multi-user technique.
+In case of multi-user approach a weighted voting system was used, where a subject with a better prediction statistics got more weight and influenced the output result more in the future classifications. This is the technique what our solution will use along with multi-trial classification. Our goal is to use multiple trials of a single user instead of single trial of several users as the related work tends to do. Our way is to use optimized Random Forests classification algorithm which according to \cite{masso} could bring the more precise result, than support vector machine (SVM) algorithm which is used in animal classifications. Finally, a single user approach has wider fields of use and less complex in implementation as a multi-user technique.
 
 \newpage
 \section{Contribution}
 
 \subsection{Overview}
+The main idea of the given work is to show the effectiveness of a multiple trial approach in a BCI perspective. 
+A regular way of prediction considers a single prediction trial for a single prediction task.
+\begin{figure} [H]
+\begin{center}
+\includegraphics[width=1\textwidth]{prediction_single}
+\caption{Prediction tasks timeline using single trial. Different shapes mean different classes.}
+\label{fig:fnCompModel}
+\end{center}
+\end{figure}
 
+In multiple trial approach the final prediction result is calculated using intermediate prediction results which every trial gives. An ensemble method is used to do the selection. 
+\begin{figure} [H]
+\begin{center}
+\includegraphics[width=1\textwidth]{prediction_multi}
+\caption{Prediction tasks timeline using multiple trials. Different shapes mean different classes.}
+\label{fig:fnCompModel}
+\end{center}
+\end{figure}
+Multiple trial way takes more time to give the answer than a single, however the 
+
+To reach and test the given approach the following plan should be covered:
+\begin{enumerate}
+\item Build a two-class BCI 
+\begin{enumerate}
+\item Implement Fourier preprocessing
+\item Split data on train, test and validation sets
+\item Machine learning process
+\item Get a meaningful prediction accuracy $X$
+\end{enumerate}
+\item Measure how many trials is it required to improve $X$ to 0.99\% accuracy
+\item Try different voting schemas and plot their results
+\end{enumerate}
 
 \subsection{Implementation}
 
@@ -351,7 +382,7 @@ For fulfilling goals in the related topic a custom application was written using
 \item Preprocessor -  does Short-time Fourier transform of a bulk raw data and determines signal amplitudes for desired frequencies (features)
 \item Data storer - stores preprocessed data to a file system (e.g CSV file)
 \item Classificator - a machine learning algorithm which teaches classificator and uses it to predict preprocessed a target based on features
-\item Voting handler - in case of multi-try sessions it is used to select the right answer
+\item Voting handler - in case of multi-trial sessions it is used to select the right answer
 \item Main application - provides a command-line user interface to select application modes and run necessary components
 \end{itemize}
 
@@ -374,7 +405,7 @@ During preprocessing a set of raw samples is converted to a frequency domain rep
 
 According to Emotiv EPOC specifications\cite{emotiv} 45 Hz is the maximum bandwidth value for the signal. In our implementation we use 1 - 45 Hz for the frequency range.
 
-\begin{figure} [h]
+\begin{figure} [H]
 \begin{center}
 \includegraphics[width=1\textwidth]{left_amplitudes}
 \caption{A sample frequency domain plot while concentrating on "Left" target. Vertical axe is measured in Hz. Horizontal in uV.}
@@ -389,7 +420,7 @@ Train data could be selected from the given dataset in different ways:
 
 \begin{itemize}
 \item first 70\% as train data, next 30\% as test data
-\item  
+\item 
 \end{itemize}
 
 \subsubsection{Voting handler}
@@ -468,7 +499,7 @@ reproduce, for the purpose of preservation and making available to the public, i
 \begin{minipage}[t]{14.2cm}
 make available to the public via the web environment of the University of Tartu, including via the DSpace digital archives until expiry of the term of validity of the copyright,\\ 
 
-Improving accuracy of brain-computer interface with multiple tries\\   
+Improving accuracy of brain-computer interface with multiple trials\\   
 
 supervised by Ilya Kuzovkin and Raul Vicente
 
