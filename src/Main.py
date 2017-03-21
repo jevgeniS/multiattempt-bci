@@ -1,14 +1,18 @@
+import itertools
 import numpy as np
 from datetime import datetime
 
 import winsound
 
 from LearningService import LearningService
+from src import constants
 from src.TestingService import TestingService
 from src.TrainingService import TrainingService
 from src.analyzing.RFTLearner import RFTLearner
 from src.processing.Plotter import Plotter
+from src.trainers.MajorityVoteTrainingService import MajorityVoteTrainingService
 from src.util.DataStorer import DataStorer
+from src.util.ExitServiceException import ExitServiceException
 
 
 def test():
@@ -46,10 +50,14 @@ def train():
 
 def learn():
     i = 1
-    while (True):
-        print "Try number:"+str(i)
-        LearningService().start()
-        i += 1
+    DataStorer.select_file()
+    try:
+        while (True):
+            print "Try number:"+str(i)
+            LearningService().start()
+            i += 1
+    except ExitServiceException as e:
+        TrainingService().start()
 
 
 def plot():
@@ -59,10 +67,9 @@ def plot():
     Plotter(target).plot_avg(data)
 
 
-
 if __name__ == "__main__":
-    plot()
-    exit()
+    #plot()
+    #exit()
     answer = raw_input("If you want to continue with learning mode please type '1', with training mode '2'")
     if answer == "1":
         print "Switched to learning mode"
@@ -70,7 +77,7 @@ if __name__ == "__main__":
     if answer == "2":
         print "Switched to training mode"
         #train()
-        TrainingService().start()
+        MajorityVoteTrainingService().train()
     else:
         print "Switched to test mode"
 

@@ -12,12 +12,10 @@
 \BOOKMARK [3][-]{subsubsection.3.2.1}{Raw data reader}{subsection.3.2}% 12
 \BOOKMARK [3][-]{subsubsection.3.2.2}{Preprocessor}{subsection.3.2}% 13
 \BOOKMARK [3][-]{subsubsection.3.2.3}{Classificator}{subsection.3.2}% 14
-\BOOKMARK [3][-]{subsubsection.3.2.4}{Voting handler}{subsection.3.2}% 15
-\BOOKMARK [2][-]{subsection.3.3}{Application modes}{section.3}% 16
-\BOOKMARK [3][-]{subsubsection.3.3.1}{Training mode}{subsection.3.3}% 17
-\BOOKMARK [3][-]{subsubsection.3.3.2}{Test mode}{subsection.3.3}% 18
-\BOOKMARK [2][-]{subsection.3.4}{Targets}{section.3}% 19
-\BOOKMARK [1][-]{section.4}{Validation}{}% 20
-\BOOKMARK [2][-]{subsection.4.1}{Test mode}{section.4}% 21
-\BOOKMARK [1][-]{section.5}{Discussion}{}% 22
-\BOOKMARK [1][-]{section.6}{Conclusion}{}% 23
+\BOOKMARK [2][-]{subsection.3.3}{Application modes}{section.3}% 15
+\BOOKMARK [3][-]{subsubsection.3.3.1}{Training mode}{subsection.3.3}% 16
+\BOOKMARK [3][-]{subsubsection.3.3.2}{Testing mode}{subsection.3.3}% 17
+\BOOKMARK [2][-]{subsection.3.4}{Targets}{section.3}% 18
+\BOOKMARK [1][-]{section.4}{Validation}{}% 19
+\BOOKMARK [1][-]{section.5}{Discussion}{}% 20
+\BOOKMARK [1][-]{section.6}{Conclusion}{}% 21

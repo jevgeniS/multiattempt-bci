@@ -1,3 +1,4 @@
+import itertools
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -39,4 +40,27 @@ class Plotter:
         plt.suptitle(self.plot_name)
         plt.tight_layout()
         plt.show()
+
+    def plot_condorcet(self, n):
+        x = []
+        y = []
+        for N in range(1, n, 2):
+            if N % 2 == 1:
+                k = np.ceil(N / 2.0)
+            else:
+                k = N / 2.0 + 1
+            p = 0.75
+            sum = 0
+            for i in range(int(k), N + 1):
+                sum += len(list(itertools.combinations(range(N), i))) * (p ** i) * (1 - p) ** (N - i)
+            x.append(N)
+            y.append(sum)
+            print str(N) + ":" + str(sum)
+        plt.plot(x,y)
+        plt.xlabel("Number of voters")
+        plt.ylabel("Probability")
+        plt.ylim(ymin=0.75)
+        plt.grid()
+        plt.show()
+
 

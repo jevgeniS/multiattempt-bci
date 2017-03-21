@@ -32,12 +32,12 @@ class RFTLearner:
         for i in range(parts_n):
             test_data_chunk_start= i*part_elements_n
             test_data_chunk_end = i*part_elements_n+part_elements_n
-            test_data = np.array(data[test_data_chunk_start:test_data_chunk_end])
+            #test_data = np.array(data[test_data_chunk_start:test_data_chunk_end])
             training_data_first_part = data[:test_data_chunk_start]
             training_data_second_part = data[test_data_chunk_end:]
             training_data = np.array(training_data_first_part+training_data_second_part)
 
-            clf, accuracy = self.train(training_data, test_data)
+            clf, accuracy = self.train(training_data)
 
             if self.accuracy < accuracy:
                 self.accuracy = accuracy
@@ -55,14 +55,19 @@ class RFTLearner:
 
         return clf
 
+    def predict_samples(self, test_data):
+        test_features = test_data[:, 1:]
+        return self.classifier.predict(test_features)
+
+
     def get_accuracy(self, test_data):
         test_targets = test_data[:, 0]
-        test_features = test_data[:, 1:]
-        predicted_targets = self.classifier.predict(test_features)
+        predicted_targets = self.predict_samples(test_data)
         accuracy = self.classification_accuracy(test_targets, predicted_targets)
         return accuracy
 
-    def classification_accuracy(self, actual_targets, predicted_targets):
+    @staticmethod
+    def classification_accuracy(actual_targets, predicted_targets):
         n = float(len(actual_targets))
         matches = 0.0
         for i, target in enumerate(actual_targets):

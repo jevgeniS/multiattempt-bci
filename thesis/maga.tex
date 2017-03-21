@@ -222,13 +222,13 @@ Computer Science Curriculum\\[2mm]
 \vspace*{2ex}
 {\flushleft{\textbf{Abstract:}} }
 
-Brain-computer interface (BCI) is a computer system for extracting brain electronic neural signals and using them to control computer applications. Beside measuring, BCI converts raw signals to digital data and maps the data to the exact computer commands. Unfortunately, the probability of the right command prediction is usually below 100\% and therefore it could be improved.
+Brain-computer interface (BCI) is a computer system for extracting brain electronic neural signals and using them to control computer applications. Besides measuring, BCI converts raw signals to digital data and maps the data to the exact computer commands. Unfortunately, the probability of the right command prediction usually is below 100\% and therefore it could be improved.
 
-This is a problem for BCI systems, since they will not be widely trusted and used until the prediction accuracy is relatively low. There are many existing solutions which provide increase of the prediction accuracy mainly based on trying out different classification techniques and algorithms. Existing methods focus mostly on a training part of the system. Our approach is to try to improve the accuracy upto 99.9\% experimenting with test part algorithms and to determine how many trials it is required during the test mode to reach the desired provided accuracy.
+This is a problem for BCI systems, since they will not be widely trusted and used, while the prediction accuracy is relatively low. There are many existing solutions, which provide increase of the prediction accuracy, mainly based on trying out different classification techniques and algorithms. Existing methods focus mostly on a training part of the system. Our approach is to try to improve the accuracy upto 99.9\%, while experimenting with test part algorithms, and to determine how many trials are required during the test mode to reach the desired provided accuracy.
 
-The solution described in a thesis is based on Condorcet's jury theorem. It means that if we have single events which probability is more than 50\%, then by combining them together the total probability for these events will rise. This work shows the actual results (prediction accuracies) and provides their comparison using the ensemble techniques based on the Condorcet's jury theorem. It also describes the dependency of the number of test mode measurements and accuracies.
+The solution described in the thesis is based on Condorcet's jury theorem. It means that if we have single events with probability of more than 50\%, then by combining them, the total probability for these events would rise. This work shows the actual results (prediction accuracies) and provides their comparison using the voting techniques based on the Condorcet's jury theorem. It also describes the dependency of the number of test mode measurements and accuracies.
 
-The BCI technology is relatively young direction. In order to fully integrate it to our ordinary life the contribution from the scientist and engineers is required for composing and choosing the most reliable system with the components. The following work represents a contribution to the brain-computer interface field.
+The BCI technology is relatively young direction. In order to fully integrate it into our ordinary life, the contribution from the scientist and engineers is required for composing and choosing the most reliable system with the components. The following work represents a contribution to the brain-computer interface field.
 
 
 \vspace*{3ex}
@@ -247,58 +247,57 @@ Brain-computer interface, Random Forests
 \section{Introduction}
 \paragraph{Motivation}~\\
 
-Many health issues can disrupt the neuromuscular channels which brain uses to communicate with different parts of organism. Channels are used to control muscles and pass the feelings. With these controls, a human can successfully participate in an ordinary life, controlling the surrounded environment. Amyotrophic lateral sclerosis (ALS), brainstem stroke, brain or spinal cord injury, cerebral palsy, muscular dystrophies, multiple sclerosis, and numerous other diseases cause problems in neural channels or the muscle control performance. There are three ways how to restore muscle disabilities. The first is to increase capability of the existing neural channels. Which means to use existing well-functioning muscles to fulfill suffering ones (e.g use of hand movements to produce artificial speech). The second one is to use control signal measurement systems (electromyography) in order to record signals sent to muscles, translate them and repeat the action in a prosthesis. The last option is to attach to a brain non-muscular communication module as a control channel which is BCI.\cite{bci_jonathan}
+Many health issues can disrupt the neuromuscular channels, which brain uses to communicate with different parts of organism. Channels are used to control muscles and pass the feelings. With these controls, a human can successfully participate in an ordinary life, controlling the surrounded environment. Amyotrophic lateral sclerosis (ALS), brainstem stroke, brain or spinal cord injury, cerebral palsy, muscular dystrophies, multiple sclerosis and other diseases cause problems in neural channels or the muscle control performance. There are three ways how to restore muscle disabilities. The first is increasing capability of the existing neural channels. That means using existing well-functioning muscles to fulfill suffering ones (e.g use of hand movements to produce artificial speech). The second is the use of control signal measurement systems (electromyography) in order to record signals sent to muscles, translate them and repeat the action in a prosthesis. And the latter is attaching a non-muscular communication module as a control channel to a brain, which is BCI.\cite{bci_jonathan}
 
-Unfortunately, BCI systems have relatively low prediction accuracy, which makes nowadays their implementations too "raw". There a lot of ways how BCI data is handled in order to get better results, but none of them are perfectly accurate.
+Unfortunately, BCI systems have relatively low prediction accuracy, which nowadays makes their implementations too "raw". There many ways how BCI data is being handled in order to gain better results, but none of them are perfectly accurate.
 \paragraph{Scope}~\\
 
-This work consists of creating a BCI application which will communicate with Emotiv EPOC headset and try to predict user distinct thoughts about the targets provided by the application. The application will work in two modes. The first learning mode for obtaining test data samples to "teach" an algorithm and give better output results in future. This is necessary step to perform for every new user (subject). The second testing mode is for checking the accuracy of prediction by the algorithm. When the predictions based on a single measurements will give a relatively high accuracy, a multi-measurement session will be run. A multi-measurement mode considers taking into account several classification results made in a row and choose the most suitable with ensemble voting algorithms. Expected to get higher results with increase of the number of classification samples participating in voting. The results from single and multi-trial sessions will be recorded and compared to the expected. The application will be available to work in offline (classification will be done after the dataset is recorded) and online modes (classification will be done instantly after sensors data is recorded).
+This work consists of creating a BCI application, which will communicate with Emotiv EPOC headset and try to predict user distinct thoughts about the targets provided by the application. The application will work in two modes. The first, learning mode, for obtaining test data samples to "teach" an algorithm and give better output results in future. This is necessary step to perform for every new user (subject). The second, testing mode, is for checking the accuracy of prediction by the algorithm. When the predictions based on a single measurements will give a relatively high accuracy, a multi-measurement session is going to be run. A multi-measurement mode considers taking into account several classification results made in a row and choose the most suitable with voting algorithms. Expected to get higher results with increase of the number of classification samples participating in voting. The results from single and multi-trial sessions will be recorded and compared to the expected. The application will be available to work in offline (classification will be done after the dataset is recorded) and online modes (classification will be done instantly after sensors data is recorded).
 \paragraph{Research problem}~\\
 
-Multi-measurement could bring better prediction result than single. The objective is to determine how multi-measurement mode's accuracies differ from single-measurement's and how the number of classification samples will improve the statistics. The results will be compared to theoretically calculated ones.
+Multi-measurement could bring better prediction result than single. The objective is to determine how multi-measurement mode's accuracies differ from single-measurement's and how the number of classification samples would improve the statistics. The results will be compared to the ones theoretically calculated.
 \paragraph{Contribution}~\\
 
-Implement an application to get measurements first of all from a single trial. Select and teach the system to process the results. Calculate the theoretical prediction accuracy for multi-trial sessions based on single try session results. Run of multi-trial sessions with validating results and compare them to the theoretical values.
+Implement an application to get measurements first of all from a single trial. Select and teach the system to process the results. Calculate the theoretical prediction accuracy for multi-trial sessions based on a single try session results. Run of multi-trial sessions with validating results and compare them to the theoretical values.
 \paragraph{Structure}~\\
 Current thesis structure is as follows:
 
 \begin{itemize}
-\item Background / State of the Art - significant technologies which are used in current work are described along with comparison to similar projects
-\item Contribution - detailed overview of the idea, list of work done, grouped by the domains of the system followed with meaningful details
+\item Background / State of the Art - significant technologies used in current work are described along with comparison to similar projects
+\item Contribution - detailed overview of the idea, list of finished work, grouped by the domains of the system and followed with meaningful details
 \item Validation - test sessions with output results described
-\item Discussion - difference to theoretical model and limitations of the system are provided
-\item Conclusion - sum up of the goal, expected and actual results with brief explanations and future adaptation propositions
+\item Discussion - difference with the theoretical model and limitations of the system are provided
+\item Conclusion - sum up of the goal, expected and actual results with brief explanations and future adaptation prepositions
 \end{itemize}
 
 \newpage
 \section{Background / State of the Art} 
-
 \subsection{Brain-computer interface}
 
-Brain-computer interface (BCI) is an interface that does not require muscle control from user to communicate with a device. It requires user to think about the distinct target. The interface records electroencephalographic (EEG) signals from the scalp surface which represents our brain activity. These signals have low amplitude (usually measured in microvolts) whereas frequencies above 30 Hz have especially low values which tends to zero.\cite{bci_vidal}
+Brain-computer interface (BCI) is an interface that does not require muscle control from user to communicate with a device. It requires user to think about the distinct target. The interface records electroencephalographic (EEG) signals from the scalp surface which represents our brain activity. These signals have low amplitude (usually measured in microvolts), whereas frequencies above 30 Hz have especially low values which tends to zero.\cite{bci_vidal}
 
-The signals could be translated into a control commands for the certain devices, what is especially useful for the people suffering from lock-in (e.g. Brainstem stroke, or severe polyneuropathy) or lack of muscle control.  BCI systems could give such people a possibility to answer simple question quickly, control the environment, perform word processing or even operate a neuroprosthetics or orthosis.
+The signals could be translated into a control commands for the certain devices, what is especially useful for the people suffering from lock-in (e.g. Brainstem stroke, severe polyneuropathy) or muscle control diseases.  BCI systems could give such people a possibility to control the environment, perform word processing or even operate a neuroprosthetics or orthosis.
 There are two types of BCI available: one way and two way. In case of one way type, a computer is accepting signals from the measuring device. Two way system deals with exchange of information between both sides.\cite{bci_shivangi}
 \paragraph{}
 BCI system structure could be divided into the four modules\cite{bci_shivangi}:
 \begin{enumerate}
 \item Source Module
-This module digitizes and saves signals coming from brain without handling them. This component knows how to obtain data from the sensors and store it to the specifically formatted file. This data samples are usually mapped to the sensor names (every sensor located on the scalp has it's own name determined by location) and event classificator. 
+This module digitizes and saves signals coming from brain without handling them. This component knows how to obtain data from the sensors and store them to the specifically formatted file. These data samples are usually mapped to the sensor names (every sensor located on the scalp has it's own name determined by location) and event classificator. 
 \item Signal Processing Module
-This module is responsible for conversion of raw data signals into something more meaningful for controlled machine or the commands. Conversion is divided on two stages: feature extraction and feature translation. The extraction considers receive a data from source module and prepare it for translation module which means obtain of the signal properties like frequency domain values for the given sensors. The feature translation is an algorithm which determines which control signal was sent with a given signal data. 
+This module is responsible for conversion of raw data signals into something more meaningful for controlled machine or the commands. Conversion is divided in two stages: feature extraction and feature translation. The extraction considers receiving data from the source module and preparing them for translation module, which means obtaining the signal properties, like frequency domain values for the given sensors. The feature translation is an algorithm, which determines the identity of the control signal sent with a given signal data. 
 \item User Application Module:
-Next to signal processing module an application module takes the control signal to perform operations in an application. Usually an application has it's own graphical interface which allows user to select and think about some sort of targets like letters, images, icons or directions. A user could also give his feedback about the prediction validity through the application. The feedback could be given orally or tactilely. 
+In addition to signal processing module, an application module takes the control signal to perform operations in the application. Usually the application has its own graphical interface, which allows the user to select and think about some sort of targets, like letters, images, icons or directions. The user could also give his feedback about the prediction validity through the application. The feedback could be given orally or tactilely. 
 \item Operator Module
-It is a module which defines system constants and parameters like learning mode length, targets or any kind of signal processing variables. In addition, this module could plot the information on graphics without knowing of the input data nature. This allows a user to see real-time feedback about happening events.
+It is a module, which defines system constants and parameters, like learning mode length, targets or any kind of signal processing variables. In addition, this module could plot the information on graphics without knowing of the input data nature. This allows a user to see real-time feedback about happening events.
 \end{enumerate}
 
-BCI use is a skill which requires practicing. An algorithm which translates the signal features to the control signal should ``learn'' to output with the more accuracy. A learning is performed based on the feedback user gives to it. That means, a user should participate in the algorithm teaching for many sessions. In addition, a user should try to think in the same way he do it usually during the sessions. Otherwise, it might get a negative impact when subject feels some sort of distractions. These exercises require concentration and it takes time to get used to it.
+BCI use is a skill, which requires practicing. An algorithm, which translates the signal features to the control signal, should ``learn'' to output with more accuracy. Learning is performed, based on the feedback provided by the user. That means, the user should participate in the algorithm teaching for many sessions. In addition, during the sessions, the user should try to think in the same way he normally does. Otherwise, it might leave a negative impact, when the subject experiences some sort of distractions. These exercises require concentration and it takes time to get used to it.
 
 \subsection{Emotiv EPOC}
 
-To obtain a raw signal data from the scalp we use Emotiv EPOC BCI headset. It is a multi-channel wireless (communicates using Bluetooth) headset with 14 channels (sensors) for the following international locations: AF3, F7, F3, FC5, T7, P7, O1, O2, P8, T8, FC6, F4, F8, AF4. The device converts an analog signal to a digital with a 14 bits resolution and 128 Hz sampling rate. The bandwith is 0.2 - 45 Hz. This suite can monitor the user's emotional state in real time.\cite{emotiv}
+In order to obtain raw signal data from the scalp, we use Emotiv EPOC BCI headset. It is a multi-channel wireless (communicates using Bluetooth) headset with 14 channels (sensors) for the following International locations: AF3, F7, F3, FC5, T7, P7, O1, O2, P8, T8, FC6, F4, F8, AF4. The device converts an analog signal to a digital with a 14 bits resolution and 128 Hz sampling rate. The bandwith is 0.2 - 45 Hz. This suite can monitor the user's emotional state in real time.\cite{emotiv}
 
-It comes with the out of the box softwares Control Panel and TestBench which visualize the features based on the signal. The Control Panel software outputs recognized emotional states, facial expressions and mental commands. With TestBench it is possible to see a raw or EEG signal regarding distinct channels. In addition it provides a signal quality for the sensors and the connection status between the headset and Bluetooth receiver.
+It comes with the out of the box softwares Control Panel and TestBench, which visualize the features based on the signal. The Control Panel software outputs recognized emotional states, facial expressions and mental commands. With TestBench it is possible to see a raw or EEG signal regarding distinct channels. In addition it provides a signal quality for the sensors and the connection status between the headset and Bluetooth receiver.
 \subsection{Short Time Fourier Transform}
 
 In a features extraction level a raw complex signal wave should be decomposed to the subwaves. Subwaves helps to construct a frequency domain representation of the complex signal where frequencies and respective amplitudes are mapped together. Although in terms of spectral analysis Fourier Transform is dominating, in case of nonstationary signals where EEG signal belongs better to use short time Fourier transform (STFT).\cite{alfahoum_fft}
@@ -309,19 +308,18 @@ In STFT, a signal is split on datasets (frames) with N samples, where N represen
 
 Despite the fact that relationships between some brainwaves and subject's mental states has been established, these mental states are too common and non-descriptive. For example they can help to distinguish if the subject is relaxing or concentrating on something. For tracking more specific mental states like concentrating on a distinct target, a unique model should be applied for each subject. Features got from a BCI signal should be divided on groups defined by target type. The other similarities (patterns) within the groups should be found and used to predict new input data. To define similarities a classification should be executed.
 
-"Classification is the task of learning a target function $f$ that maps each attribute set $x$ to one of the predefined class labels $y$"\cite{classification_basics}. A model received as a result of a classification could help distinguish between different target classes. Attribute set $x$(also known as features or key characteristics) could contain continuous (e.g real numbers) as well as discrete values (e.g labels).
+Classification is the task of learning a target function $f$ that maps each attribute set $x$ to one of the predefined class labels $y$\cite{classification_basics}. A model received as a result of a classification could help distinguish between different target classes. Attribute set $x$(also known as features or key characteristics) could contain continuous (e.g real numbers) as well as discrete values (e.g labels).
 
 \subsection{Random Forests algorithm}
 
 As described above, the goal of translation phase is to understand what control signal has been described with signal features received from the extraction phase. That means we should classify our data samples, where the classes would be a set of targets a user should deal with. For generating a classification model a machine learning algorithm should be applied. 
 
-A machine learning algorithm is a data-driven algorithm, that predicts in which data group a new input value belongs (classification) or which continuous output the input data maps (regression). These decisions are made based on the existing data samples which are grouped by some property. There exist three learning types of the algorithms\cite{ml_types}:
+A machine learning algorithm is a data-driven algorithm, that predicts in which data group a new input value belongs (classification) or which continuous output the input data maps (regression). These decisions are made based on the existing data samples which are grouped by some property. There exist two major learning types of the algorithms\cite{ml_types}:
 \begin{itemize}
 \item Supervised - creates a model with labeled (classified) input data samples, so that groups of data have own class label
 \item Unsupervised - the algorithm does not know anything about the data as well as the classes
-\item Reinforcement - dynamic feedback system to algorithm with rewards and punishments
 \end{itemize}
-Unsupervised algorithm is a good way to analyse the data without knowing how to use it, however, in our case we know that we should recognize the targets. For simplicity reasons we will skip reinforcement learning and choose supervised learning.
+Unsupervised algorithm is a good way to analyse the data without knowing how to use it and on which potential groups it could be split. However, in our case we know that we should split data according to targets and thus, chose a supervised learning machine algorithm.
 
 We will use Random Forest as a machine algorithm which is the one of the most precise for the work with EEG data, according to the \cite{masso}. It shows better classification accuracy and performance than the other modern algorithms. It's accuracy dominates over the other algorithms in case of parameter optimization, which we plan to do as well. 
 
@@ -342,7 +340,7 @@ In case of multi-user approach a weighted voting system was used, where a subjec
 
 \subsection{Overview}
 The main idea of the given work is to show the effectiveness of a multiple trial approach in a BCI perspective. 
-A regular way of prediction considers a single prediction trial for a single prediction task.
+A regular way of prediction considers a single prediction trial for a single prediction task. If any noise has been recorded due to technical issues or a subject was distracted and could not properly concentrate on a target during the trial, then it will directly reflect on a classification accuracy.
 \begin{figure} [H]
 \begin{center}
 \includegraphics[width=1\textwidth]{prediction_single}
@@ -351,17 +349,36 @@ A regular way of prediction considers a single prediction trial for a single pre
 \end{center}
 \end{figure}
 
-In multiple trial approach the final prediction result is calculated using intermediate prediction results which every trial gives. An ensemble method is used to do the selection. 
+In multiple trial approach the final prediction result is calculated using intermediate prediction results which every trial gives. Multiple trial way takes more time to give the answer than a single, however the accuracy should be improved in case when single trial accuracy gave more than 50\%. Our goal is to understand how many trials $N$ (see Figure\ref{fig:prediction_multi}) it is required to get the accuracy 99.9\%.
 \begin{figure} [H]
 \begin{center}
 \includegraphics[width=1\textwidth]{prediction_multi}
 \caption{Prediction tasks timeline using multiple trials. Different shapes mean different classes.}
-\label{fig:fnCompModel}
+\label{fig:prediction_multi}
 \end{center}
 \end{figure}
-Multiple trial way takes more time to give the answer than a single, however the 
 
-To reach and test the given approach the following plan should be covered:
+The rule to deal with >50\% accuracy classifiers comes from Condorcet's jury theorem definition. It states that in majority vote with two options available ($Option1$, $Option2$), if voters have independent probability $p$ for voting for $Option1$, then:
+\begin{itemize}
+\item If $p$ is higher than 50\%, then the more voters is participating, the higher probability for the majority decision for $Option1$ will be
+\item If $p$ is lower than 50\%, then the more voters is participating, the lower probability for the majority decision for $Option1$ will be
+\end{itemize}
+
+\begin{figure} [H]
+\begin{center}
+\includegraphics[width=1\textwidth]{condorcet}
+\caption{Plot showing the dependency between number of voters and probability result. Single voter probability is 75\%}
+\label{fig:condorcet}
+\end{center}
+\end{figure}
+
+A voting system is used to do the final target selection from the single trial classifier results. The following voting systems will be used in our implementation:
+\begin{itemize}
+\item Majority voting - all the voters have the same influence on the final result.
+\item Weighted voting - individual voter influence on the final result is measured with a weight, which is updated depending on voter accuracy history. Final weight is set up for a classificator after training is done.
+\end{itemize}
+
+To reach and test the given work approach the following plan should be covered:
 \begin{enumerate}
 \item Build a two-class BCI 
 \begin{enumerate}
@@ -401,14 +418,14 @@ This component is required to poll the Emotiv EPOC headset and store sent data t
 
 \subsubsection{Preprocessor}
 
-During preprocessing a set of raw samples is converted to a frequency domain representation. To do this the Short Time Fourier Transform is used with a sliding window. Sliding window technique allows to capture more precisely non-constant signals. Sliding window length equals to 1 s with 0.5 s overlapping. These factors increase the number of samples to:\[2*N-1\] where N is the original number of samples. For example a BCI session with a duration of 1 minute will output 119 samples.
+During preprocessing a set of raw samples is converted to a frequency domain representation. To do this the Short Time Fourier Transform is used with a sliding window. Sliding window technique allows to capture more precisely non-constant signals. Sliding window length equals to 1 s with 0.5 s overlapping. These factors increase the number of samples to$2*N-1$ where $N$ is the original number of samples. For example a BCI session with a duration of 1 minute will output 119 samples.
 
 According to Emotiv EPOC specifications\cite{emotiv} 45 Hz is the maximum bandwidth value for the signal. In our implementation we use 1 - 45 Hz for the frequency range.
 
 \begin{figure} [H]
 \begin{center}
 \includegraphics[width=1\textwidth]{left_amplitudes}
-\caption{A sample frequency domain plot while concentrating on "Left" target. Vertical axe is measured in Hz. Horizontal in uV.}
+\caption{A sample frequency domain plot while concentrating on "Left" target. Vertical axis is measured in Hz. Horizontal in uV.}
 \end{center}
 \end{figure}
 
@@ -416,27 +433,22 @@ According to Emotiv EPOC specifications\cite{emotiv} 45 Hz is the maximum bandwi
 
 Classificator component is responsible for determination of a target (class) from the number of samples given by preprocessor component. Each sample (record) contains amplitudes for all the sensors and different frequencies which makes $14*45=630$ features. In addition to them we add a timestamp and a target name to each record. This records compose a dataset which is fed up to a classificator (machine learning algorithm) to train it. 
 
-Train data could be selected from the given dataset in different ways:
+Train data could be separated from test data in different ways:
 
 \begin{itemize}
-\item first 70\% as train data, next 30\% as test data
-\item 
+\item Using first majority of samples as train data and other as test data. For example it could be 70\% for train and 30\% for test data.
+\item Using cross-validation. This means selecting proportional test data chunks (e.g 20\%) from the whole dataset without overlapping and using the rest of samples as train data. This will result in training several classificators. A classificator with the highest accuracy will be chosen finally.
 \end{itemize}
 
-\subsubsection{Voting handler}
-
 \subsection{Application modes}
-Some text here...
 \subsubsection{Training mode}
-Training mode use case
-\subsubsection{Test mode}
+\subsubsection{Testing mode}
 
 \subsection{Targets}
+For the targets in the current system two classes were selected: "Left" and "Right". It is expected that concentration on a target requires a motor activity signal (e.g imaging moving a hand), which is a common practice in BCI tasks. A subject should concentrate on the target at least one second to get the necessary data.
 
 \newpage
 \section{Validation}
-
-\subsection{Test mode}
 
 \newpage
 \section{Discussion}
