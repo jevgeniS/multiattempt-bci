@@ -1,0 +1,2 @@
+class ExitServiceException(Exception):
+    pass

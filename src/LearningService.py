@@ -40,7 +40,7 @@ class LearningService(object):
 
         print "Please concentrate on the '"+target+"' for " + str(c.USER_TRAINING_DURATION_S) + "s :"
         exercise=MathQuizGenerator().generate()
-        self.draw_fix_cross(exercise)
+        self.draw_fix_cross(target+": "+str(c.USER_TRAINING_DURATION_S)+"s", exercise)
         packet_queue = Queue()
         process = Process(target=emotiv_start_reader, args=(packet_queue,))
         process.start()
@@ -63,17 +63,20 @@ class LearningService(object):
             DataStorer.store(samples, ts)
 
 
-    def draw_fix_cross(self, text):
+    def draw_fix_cross(self, target, text):
         from psychopy import visual
 
         mywin = visual.Window([800, 600], monitor="testMonitor", units="deg")
 
         fixation = visual.GratingStim(win=mywin, mask="cross", size=0.4, pos=[0, 0], sf=0, color="red")
+        target_stim = visual.TextStim(mywin, target, pos=(0, 8), colorSpace='rgb')
         text_stim =visual.TextStim(mywin, text, pos=(0, -1), colorSpace='rgb')
 
+        target_stim.draw()
         text_stim.draw()
         fixation.draw()
         mywin.update()
+        return mywin
 
 
 
