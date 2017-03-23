@@ -2,12 +2,9 @@ from math import floor
 
 
 import numpy as np
-from numpy.fft import fft
-from scipy.signal import detrend
 from wyrm.processing import stft
 
-from .. import constants as c
-
+from constants import constants as c
 
 class RawDataTransformer:
     def __init__(self, raw_data):

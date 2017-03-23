@@ -10,7 +10,7 @@ class MathQuizGenerator(object):
     ]
 
     def generate(self):
-        arguments = 3
+        arguments = 1
         quiz = ""
         quiz +=  str(random.randint(1000, 10000))+" "
         for i in range(arguments):

@@ -2,8 +2,8 @@ from random import shuffle
 
 import numpy as np
 
-from src import constants
-from src.analyzing.RFTLearner import RFTLearner
+from constants import constants
+from analyzing.RFTLearner import RFTLearner
 from sklearn.metrics import confusion_matrix
 
 class TrainingService(object):

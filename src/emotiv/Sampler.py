@@ -1,8 +1,7 @@
 import time
 
 import gevent
-
-from .. import constants as c
+from constants import constants as c
 
 class Sampler:
 

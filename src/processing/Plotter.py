@@ -2,8 +2,7 @@ import itertools
 import matplotlib.pyplot as plt
 import numpy as np
 
-from src import constants
-
+from constants import constants
 
 
 class Plotter:

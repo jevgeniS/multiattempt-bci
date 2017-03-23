@@ -1,4 +1,3 @@
-import gevent
 from emokit.emotiv import Emotiv
 
 

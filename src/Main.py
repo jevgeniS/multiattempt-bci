@@ -5,14 +5,14 @@ from datetime import datetime
 import winsound
 
 from LearningService import LearningService
-from src import constants
-from src.TestingService import TestingService
-from src.TrainingService import TrainingService
-from src.analyzing.RFTLearner import RFTLearner
-from src.processing.Plotter import Plotter
-from src.trainers.MajorityVoteTrainingService import MajorityVoteTrainingService
-from src.util.DataStorer import DataStorer
-from src.util.ExitServiceException import ExitServiceException
+from constants import constants
+from TestingService import TestingService
+from TrainingService import TrainingService
+from analyzing.RFTLearner import RFTLearner
+from processing.Plotter import Plotter
+from trainers.MajorityVoteTrainingService import MajorityVoteTrainingService
+from util.DataStorer import DataStorer
+from util.ExitServiceException import ExitServiceException
 
 
 def test():

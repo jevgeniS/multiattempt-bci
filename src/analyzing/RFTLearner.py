@@ -3,8 +3,6 @@ from random import shuffle
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 
-from src import constants
-
 
 class RFTLearner:
 

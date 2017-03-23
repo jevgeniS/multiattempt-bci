@@ -1,15 +1,17 @@
+import time
+import winsound
 from multiprocessing import Process, Queue
 
-import winsound
+from processing.RawDataTransformer import RawDataTransformer
+from util.DataStorer import DataStorer
+from util.ExitServiceException import ExitServiceException
+from util.MathQuizGenerator import MathQuizGenerator
+from util.TimeStampGenerator import get_timestamp
 
-import constants as c
-from src.emotiv.Reader import Reader
-from src.emotiv.Sampler import Sampler
-from src.processing.RawDataTransformer import RawDataTransformer
-from src.util.DataStorer import DataStorer
-from src.util.ExitServiceException import ExitServiceException
-from src.util.MathQuizGenerator import MathQuizGenerator
-from src.util.TimeStampGenerator import get_timestamp
+from constants import constants as c
+
+from emotiv.Reader import Reader
+from emotiv.Sampler import Sampler
 
 
 def emotiv_start_reader(queue):
@@ -40,7 +42,9 @@ class LearningService(object):
 
         print "Please concentrate on the '"+target+"' for " + str(c.USER_TRAINING_DURATION_S) + "s :"
         exercise=MathQuizGenerator().generate()
-        self.draw_fix_cross(target+": "+str(c.USER_TRAINING_DURATION_S)+"s", exercise)
+
+        window=self.draw_fix_cross(target+": "+str(c.USER_TRAINING_DURATION_S)+"s", exercise)
+        time.sleep(2)
         packet_queue = Queue()
         process = Process(target=emotiv_start_reader, args=(packet_queue,))
         process.start()
@@ -55,7 +59,7 @@ class LearningService(object):
             for sensor in freq_domains:
                 sample += freq_domains[sensor][w]
             samples.append(sample)
-
+        window.close()
         winsound.MessageBeep()
         answer = raw_input("Type X do skip save of current try")
 
@@ -70,12 +74,14 @@ class LearningService(object):
 
         fixation = visual.GratingStim(win=mywin, mask="cross", size=0.4, pos=[0, 0], sf=0, color="red")
         target_stim = visual.TextStim(mywin, target, pos=(0, 8), colorSpace='rgb')
-        text_stim =visual.TextStim(mywin, text, pos=(0, -1), colorSpace='rgb')
+        text_stim = visual.TextStim(mywin, text, pos=(0, -0.5), colorSpace='rgb')
 
         target_stim.draw()
         text_stim.draw()
         fixation.draw()
         mywin.update()
+        mywin.winHandle.activate()
+
         return mywin
 
 

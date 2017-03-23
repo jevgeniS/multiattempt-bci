@@ -1,10 +1,10 @@
 from multiprocessing import Process, Queue
 
-from src.analyzing.RFTLearner import RFTLearner
-from src.emotiv.Reader import Reader
-from src.emotiv.Sampler import Sampler
-from src.processing.RawDataTransformer import RawDataTransformer
-from src.util.DataStorer import DataStorer
+from analyzing.RFTLearner import RFTLearner
+from emotiv.Reader import Reader
+from emotiv.Sampler import Sampler
+from processing.RawDataTransformer import RawDataTransformer
+from util.DataStorer import DataStorer
 
 
 def emotiv_start_reader(queue):

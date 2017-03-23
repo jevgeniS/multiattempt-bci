@@ -1,10 +1,10 @@
 from collections import Counter
 from math import floor
 
-from src import constants
-from src.TrainingService import TrainingService
-from src.analyzing.RFTLearner import RFTLearner
-from src.util.DataStorer import DataStorer
+from constants import constants
+from TrainingService import TrainingService
+from analyzing.RFTLearner import RFTLearner
+from util.DataStorer import DataStorer
 import numpy as np
 
 class MajorityVoteTrainingService(TrainingService):

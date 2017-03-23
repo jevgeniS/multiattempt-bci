@@ -3,8 +3,8 @@ import csv
 import datetime
 import numpy as np
 
-from src import constants
-from src.util.TimeStampGenerator import ts_format, get_timestamp, get_timestamp_for_filename
+from constants import constants
+from util.TimeStampGenerator import ts_format, get_timestamp, get_timestamp_for_filename
 
 
 class DataStorer():
