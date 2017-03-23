@@ -19,7 +19,7 @@ class MajorityVoteTrainingService(TrainingService):
         result = self.train_and_test(train_data, test_data)
         self.majority_vote(result.values()[0], result.keys()[0])
         self.majority_vote(result.values()[1], result.keys()[1])
-        print(self.calculate_threshold(train_data))
+        print(self.calculate_weights(train_data))
         #self.weighted_vote(result.values()[0], result.keys()[0], weigths)
         #self.weighted_vote(result.values()[1], result.keys()[1], weigths)
 
@@ -37,17 +37,19 @@ class MajorityVoteTrainingService(TrainingService):
 
         return results
 
-    def vote_with_threshold(self, predicted_targets, high_probability_target, threshold):
-        most_common_targets=Counter(predicted_targets).most_common()
-        accuracy = most_common_targets[0][1] / float(len(predicted_targets))
-        if most_common_targets[0][0]==high_probability_target:
-            if accuracy>=threshold:
-                return most_common_targets[0][0]
+    def vote_with_weights(self, predicted_targets, target_weights):
+        selected_target = None
+        max_accuracy = 0
+        for target in target_weights:
+            accuracy=predicted_targets.tolist().count(target)/float(len(predicted_targets))
+            accuracy_with_weight_applied= accuracy*target_weights[target]
+            if accuracy_with_weight_applied > max_accuracy:
+                selected_target = target
+                max_accuracy = accuracy_with_weight_applied
+        return selected_target
 
-        return most_common_targets[1][0]
 
-
-    def calculate_threshold(self, training_data):
+    def calculate_weights(self, training_data):
         chunks = 3
         training_chunks = 2
         data_size = len(training_data)
@@ -57,72 +59,52 @@ class MajorityVoteTrainingService(TrainingService):
         chunk_borders = range(0,data_size,chunk_size)
         chunk_borders.append(dataset_end)
 
-        thresholds_from_chunks = {}
-        high_probability_targets_from_chunks = []
+        weights_from_chunks = []
 
         for i in range(chunks):
             current_chunk = np.concatenate([training_data[:chunk_borders[i]] ,training_data[chunk_borders[i+1]:],training_data[chunk_borders[i]:chunk_borders[i+1]]])
 
             train_data, test_data = self.split_data(current_chunk, 0, training_chunks*chunk_size)
-            result = self.train_and_test(train_data, test_data)
+            prediction_result = self.train_and_test(train_data, test_data)
 
-            t1 = result.keys()[0]
-            t2 = result.keys()[1]
+            weights = self.find_best_weights_for_target(prediction_result)
+            weights_from_chunks.append(weights)
 
-            t1_results = self.majority_vote(result.values()[0], t1)
-            t1_results_avg = sum(t1_results)/len(t1_results)
-            t2_results = self.majority_vote(result.values()[1], t2)
-            t2_results_avg = sum(t2_results) / len(t2_results)
+        print "Weights from chunks" + str(weights_from_chunks)
+        avg_weights = {}
 
-            if t1_results_avg>t2_results_avg:
-                high_probability_targets_from_chunks.append(t1)
-            else:
-                high_probability_targets_from_chunks.append(t2)
+        for i,val in enumerate(weights_from_chunks):
+            weight = weights_from_chunks[i]
+            for target in weight:
+                avg_weights[target] = (avg_weights.get(target, weight[target]) + weight[target])/2.0
 
-            treshold1 = self.find_best_threshold_for_high_accuracy_target(t1, result)
-            tresholds1 = thresholds_from_chunks.get(t1, [])
-            tresholds1.append(treshold1)
-            thresholds_from_chunks[t1] =tresholds1
+        return avg_weights
 
-            treshold2 = self.find_best_threshold_for_high_accuracy_target(t2, result)
-            tresholds2 = thresholds_from_chunks.get(t2, [])
-            tresholds2.append(treshold2)
-            thresholds_from_chunks[t2] = tresholds2
-
-
-        if len(list(set(high_probability_targets_from_chunks)))>1:
-            #raise Exception("High probability targets differ within chunks")
-            most_common_targets = Counter(high_probability_targets_from_chunks).most_common()
-            high_probability_target = most_common_targets[0][0]
-
-        else:
-            high_probability_target = high_probability_targets_from_chunks[0]
-
-        print thresholds_from_chunks[high_probability_target]
-
-        avg_threshold= sum(thresholds_from_chunks[high_probability_target])/float(len(thresholds_from_chunks[high_probability_target]))
-
-        return {high_probability_target:avg_threshold}
-
-    def find_best_threshold_for_high_accuracy_target(self, high_probability_target, result):
-        thresholds= [x * 0.01 for x in range(50,100,5)]
+    def find_best_weights_for_target(self, prediction_result):
+        weights_to_test = [(x * 0.01, 200 * 0.01 - x * 0.01) for x in range(0, 200, 10)]
         max_accuracy=0
-        threshold=0
-        for t in thresholds:
-            acc=self.find_accuracy_for_threshold(result, high_probability_target, t)
+        best_weights = None
+        for w in weights_to_test:
+            weights = { prediction_result.keys()[0]: w[0], prediction_result.keys()[1]: w[1]}
+            acc = self.find_accuracy_for_weights(prediction_result, weights)
             if acc>max_accuracy:
                 max_accuracy = acc
-                threshold = t
-        return threshold
+                best_weights = weights
 
-    def find_accuracy_for_threshold(self, result, high_probability_target, threshold):
-        second_chunks = self.split_on_seconds(result[high_probability_target])
-        prediction_result=[]
-        for chunk in second_chunks:
-            prediction_result.append(self.vote_with_threshold(chunk, high_probability_target, threshold))
-        accuracy = prediction_result.count(high_probability_target) / float(len(prediction_result))
+        return best_weights
 
-        return accuracy
+    def find_accuracy_for_weights(self, prediction_result, weights):
+        accuracies = []
+
+        for target in weights:
+            # TODO: should I split on samples instead of seconds ?
+            second_chunks = self.split_on_seconds(prediction_result[target])
+            single_target_voting_results=[]
+            for chunk in second_chunks:
+                single_target_voting_results.append(self.vote_with_weights(chunk, weights))
+            accuracies.append(single_target_voting_results.count(target) / float(len(single_target_voting_results)))
+
+        return sum(accuracies)/float(len(accuracies))
 
     def train_and_test(self, train_data, test_data):
         test_data = self.balance_data(test_data)
