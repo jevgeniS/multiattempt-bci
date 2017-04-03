@@ -2,6 +2,7 @@ from random import shuffle
 
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.tree import DecisionTreeClassifier
 
 
 class RFTLearner:
@@ -13,9 +14,6 @@ class RFTLearner:
 
     def predict(self, sample):
         return self.classifier.predict(sample)
-
-
-
 
 
     def setup_classifier(self, training_data):
@@ -48,14 +46,17 @@ class RFTLearner:
         training_targets = training_data[:, 0]
         training_features = training_data[:, 1:]
 
-        clf = RandomForestClassifier(n_jobs=2)
+
+        clf = RandomForestClassifier(n_estimators=100, n_jobs=2, random_state=0)
+        #clf = DecisionTreeClassifier(random_state=0)
         clf.fit(training_features, training_targets)
 
         return clf
 
     def predict_samples(self, test_data):
         test_features = test_data[:, 1:]
-        return self.classifier.predict(test_features)
+        prediction_result=self.classifier.predict(test_features)
+        return prediction_result
 
 
     def get_accuracy(self, test_data):

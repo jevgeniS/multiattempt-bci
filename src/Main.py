@@ -1,16 +1,13 @@
-import itertools
-import numpy as np
 from datetime import datetime
 
-import winsound
+import numpy as np
 
 from LearningService import LearningService
-from constants import constants
 from TestingService import TestingService
 from TrainingService import TrainingService
 from analyzing.RFTLearner import RFTLearner
 from processing.Plotter import Plotter
-from trainers.MajorityVoteTrainingService import MajorityVoteTrainingService
+from trainers.VoteTrainingService import VoteTrainingService
 from util.DataStorer import DataStorer
 from util.ExitServiceException import ExitServiceException
 
@@ -77,7 +74,7 @@ if __name__ == "__main__":
     if answer == "2":
         print "Switched to training mode"
         #train()
-        MajorityVoteTrainingService().train()
+        VoteTrainingService().train()
     else:
         print "Switched to test mode"
 
