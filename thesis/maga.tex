@@ -358,20 +358,6 @@ In multiple trial approach the final prediction result is calculated using inter
 \end{center}
 \end{figure}
 
-The rule to deal with >50\% accuracy classifiers comes from Condorcet's jury theorem definition. It states that in majority vote with two options available ($Option1$, $Option2$), if voters have independent probability $p$ for voting for $Option1$, then:
-\begin{itemize}
-\item If $p$ is higher than 50\%, then the more voters is participating, the higher probability for the majority decision for $Option1$ will be
-\item If $p$ is lower than 50\%, then the more voters is participating, the lower probability for the majority decision for $Option1$ will be
-\end{itemize}
-
-\begin{figure} [H]
-\begin{center}
-\includegraphics[width=1\textwidth]{condorcet}
-\caption{Plot showing the dependency between number of voters and probability result. Single voter probability is 75\%}
-\label{fig:condorcet}
-\end{center}
-\end{figure}
-
 A voting system is used to do the final target selection from the single trial classifier results. The following voting systems will be used in our implementation:
 \begin{itemize}
 \item Majority voting - all the voters have the same influence on the final result.
@@ -387,9 +373,27 @@ To reach and test the given work approach the following plan should be covered:
 \item Machine learning process
 \item Get a meaningful prediction accuracy $X$
 \end{enumerate}
-\item Measure how many trials is it required to improve $X$ to 0.99\% accuracy
+\item Measure how many trials is it required to improve $X$ to 0.99 accuracy
 \item Try different voting schemas and plot their results
 \end{enumerate}
+
+\subsection{Condorcet's jury theorem}
+The rule to deal with >50\% accuracy classifiers comes from Condorcet's jury theorem definition. It states that in majority vote with two options available ($Option1$, $Option2$), if voters have independent probability $p$ for voting for $Option1$, then:
+\begin{itemize}
+\item If $p$ is higher than 50\%, then the more voters is participating, the higher probability for the majority decision for $Option1$ will be
+\item If $p$ is lower than 50\%, then the more voters is participating, the lower probability for the majority decision for $Option1$ will be
+\end{itemize}
+The Condorcet's jury theorem is defined by the following expression:
+\[ \mu = \sum_{i=m}^{N} (\frac{N!}{(N-i)!i!})(p)^i(1-p)^{N-i} \]
+where $N$ is the number of jurors, $p$ is the probability of the individual juror giving the true result, $\mu$ is the probability that a jury gives the true result.
+\begin{figure} [H]
+\begin{center}
+\includegraphics[width=1\textwidth]{condorcet}
+\caption{Plot showing the dependency between number of voters and probability result when a single voter probability is 75\%}
+\label{fig:condorcet}
+\end{center}
+\end{figure}
+
 
 \subsection{Implementation}
 
@@ -418,16 +422,9 @@ This component is required to poll the Emotiv EPOC headset and store sent data t
 
 \subsubsection{Preprocessor}
 
-During preprocessing a set of raw samples is converted to a frequency domain representation. To do this the Short Time Fourier Transform is used with a sliding window. Sliding window technique allows to capture more precisely non-constant signals. Sliding window length equals to 1 s with 0.5 s overlapping. These factors increase the number of samples to$2*N-1$ where $N$ is the original number of samples. For example a BCI session with a duration of 1 minute will output 119 samples.
+During preprocessing a set of raw samples is converted to a frequency domain representation. To do this the Short Time Fourier Transform is used with a sliding window. Sliding window technique allows to capture more precisely non-constant signals. Sliding window length equals to 1 s with 0.5 s overlapping. These factors increase the number of samples to $2*N-1$ where $N$ is the original number of samples. For example a BCI session with a duration of 1 minute will output 119 samples.
 
 According to Emotiv EPOC specifications\cite{emotiv} 45 Hz is the maximum bandwidth value for the signal. In our implementation we use 1 - 45 Hz for the frequency range.
-
-\begin{figure} [H]
-\begin{center}
-\includegraphics[width=1\textwidth]{left_amplitudes}
-\caption{A sample frequency domain plot while concentrating on "Left" target. Vertical axis is measured in Hz. Horizontal in uV.}
-\end{center}
-\end{figure}
 
 \subsubsection{Classificator}
 
@@ -445,11 +442,36 @@ Train data could be separated from test data in different ways:
 \subsubsection{Testing mode}
 
 \subsection{Targets}
-For the targets in the current system two classes were selected: "Left" and "Right". It is expected that concentration on a target requires a motor activity signal (e.g imaging moving a hand), which is a common practice in BCI tasks. A subject should concentrate on the target at least one second to get the necessary data.
+For the targets in the current system two classes were selected: 
+\begin{itemize}
+\item Relax - the mental task considering a subject to focus sight on a fixation cross and trying to meditate.
+\item Excitement - the high performance mental task considering a subject to try focusing on a fixation cross and calculate the mathematical expressions provided by the system.
+\end{itemize}
 
+\begin{figure} [H]
+\begin{center}
+\includegraphics[width=0.7\textwidth]{test_ui}
+\caption{A dialog window displaying what a subject sees during a test for both target tasks. A red fixation cross is located at the center of the window}
+\label{fig:fnCompModel}
+\end{center}
+\end{figure}
+
+At the beginning of the classification experiments the motor activity signals were used as targets, upon it was made clear that Excitement and Relax are actually giving better prediction results. The motor activity signals:
+\begin{itemize}
+\item Left - the motor task considering imaging movement of the left hand.
+\item Right - the motor task considering imaging movement of the right hand.
+\end{itemize}
+
+The results connected to the motor tasks are also provided in the validation section.
+
+With the several measurements and verifications it was determined that 10 seconds is the suitable measurement session length. Taking into account that every second of measurement produces 18 samples after the short-time Fourier transformation the provided period is containing 180 ($10*18=180$) signal data samples. The classification result from this sample is calculated either using majority or weighted vote.
 \newpage
 \section{Validation}
+\subsection{Motor activity tasks validation}
 
+\subsection{Relax and Excitement tasks validation}
+\subsubsection{Majority voting}
+\subsubsection{Weighted voting}
 \newpage
 \section{Discussion}
 
@@ -492,6 +514,14 @@ Emokit SDK. https://github.com/openyou/emokit
 %\bibliography{bachelor-thesis}
 
 \appendix
+
+\begin{figure} [H]
+\begin{center}
+\includegraphics[width=1\textwidth]{left_amplitudes}
+\caption{A sample frequency domain plot while concentrating on "Left" target. Vertical axis is measured in Hz. Horizontal in $\mu$V.}
+\end{center}
+\end{figure}
+
 \pagebreak
 \section*{\small Non-exclusive licence to reproduce thesis and make thesis public}
 

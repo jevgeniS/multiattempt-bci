@@ -1,56 +1,60 @@
 from math import floor
 
-from constants import constants
-from TrainingService import TrainingService
-from analyzing.RFTLearner import RFTLearner
-from trainers.CondorcetCalculator import CondorcetCalculator
-from util.DataStorer import DataStorer
 import numpy as np
+import operator
+
+from TrainingService import TrainingService
+from analyzing.RfLearner import RfLearner
+from constants import constants
+from trainers.CondorcetCalculator import CondorcetCalculator
 
 
 class VoteTrainingService(TrainingService):
+    weights=None
+    classificator=None
+
+    def __init__(self, train_data_storer):
+        self.train_data_storer=train_data_storer
+
+    def test(self, test_data):
+        result = self.classificator.predict(test_data)
+        mv_result = self.majority_vote_test(result)
+        print "Majority vote result: "+str(mv_result)
+        wv_result = self.weighted_vote_test(result, self.weights)
+        print "Weighted vote result: "+str(wv_result)
+        return mv_result, wv_result
+
+
     def train(self):
-        data = DataStorer.read()
-        n = 1
-        m_accuracies = []
-        w_accuracies = []
-        for i in range(n):
-            w_acc, m_acc = self.train_with_weighted_vote(data)
-            m_accuracies.append(m_acc)
-            w_accuracies.append(w_acc)
+        data = self.train_data_storer.read()
+        w_acc, m_acc = self.train_with_weighted_vote(data)
 
         print "Majority Vote: "
-        print "Min accuracy: " + str(min(m_accuracies))
-        print "Max accuracy: " + str(max(m_accuracies))
-        total_accuracy = sum(m_accuracies) / float(len(m_accuracies))
-        print "Total accuracy: " + str(total_accuracy)
+        print "Total accuracy: " + str(m_acc)
         required_p= 0.99
-        condorcet_result=CondorcetCalculator.calculate_number_of_voters(total_accuracy, required_p)
+        condorcet_result=CondorcetCalculator.calculate_number_of_voters(m_acc, required_p)
         print "Samples required for p>="+str(required_p)+" "+str(condorcet_result)
         print
         print "Weighted Vote: "
-        print "Min accuracy: " + str(min(w_accuracies))
-        print "Max accuracy: " + str(max(w_accuracies))
-        total_accuracy = sum(w_accuracies) / float(len(w_accuracies))
-        print "Total accuracy: " + str(total_accuracy)
-        condorcet_result=CondorcetCalculator.calculate_number_of_voters(total_accuracy, required_p)
+        print "Total accuracy: " + str(w_acc)
+        condorcet_result=CondorcetCalculator.calculate_number_of_voters(w_acc, required_p)
         print "Samples required for p>=" + str(required_p) + " " + str(condorcet_result)
 
 
     def train_with_weighted_vote(self, data):
         training_border_index = int(constants.TRAINING_DATA_PERCENTAGE / 100.0 * len(data))
         train_data, test_data = self.split_data(data, 0, training_border_index)
-        result = self.train_and_test(train_data, test_data)
+        result = self.train_and_test(train_data, test_data, True)
         m_acc1 = self.majority_vote(result.values()[0], result.keys()[0])
         m_acc2 = self.majority_vote(result.values()[1], result.keys()[1])
         majority_accuracy = ((m_acc1 + m_acc2) / 2.0)
         print "Majority Vote accuracy: " + str(majority_accuracy)
+        self.weights = self.calculate_weights(train_data)
 
-        weights = self.calculate_weights(train_data)
-        print(weights)
+        print(self.weights)
 
-        acc1 = self.weighted_vote(result.values()[0], result.keys()[0], weights)
-        acc2 = self.weighted_vote(result.values()[1], result.keys()[1], weights)
+        acc1 = self.weighted_vote(result.values()[0], result.keys()[0], self.weights)
+        acc2 = self.weighted_vote(result.values()[1], result.keys()[1], self.weights)
         total_accuracy = ((acc1 + acc2) / 2.0)
         print "Weighted Vote accuracy: " + str(total_accuracy)
         return total_accuracy, majority_accuracy
@@ -64,6 +68,19 @@ class VoteTrainingService(TrainingService):
             results.append(accuracy)
             # print "Accuracy "+str(accuracy)
         return sum(results) / float(len(results))
+
+    def majority_vote_test(self, predicted_targets):
+        sessions = self.split_on_sessions(predicted_targets)
+
+        vote_results = {}
+        for session_data in sessions:
+            for t in constants.TARGETS.values():
+                p = session_data.tolist().count(t) / float(len(session_data))
+                vote_results[t] = (vote_results.get(t, p) + p)/2.0
+
+        max_key = max(vote_results.iteritems(), key=operator.itemgetter(1))[0]
+
+        return (max_key, vote_results[max_key])
 
     def weighted_vote(self, predicted_targets, actual_target, weights):
         # print "Target expected: " + actual_target
@@ -79,6 +96,21 @@ class VoteTrainingService(TrainingService):
         # print "Accuracy "+str(accuracy)
 
         return accuracy
+
+    def weighted_vote_test(self, predicted_targets, weights):
+        results = []
+        sessions = self.split_on_sessions(predicted_targets)
+        for session_data in sessions:
+            results.append(self.vote_with_weights(session_data, weights))
+
+        vote_results={}
+        for t in constants.TARGETS.values():
+            p = results.count(t) / float(len(results))
+            vote_results[t] = p
+
+        max_key= max(vote_results.iteritems(), key=operator.itemgetter(1))[0]
+
+        return (max_key,vote_results[max_key])
 
 
     def vote_with_weights_coef(self, predicted_targets, target_weights):
@@ -101,7 +133,6 @@ class VoteTrainingService(TrainingService):
 
         return target_weights.keys()[1]
 
-    training_data=None
     def calculate_weights(self, training_data):
         chunks = 3
         training_chunks = 2
@@ -162,12 +193,14 @@ class VoteTrainingService(TrainingService):
         return sum(accuracies) / float(len(accuracies))
 
 
-    def train_and_test(self, train_data, test_data):
+    def train_and_test(self, train_data, test_data, set_classificator=False):
 
         test_data = self.balance_data(test_data)
 
-        learner = RFTLearner()
+        learner = RfLearner()
         learner.setup_classifier(train_data)
+        if set_classificator:
+            self.classificator=learner
         actual_targets = test_data[:, 0]
         predicted_targets = learner.predict_samples(test_data)
 
@@ -184,7 +217,7 @@ class VoteTrainingService(TrainingService):
         chunks = []
         current_index = 0
         chunk_size = constants.SAMPLES_PER_TEST_SESSION
-        while current_index + chunk_size < len(data):
+        while current_index + chunk_size <= len(data):
             chunks.append(data[current_index: (current_index + chunk_size)])
             current_index += chunk_size
         return chunks

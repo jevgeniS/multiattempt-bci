@@ -17,14 +17,15 @@
 \contentsline {subsection}{\numberline {2.6}Collaborative Brain-Computer Interface}{9}{subsection.2.6}
 \contentsline {section}{\numberline {3}Contribution}{11}{section.3}
 \contentsline {subsection}{\numberline {3.1}Overview}{11}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Implementation}{14}{subsection.3.2}
-\contentsline {subsubsection}{\numberline {3.2.1}Raw data reader}{14}{subsubsection.3.2.1}
-\contentsline {subsubsection}{\numberline {3.2.2}Preprocessor}{15}{subsubsection.3.2.2}
-\contentsline {subsubsection}{\numberline {3.2.3}Classificator}{17}{subsubsection.3.2.3}
-\contentsline {subsection}{\numberline {3.3}Application modes}{17}{subsection.3.3}
-\contentsline {subsubsection}{\numberline {3.3.1}Training mode}{17}{subsubsection.3.3.1}
-\contentsline {subsubsection}{\numberline {3.3.2}Testing mode}{17}{subsubsection.3.3.2}
-\contentsline {subsection}{\numberline {3.4}Targets}{17}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.2}Condorcet's jury theorem}{13}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Implementation}{14}{subsection.3.3}
+\contentsline {subsubsection}{\numberline {3.3.1}Raw data reader}{15}{subsubsection.3.3.1}
+\contentsline {subsubsection}{\numberline {3.3.2}Preprocessor}{15}{subsubsection.3.3.2}
+\contentsline {subsubsection}{\numberline {3.3.3}Classificator}{16}{subsubsection.3.3.3}
+\contentsline {subsection}{\numberline {3.4}Application modes}{16}{subsection.3.4}
+\contentsline {subsubsection}{\numberline {3.4.1}Training mode}{16}{subsubsection.3.4.1}
+\contentsline {subsubsection}{\numberline {3.4.2}Testing mode}{16}{subsubsection.3.4.2}
+\contentsline {subsection}{\numberline {3.5}Targets}{16}{subsection.3.5}
 \contentsline {section}{\numberline {4}Validation}{18}{section.4}
 \contentsline {section}{\numberline {5}Discussion}{19}{section.5}
 \contentsline {section}{\numberline {6}Conclusion}{20}{section.6}

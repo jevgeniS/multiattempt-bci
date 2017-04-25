@@ -3,7 +3,7 @@ from random import shuffle
 import numpy as np
 
 from constants import constants
-from analyzing.RFTLearner import RFTLearner
+from analyzing.RfLearner import RfLearner
 from sklearn.metrics import confusion_matrix
 
 class TrainingService(object):
@@ -15,7 +15,7 @@ class TrainingService(object):
         print "Random train data train"
         n = 10
         count = 0
-        learner = RFTLearner()
+        learner = RfLearner()
 
         for i in range(n):
             d = data[:]
@@ -31,7 +31,7 @@ class TrainingService(object):
 
     def train_first_chunk_as_train_second_as_test(self, data):
         print "First chunk as train"
-        learner = RFTLearner()
+        learner = RfLearner()
         training_border_index = int(constants.TRAINING_DATA_PERCENTAGE / 100.0 * len(data))
         train_data, test_data = self.split_data(data, 0, training_border_index)
         test_data = self.balance_data(test_data)
@@ -67,7 +67,7 @@ class TrainingService(object):
         print "Sliding window train"
         n = 7
         count = 0
-        learner = RFTLearner()
+        learner = RfLearner()
 
         step = 0
 
