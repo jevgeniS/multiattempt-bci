@@ -3,6 +3,7 @@ import numpy as np
 import constants
 from LearningService import LearningService
 from TestingService import TestingService
+from analyzing.CrossValidator import CrossValidator
 from processing.Plotter import Plotter
 from trainers.VoteTrainingService import VoteTrainingService
 from util.DataStorer import DataStorer
@@ -23,7 +24,7 @@ if __name__ == "__main__":
         if answer == "1":
             LearningService().measure()
         if answer == "2":
-            VoteTrainingService(DataStorer(constants.constants.DATA_FILE)).train()
+            VoteTrainingService(DataStorer(constants.constants.DATA_FILE), CrossValidator()).train()
         if answer == "3":
             TestingService(DataStorer(constants.constants.DATA_FILE)).measure()
         if answer == "4":

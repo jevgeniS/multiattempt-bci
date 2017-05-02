@@ -464,14 +464,69 @@ At the beginning of the classification experiments the motor activity signals we
 
 The results connected to the motor tasks are also provided in the validation section.
 
-With the several measurements and verifications it was determined that 10 seconds is the suitable measurement session length. Taking into account that every second of measurement produces 18 samples after the short-time Fourier transformation the provided period is containing 180 ($10*18=180$) signal data samples. The classification result from this sample is calculated either using majority or weighted vote.
+With the several measurements and verifications it was determined that 10 seconds is a suitable length for a measurement session. Taking into account that the short-time Fourier transformation extends the number of the input samples (since it uses sliding window) the provided period is containing 18 signal data samples. The classification result from this sample is calculated either using majority or weighted vote.
 \newpage
 \section{Validation}
-\subsection{Motor activity tasks validation}
+Before each training or testing session a signal quality check was performed in order to ensure that the headset sensors are well placed on a head and the signal quality is high. This check was done using Emotiv Epoc Control Panel software. The training data was collected multiple times within several days which means that the headset sensor locations were slightly changed what is more close to realistic scenario. 
 
-\subsection{Relax and Excitement tasks validation}
-\subsubsection{Majority voting}
-\subsubsection{Weighted voting}
+Test data used to check the performance of a classifier is balanced (i.e has the equal amount of samples per different targets).
+
+Random Forest classifier is set up to use 100 trees and the random seed is manually specified in order to avoid different results within the different classification session runs.
+
+The following section is divided on the two main subsections:
+\begin{itemize}
+\item Baseline establishment - this section describes the process of finding the baseline accuracy (i.e single juror probability) and the results considering to it. 
+\item Validation of the multiple trial approach - this section compares expected prediction accuracy (calculated in the baseline establishment chapter) to the real one.
+\end{itemize}
+\subsection{Baseline establishment}
+
+\subsubsection{Training and test data selection}
+
+Two ways of classifier training were applied:
+\begin{itemize}
+\item using first 70\% of data as training data and left 30\% as test data
+\item using 5-fold cross-validation
+\end{itemize}
+
+In this approach the whole testing data was divided in two parts (70\% and 30\%), where the first part is training data and the second is test data.
+This approach resulted with 0.67 probability when it was run using majority voting.
+
+\begin{table}[H]
+\caption{Contingency table for a classifier trained with first 70\% as train data} \label{tab:title} 
+\begin{center}
+  \begin{tabular}{ | c | c | c | c | }
+    \hline
+     & Predicted Relax & Predicted Excitement & Total \\ \hline
+    Actually Relax & 168 & 180 & 348 \\ \hline
+    Actually Excitement & 50 & 298 & 348 \\ \hline
+    Total & 218 & 478 & 696 \\ 
+    \hline
+  \end{tabular}
+\end{center}
+\end{table}
+
+Cross-validation is a way of validating a classifier by using different data parts as test data. In that case it is used 20\% of the data as test and 80\% as training data. In total 5 different classifiers were trained and validated. The average of their accuracies is 0.68.
+
+\begin{table}[H]
+\caption{Contingency table for a classifier trained using 5-fold cross-validation} \label{tab:title} 
+\begin{center}
+  \begin{tabular}{ | c | c | c | c | }
+    \hline
+     & Predicted Relax & Predicted Excitement & Total \\ \hline
+    Actually Relax & 597 & 570 & 1167 \\ \hline
+    Actually Excitement & 239 & 1129 & 1368 \\ \hline
+    Total & 836 & 1169 & 2535 \\ 
+    \hline
+  \end{tabular}
+\end{center}
+\end{table}
+
+\subsubsection{Weighted voting system}
+
+roc curve using RF \% and using and using voters
+
+\subsubsection{Weighted voting system}
+
 \newpage
 \section{Discussion}
 
