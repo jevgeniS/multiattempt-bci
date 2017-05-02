@@ -2,7 +2,7 @@ from analyzing.DataDivider import DataDivider
 from constants import constants
 
 
-class VotingHandler(object):
+class WeightsVotingHandler(object):
 
     def __init__(self, chunk_size=None):
         if chunk_size is None:
@@ -10,7 +10,7 @@ class VotingHandler(object):
         else:
             self.chunk_size = chunk_size
 
-    def vote_with_threshold(self, result, weights):
+    def vote_with_weights(self, result, weights):
         new_result={}
         for key in result:
             new_result[key] = self.weighted_vote(result[key], weights)
@@ -20,11 +20,11 @@ class VotingHandler(object):
         results = []
         sessions = DataDivider().split_on_sessions(predicted_targets, self.chunk_size)
         for session_data in sessions:
-            results.append(self.vote_with_weights(session_data, weights))
+            results.append(self.vote_with_weights1(session_data, weights))
 
         return results
 
-    def vote_with_weights(self, predicted_targets, target_weights):
+    def vote_with_weights1(self, predicted_targets, target_weights):
         target = target_weights.keys()[0]
         matches = len([i for i in predicted_targets if i == target])
         whole_number_threshold = round(target_weights[target])

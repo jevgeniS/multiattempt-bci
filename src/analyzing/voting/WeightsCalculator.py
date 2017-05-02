@@ -6,11 +6,11 @@ from TrainingService import TrainingService
 from analyzing.AccuracyCalculator import AccuracyCalculator
 from analyzing.DataDivider import DataDivider
 from analyzing.voting.MajorityProbabilitiesToClassesConverter import MajorityProbabilitiesToClassesConverter
-from analyzing.voting.VotingHandler import VotingHandler
+from analyzing.voting.WeightsVotingHandler import WeightsVotingHandler
 from constants import constants
 
 
-class ThresholdCalculator(object):
+class WeightsCalculator(object):
 
     def calculate_weights(self, probabilities):
         prediction_result = MajorityProbabilitiesToClassesConverter().convert(probabilities)
@@ -65,5 +65,5 @@ class ThresholdCalculator(object):
         return best_weights
 
     def find_accuracy_for_weights(self, prediction_result, weights):
-        new_result = VotingHandler().vote_with_threshold(prediction_result, weights)
+        new_result = WeightsVotingHandler().vote_with_weights(prediction_result, weights)
         return AccuracyCalculator().get_accuracy(new_result)

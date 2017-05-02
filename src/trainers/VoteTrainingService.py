@@ -7,13 +7,13 @@ from analyzing.AccuracyCalculator import AccuracyCalculator
 from analyzing.CondorcetCalculator import CondorcetCalculator
 from analyzing.ContingencyTableBuilder import ContingencyTableBuilder
 from analyzing.DataDivider import DataDivider
-from analyzing.ProbabilityThresholdCalculator import ProbabilityThresholdCalculator
 from analyzing.RfLearner import RfLearner
-from analyzing.ThresholdCalculator import ThresholdCalculator
 from analyzing.voting.MajorityProbabilitiesToClassesConverter import MajorityProbabilitiesToClassesConverter
 from analyzing.voting.MajorityVotingHandler import MajorityVotingHandler
 from analyzing.voting.ProbabilitiesToClassesConverter import ProbabilitiesToClassesConverter
-from analyzing.voting.VotingHandler import VotingHandler
+from analyzing.voting.ProbabilityThresholdCalculator import ProbabilityThresholdCalculator
+from analyzing.voting.WeightsVotingHandler import WeightsVotingHandler
+from analyzing.voting.WeightsCalculator import WeightsCalculator
 from constants import constants
 
 
@@ -27,31 +27,42 @@ class VoteTrainingService(TrainingService):
         self.cross_validator = cross_validator
 
     def test(self, test_data):
+        print "____TESTING_RESULTS____"
         probabilities = self.learner.predict_samples(test_data)
 
         result = MajorityProbabilitiesToClassesConverter().convert(probabilities)
-        result_from_single_sessions = MajorityVotingHandler().vote(result)
-        result_from_sessions = MajorityVotingHandler(constants.USER_TEST_SAMPLES).vote(result_from_single_sessions)
-        accuracy_from_sessions = AccuracyCalculator().get_accuracy(result_from_sessions)
-        print "Majority accuracy: "+str(accuracy_from_sessions)
+        inter_sessions_results = MajorityVotingHandler(constants.USER_TEST_SAMPLES*constants.SAMPLES_PER_TEST_SESSION).vote(result)
+        accuracy_from_sessions = AccuracyCalculator().get_accuracy(inter_sessions_results)
+        print "Majority accuracy: " + str(accuracy_from_sessions)
+        print
 
+        result = MajorityProbabilitiesToClassesConverter().convert(probabilities)
+        intra_juror_results = MajorityVotingHandler().vote(result)
+        inter_juror_results = MajorityVotingHandler(constants.USER_TEST_SAMPLES).vote(intra_juror_results)
+        accuracy_from_sessions = AccuracyCalculator().get_accuracy(inter_juror_results)
+        print "Majority accuracy between sessions: "+str(accuracy_from_sessions)
+        print
+
+        result = MajorityProbabilitiesToClassesConverter().convert(probabilities)
+        intra_juror_results = WeightsVotingHandler().vote_with_weights(result, self.weights)
+        inter_juror_results = MajorityVotingHandler(constants.USER_TEST_SAMPLES).vote(intra_juror_results)
+        accuracy_from_sessions = AccuracyCalculator().get_accuracy(inter_juror_results)
+        print "Weighted Vote accuracy between sessions: " + str(accuracy_from_sessions)
+        print
 
         result = ProbabilitiesToClassesConverter(self.thresholds).convert(probabilities)
-        result_from_single_sessions = MajorityVotingHandler().vote(result)
-        result_from_sessions = MajorityVotingHandler(constants.USER_TEST_SAMPLES).vote(result_from_single_sessions)
-        accuracy_from_sessions = AccuracyCalculator().get_accuracy(result_from_sessions)
+        inter_sessions_results = MajorityVotingHandler(constants.USER_TEST_SAMPLES * constants.SAMPLES_PER_TEST_SESSION).vote(result)
+        accuracy_from_sessions = AccuracyCalculator().get_accuracy(inter_sessions_results)
+        print "Vote with thresholds: " + str(accuracy_from_sessions)
+        print
+
+        result = ProbabilitiesToClassesConverter(self.thresholds).convert(probabilities)
+        intra_juror_results = MajorityVotingHandler().vote(result)
+        inter_juror_results = MajorityVotingHandler(constants.USER_TEST_SAMPLES).vote(intra_juror_results)
+        accuracy_from_sessions = AccuracyCalculator().get_accuracy(inter_juror_results)
         print "Vote with thresholds between sessions accuracy: "+str(accuracy_from_sessions)
 
-        result = MajorityProbabilitiesToClassesConverter().convert(probabilities)
-        result_from_single_sessions = VotingHandler().vote_with_threshold(result, self.weights)
-        result_from_sessions = MajorityVotingHandler(constants.USER_TEST_SAMPLES).vote(result_from_single_sessions)
-        accuracy_from_sessions = AccuracyCalculator().get_accuracy(result_from_sessions)
-        print "Weighted Vote accuracy: " + str(accuracy_from_sessions)
 
-        result = MajorityProbabilitiesToClassesConverter().convert(probabilities)
-        result_from_sessions = VotingHandler(constants.USER_TEST_SAMPLES*constants.SAMPLES_PER_TEST_SESSION).vote_with_threshold(result, self.weights)
-        accuracy_from_sessions = AccuracyCalculator().get_accuracy(result_from_sessions)
-        print "Weighted Vote accuracy: " + str(accuracy_from_sessions)
 
     def train(self):
         data = self.train_data_storer.read()
@@ -59,7 +70,8 @@ class VoteTrainingService(TrainingService):
         self.train_baselines(data)
 
     def train_baselines(self, data):
-        required_p = 0.99
+        required_p = constants.REQUIRED_PROBABILITY
+        print "____TRAINING_RESULTS____"
 
         if self.cross_validator is None:
             train_data, test_data = DataDivider().divide_on_two(data)
@@ -80,23 +92,24 @@ class VoteTrainingService(TrainingService):
         print "Majority Vote accuracy: " + str(majority_accuracy)
         print "Samples required for p>=" + str(required_p) + " " + str(
             CondorcetCalculator().calculate_number_of_voters(majority_accuracy, required_p))
+        print
 
         majority_accuracy_between_sessions =AccuracyCalculator().get_accuracy(MajorityVotingHandler().vote(result))
         print "Majority Vote between sessions accuracy: " + str(majority_accuracy_between_sessions)
         print "Samples required for p>=" + str(required_p) + " " + str(
             CondorcetCalculator().calculate_number_of_voters(majority_accuracy_between_sessions, required_p))
-
-        self.weights = ThresholdCalculator().calculate_weights(probabilities)
+        print
+        self.weights = WeightsCalculator().calculate_weights(probabilities)
 
         print "Selected weights"+str(self.weights)
 
-        vote_result=VotingHandler().vote_with_threshold(result, self.weights)
+        vote_result=WeightsVotingHandler().vote_with_weights(result, self.weights)
         vote_res_accuracy = AccuracyCalculator().get_accuracy(vote_result)
 
         print "Weighted Vote accuracy: " + str(vote_res_accuracy)
         print "Samples required for p>=" + str(required_p) + " " + str(
             CondorcetCalculator().calculate_number_of_voters(vote_res_accuracy, required_p))
-
+        print
         self.thresholds = ProbabilityThresholdCalculator().calculate_thresholds(probabilities)
 
         print "Selected thresholds" + str(self.thresholds)
@@ -107,12 +120,13 @@ class VoteTrainingService(TrainingService):
         print "Vote with thresholds accuracy: " + str(thr_vote_res_accuracy)
         print "Samples required for p>=" + str(required_p) + " " + str(
             CondorcetCalculator().calculate_number_of_voters(thr_vote_res_accuracy, required_p))
+        print
 
         thresholds_vote_accuracy_between_sessions = AccuracyCalculator().get_accuracy(MajorityVotingHandler().vote(thr_vote_result))
         print "Vote with thresholds between sessions accuracy: " + str(thresholds_vote_accuracy_between_sessions)
         print "Samples required for p>=" + str(required_p) + " " + str(
             CondorcetCalculator().calculate_number_of_voters(thresholds_vote_accuracy_between_sessions, required_p))
-
+        print
 
     def majority_vote_test(self, predicted_targets):
         sessions = DataDivider().split_on_sessions(predicted_targets)
