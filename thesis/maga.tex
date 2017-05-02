@@ -5,7 +5,7 @@
 % A package for setting layout and margins for your thesis 
 \usepackage[a4paper]{geometry}
 \usepackage{float}
-
+\usepackage{xcolor}
 % Use package babel for English or Estonian 
 % If you use Estonian make sure that Estonian hyphenation is installed 
 % - hypen-estonian or eehyp packages
@@ -467,11 +467,9 @@ The results connected to the motor tasks are also provided in the validation sec
 With the several measurements and verifications it was determined that 10 seconds is a suitable length for a measurement session. Taking into account that the short-time Fourier transformation extends the number of the input samples (since it uses sliding window) the provided period is containing 18 signal data samples. The classification result from this sample is calculated either using majority or weighted vote.
 \newpage
 \section{Validation}
-Before each training or testing session a signal quality check was performed in order to ensure that the headset sensors are well placed on a head and the signal quality is high. This check was done using Emotiv Epoc Control Panel software. The training data was collected multiple times within several days which means that the headset sensor locations were slightly changed what is more close to realistic scenario. 
+Before each training or testing session a signal quality check was performed in order to ensure that the headset sensors are well placed on a head and the signal quality is high. This check was done using Emotiv Epoc Control Panel software. The training data was collected multiple times within several days which means that there is no guarantee that headset sensor locations were all the time on the same place what is more close to realistic scenario. 
 
-Test data used to check the performance of a classifier is balanced (i.e has the equal amount of samples per different targets).
-
-Random Forest classifier is set up to use 100 trees and the random seed is manually specified in order to avoid different results within the different classification session runs.
+Random Forest classifier is set up to use 100 trees and the random seed is manually specified in order to avoid different results within the different classification session runs. The classifier instance is set to return the probabilities of targets instead of the predicted targets. Processing continuous probabilities instead of discrete targets gives flexibility in voting systems applied in the current work.
 
 The following section is divided on the two main subsections:
 \begin{itemize}
@@ -480,52 +478,92 @@ The following section is divided on the two main subsections:
 \end{itemize}
 \subsection{Baseline establishment}
 
-\subsubsection{Training and test data selection}
+During baseline establishment phase a classifier was trained and validated using 5-fold cross-validation. Every prediction answer from a classifier within 5 trials was recorded into one result set. This result set has been used to determine baselines for the next voting approaches.
 
-Two ways of classifier training were applied:
-\begin{itemize}
-\item using first 70\% of data as training data and left 30\% as test data
-\item using 5-fold cross-validation
-\end{itemize}
-
-In this approach the whole testing data was divided in two parts (70\% and 30\%), where the first part is training data and the second is test data.
-This approach resulted with 0.67 probability when it was run using majority voting.
-
+\subsubsection{Majority vote}
+After getting the prediction result from the cross-validation outputs the average prediction accuracy was determined as 66.0\%. Based on the prediction results the following contingency table was constructed:
 \begin{table}[H]
-\caption{Contingency table for a classifier trained with first 70\% as train data} \label{tab:title} 
-\begin{center}
-  \begin{tabular}{ | c | c | c | c | }
-    \hline
-     & Predicted Relax & Predicted Excitement & Total \\ \hline
-    Actually Relax & 168 & 180 & 348 \\ \hline
-    Actually Excitement & 50 & 298 & 348 \\ \hline
-    Total & 218 & 478 & 696 \\ 
-    \hline
-  \end{tabular}
-\end{center}
-\end{table}
-
-Cross-validation is a way of validating a classifier by using different data parts as test data. In that case it is used 20\% of the data as test and 80\% as training data. In total 5 different classifiers were trained and validated. The average of their accuracies is 0.68.
-
-\begin{table}[H]
-\caption{Contingency table for a classifier trained using 5-fold cross-validation} \label{tab:title} 
+\caption{Contingency table showing classifiers prediction performance used in cross-validation} \label{tab:title} 
 \begin{center}
   \begin{tabular}{ | c | c | c | c | }
     \hline
      & Predicted Relax & Predicted Excitement & Total \\ \hline
     Actually Relax & 597 & 570 & 1167 \\ \hline
-    Actually Excitement & 239 & 1129 & 1368 \\ \hline
-    Total & 836 & 1169 & 2535 \\ 
+    Actually Excitement & 263 & 1105 & 1368 \\ \hline
+    Total & 860 & 1675 & 2535 \\ 
     \hline
   \end{tabular}
 \end{center}
 \end{table}
 
-\subsubsection{Weighted voting system}
+This table shows that $Excitement$ is being better recognized and has ~0.24 error rate. However, the target $Relax$ has almost 50\% accuracy.
 
-roc curve using RF \% and using and using voters
+Every session on the prediction task is being run for 10 seconds and this is considered to represent a single juror decision (i.e single juror decision is composed of 18 prediction result samples). To get a single juror decision 18 prediction answers should be processed in some way to get the one final result from them. In the following approach a majority voting was applied among these 18 prediction answers. After finding single voter answers, their average accuracy was determined as 76.9\%.
+
+\begin{table}[H]
+\caption{Contingency table showing classifiers prediction performance used in cross-validation with dividing the data set on different jurors} \label{tab:title} 
+\begin{center}
+  \begin{tabular}{ | c | c | c | c | }
+    \hline
+     & Predicted Relax & Predicted Excitement & Total \\ \hline
+    Actually Relax & 37 & 27 & 64 \\ \hline
+    Actually Excitement & 3 & 73 & 76 \\ \hline
+    Total & 40 & 100 & 140 \\ 
+    \hline
+  \end{tabular}
+\end{center}
+\end{table}
+
+It could be clearly seen that this approach gave better results compared to the previous without dividing the data set on jurors, but it is still not good at prediction of $Relax$.
 
 \subsubsection{Weighted voting system}
+Since the previous techniques show relatively precise prediction results for $Excitement$ and on the other hand low accuracy for $Relax$ targets, prediction results could be balanced with using of a weighting or threshold systems. The following approach is based on calculating the thresholds which bring the higher accuracy. The thresholds are defined as the minimum number of occurrences for the exact target to make this target win in a vote. The vote is performed among 10 second data samples or the single juror samples (i.e every juror's decision is defined using that vote along with thresholds). Because of that the range for the thresholds values is $[0-18]$ with the step size of 1. 
+
+\colorbox{yellow}{Plot here dependency of weights and accuracy?}
+
+The weights with the best classification accuracy of 80.9\% are:
+\begin{itemize}
+\item  $Excitement$: 12
+\item  $Relax$: 6
+\end{itemize}
+
+
+\begin{table}[H]
+\caption{Contingency table showing classifiers prediction performance used in cross-validation with dividing the data set on different jurors and using thresholds to define a juror decision} \label{tab:title} 
+\begin{center}
+  \begin{tabular}{ | c | c | c | c | }
+    \hline
+     & Predicted Relax & Predicted Excitement & Total \\ \hline
+    Actually Relax & 48 & 16 & 64 \\ \hline
+    Actually Excitement & 10 & 66 & 76 \\ \hline
+    Total & 58 & 82 & 140 \\ 
+    \hline
+  \end{tabular}
+\end{center}
+\end{table}
+
+Usage of threshold has balanced False Negatives and True Negatives, however the error rate for the $Excitement$ has been grown compared to the majority vote with dividing on jurors technique.
+
+\subsubsection{Ensemble probability threshold system}
+The usage of weights
+
+\begin{table}[H]
+\caption{Contingency table showing classifiers prediction performance used in cross-validation with dividing the data set on different jurors and using thresholds to define a juror decision} \label{tab:title} 
+\begin{center}
+  \begin{tabular}{ | c | c | c | c | }
+    \hline
+     & Predicted Relax & Predicted Excitement & Total \\ \hline
+    Actually Relax & 48 & 16 & 64 \\ \hline
+    Actually Excitement & 10 & 66 & 76 \\ \hline
+    Total & 58 & 82 & 140 \\ 
+    \hline
+  \end{tabular}
+\end{center}
+\end{table}
+
+
+\subsubsection{Weighted voting system}
+roc curve using RF \% and using and using voters, compare condorcet results with the theoretical
 
 \newpage
 \section{Discussion}

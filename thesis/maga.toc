@@ -28,8 +28,9 @@
 \contentsline {subsection}{\numberline {3.5}Targets}{16}{subsection.3.5}
 \contentsline {section}{\numberline {4}Validation}{18}{section.4}
 \contentsline {subsection}{\numberline {4.1}Baseline establishment}{18}{subsection.4.1}
-\contentsline {subsubsection}{\numberline {4.1.1}Training and test data selection}{18}{subsubsection.4.1.1}
-\contentsline {subsubsection}{\numberline {4.1.2}Majority voting}{19}{subsubsection.4.1.2}
-\contentsline {subsubsection}{\numberline {4.1.3}Weighted voting}{19}{subsubsection.4.1.3}
-\contentsline {section}{\numberline {5}Discussion}{20}{section.5}
-\contentsline {section}{\numberline {6}Conclusion}{21}{section.6}
+\contentsline {subsubsection}{\numberline {4.1.1}Majority vote}{18}{subsubsection.4.1.1}
+\contentsline {subsubsection}{\numberline {4.1.2}Weighted voting system}{19}{subsubsection.4.1.2}
+\contentsline {subsubsection}{\numberline {4.1.3}Weighted voting system}{20}{subsubsection.4.1.3}
+\contentsline {subsubsection}{\numberline {4.1.4}Weighted voting system}{20}{subsubsection.4.1.4}
+\contentsline {section}{\numberline {5}Discussion}{21}{section.5}
+\contentsline {section}{\numberline {6}Conclusion}{22}{section.6}

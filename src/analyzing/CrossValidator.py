@@ -1,8 +1,6 @@
 import numpy as np
 
 from TrainingService import TrainingService
-from analyzing.DataDivider import DataDivider
-from analyzing.voting.MajorityProbabilitiesToClassesConverter import MajorityProbabilitiesToClassesConverter
 
 
 class CrossValidator(object):

@@ -15,4 +15,9 @@ class ContingencyTableBuilder(object):
             else:
                 tn = len([i for i,x in enumerate(predicted_classes) if x == cls])
                 fp = len([i for i,x in enumerate(predicted_classes) if x != cls])
-        print "TP: {}, FN: {}, FP: {}, TN: {}".format(tp, fn, fp, tn)
+
+        str = ""
+        str += "TP: {}\tFN: {}\tTot:{}\n".format(tp, fn, tp+fn)
+        str += "FP: {}\tTN: {}\tTot:{}\n".format(fp, tn, fp + tn)
+        str += "Tot:{}\tTot:{}\tTot:{}".format(tp+fp, fn+tn, tp+fn+fp+tn)
+        print str

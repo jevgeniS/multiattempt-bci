@@ -32,7 +32,7 @@ class TestingService(BaseMeasuringService):
     def calculate_target(self):
         test_data = self.test_data_storer.read_with_timestamps()
         test_data_with_labels = self.reduce_sample_length_to_required(test_data)
-
+        print "Test data length after filtering by juror numbers: "+str(len(test_data_with_labels))
         self.vote_training_service.test(test_data_with_labels)
 
 
