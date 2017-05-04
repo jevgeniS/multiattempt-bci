@@ -9,6 +9,9 @@ class AccuracyCalculator(object):
         return accuracy
 
     def get_avg_accuracy(self, predicted_targets, actual_target):
+        if len(predicted_targets) == 0:
+            return 1.0
+
         matches = len([i for i,x in enumerate(predicted_targets) if x == actual_target])
         accuracy= matches/float(len(predicted_targets))
         return accuracy

@@ -2,17 +2,13 @@ import time
 import winsound
 from multiprocessing import Process, Queue
 
-from TrainingService import TrainingService
+from constants import constants as c
+from emotiv.Reader import Reader
+from emotiv.Sampler import Sampler
 from processing.RawDataTransformer import RawDataTransformer
 from util.DataStorer import DataStorer
 from util.ExitServiceException import ExitServiceException
 from util.MathQuizGenerator import MathQuizGenerator
-from util.TimeStampGenerator import get_timestamp
-
-from constants import constants as c
-
-from emotiv.Reader import Reader
-from emotiv.Sampler import Sampler
 
 
 def emotiv_start_reader(queue):
@@ -37,7 +33,8 @@ class BaseMeasuringService(object):
                 self.start()
                 i += 1
         except ExitServiceException as e:
-            TrainingService().train()
+            pass
+            #TrainingService().train()
 
     def select_target(self):
         print "Select target typing the number of a target"
@@ -89,7 +86,7 @@ class BaseMeasuringService(object):
 
 
     def process_prediction_data(self, samples):
-        raise NotImplementedError("Please Implement this method")
+        raise NotImplementedError("Please Implement this method in child class")
 
     def draw_fix_cross(self, target, text):
         from psychopy import visual

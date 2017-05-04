@@ -224,7 +224,7 @@ Computer Science Curriculum\\[2mm]
 
 Brain-computer interface (BCI) is a computer system for extracting brain electronic neural signals and using them to control computer applications. Besides measuring, BCI converts raw signals to digital data and maps the data to the exact computer commands. Unfortunately, the probability of the right command prediction usually is below 100\% and therefore it could be improved.
 
-This is a problem for BCI systems, since they will not be widely trusted and used, while the prediction accuracy is relatively low. There are many existing solutions, which provide increase of the prediction accuracy, mainly based on trying out different classification techniques and algorithms. Existing methods focus mostly on a training part of the system. Our approach is to try to improve the accuracy upto 99.9\%, while experimenting with test part algorithms, and to determine how many trials are required during the test mode to reach the desired provided accuracy.
+This is a problem for BCI systems, since they will not be widely trusted and used, while the prediction accuracy is relatively low. There are many existing solutions, which provide increase of the prediction accuracy, mainly based on trying out different classification techniques and algorithms. Existing methods focus mostly on a training part of the system. Our approach is to try to improve the accuracy upto 99\%, while experimenting with test part algorithms, and to determine how many trials are required during the test mode to reach the desired provided accuracy.
 
 The solution described in the thesis is based on Condorcet's jury theorem. It means that if we have single events with probability of more than 50\%, then by combining them, the total probability for these events would rise. This work shows the actual results (prediction accuracies) and provides their comparison using the voting techniques based on the Condorcet's jury theorem. It also describes the dependency of the number of test mode measurements and accuracies.
 
@@ -272,6 +272,29 @@ Current thesis structure is as follows:
 
 \newpage
 \section{Background / State of the Art} 
+
+\subsection{Condorcet's jury theorem}
+The fundamental theorem for the current work is Condorcet's jury theorem. The rule states that in majority vote with two options available ($Option1$, $Option2$), if voters (jurors) have independent probability $p$ for voting for $Option1$, then:
+\begin{itemize}
+\item If $p$ is higher than 50\%, then the more voters is participating, the higher probability for the majority decision for $Option1$ will be
+\item If $p$ is lower than 50\%, then the more voters is participating, the lower probability for the majority decision for $Option1$ will be
+\end{itemize}
+The Condorcet's jury theorem is defined by the following expression:
+\[ \mu = \sum_{i=m}^{N} (\frac{N!}{(N-i)!i!})(p)^i(1-p)^{N-i} \]
+where $N$ is the number of jurors, $p$ is the probability of the individual juror giving the true result, $\mu$ is the probability that a jury gives the true result.
+Based on the formula, the higher initial probability (single juror's probability) is, the less jurors it is required to reach the absolute probability.
+
+Our main idea's aspect is to produce multiple so-called jurors to be used in a voting system to increase their common probability. Their probability, in our case, means the increase in quality of the BCI system performance. In a role of a single juror will be a single prediction trial (i.e concentration attempt on a target) with it's accuracy. Accordingly, multiple trial approach considers with use of several prediction trials and their accuracies, what on the other hand, will require more time on a whole prediction task.
+
+\begin{figure} [H]
+\begin{center}
+\includegraphics[width=1\textwidth]{condorcet}
+\caption{Plot showing the dependency between number of voters and probability result when a single voter probability is 75\%}
+\label{fig:condorcet}
+\end{center}
+\end{figure}
+
+Figure \ref{fig:condorcet} shows that with a single juror's probability of 75\% it is required approximately 21 jurors to reach the near maximum probability.
 \subsection{Brain-computer interface}
 
 Brain-computer interface (BCI) is an interface that does not require muscle control from user to communicate with a device. It requires user to think about the distinct target. The interface records electroencephalographic (EEG) signals from the scalp surface which represents our brain activity. These signals have low amplitude (usually measured in microvolts), whereas frequencies above 30 Hz have especially low values which tends to zero.\cite{bci_vidal}
@@ -297,7 +320,7 @@ BCI use is a skill, which requires practicing. An algorithm, which translates th
 
 In order to obtain raw signal data from the scalp, we use Emotiv EPOC BCI headset. It is a multi-channel wireless (communicates using Bluetooth) headset with 14 channels (sensors) for the following International locations: AF3, F7, F3, FC5, T7, P7, O1, O2, P8, T8, FC6, F4, F8, AF4. The device converts an analog signal to a digital with a 14 bits resolution and 128 Hz sampling rate. The bandwith is 0.2 - 45 Hz. This suite can monitor the user's emotional state in real time.\cite{emotiv}
 
-It comes with the out of the box softwares Control Panel and TestBench, which visualize the features based on the signal. The Control Panel software outputs recognized emotional states, facial expressions and mental commands. With TestBench it is possible to see a raw or EEG signal regarding distinct channels. In addition it provides a signal quality for the sensors and the connection status between the headset and Bluetooth receiver.
+It comes with the out of the box software Control Panel and TestBench, which visualize the features based on the signal. The Control Panel software outputs recognized emotional states, facial expressions and mental commands. With TestBench it is possible to see a raw or EEG signal regarding distinct channels. In addition it provides a signal quality for the sensors and the connection status between the headset and Bluetooth receiver.
 \subsection{Short Time Fourier Transform}
 
 In a features extraction level a raw complex signal wave should be decomposed to the subwaves. Subwaves helps to construct a frequency domain representation of the complex signal where frequencies and respective amplitudes are mapped together. Although in terms of spectral analysis Fourier Transform is dominating, in case of nonstationary signals where EEG signal belongs better to use short time Fourier transform (STFT).\cite{alfahoum_fft}
@@ -335,67 +358,81 @@ Every subject had to train the algorithm and test it in a single user mode. Subj
 
 In case of multi-user approach a weighted voting system was used, where a subject with a better prediction statistics got more weight and influenced the output result more in the future classifications. This is the technique what our solution will use along with multi-trial classification. Our goal is to use multiple trials of a single user instead of single trial of several users as the related work tends to do. Our way is to use optimized Random Forests classification algorithm which according to \cite{masso} could bring the more precise result, than support vector machine (SVM) algorithm which is used in animal classifications. Finally, a single user approach has wider fields of use and less complex in implementation as a multi-user technique.
 
+\colorbox{yellow}{Maybe to find some articles about ML results enhancing using Condorcet's ?}
+
 \newpage
 \section{Contribution}
 
 \subsection{Overview}
 The main idea of the given work is to show the effectiveness of a multiple trial approach in a BCI perspective. 
-A regular way of prediction considers a single prediction trial for a single prediction task. If any noise has been recorded due to technical issues or a subject was distracted and could not properly concentrate on a target during the trial, then it will directly reflect on a classification accuracy.
+A regular way of prediction considers a single prediction trial for a single prediction task. If any noise has been recorded due to technical issues or a subject was distracted and could not properly concentrate on a target during the trial, then it will directly reflect on a classification result and dramatically on the accuracy. However, if we know that our system in the most cases works properly and gives the right answers, then we could compensate appearing of noisy and faulty predictions with the others with a better quality.
+
+In multiple trial approach the final prediction result is calculated using intermediate prediction results which every trial gives. Multiple trial way takes more time to give the answer than a single, however the accuracy should be improved in case when single trial accuracy gives more than 50\%. Our goal is to understand how many trials it is required to get the accuracy 99\% in theory and check it against the reality.
+
+\colorbox{yellow}{New pic}
+
+
+\subsection{Experimental design}
+To provide an experimental platform for the research question a special system was designed and implemented along with the experimental flow. The general plan is to use a two-class (two-target) BCI system to collect the data necessary for the analysis. The flow for the experiment could be described as follows:
+\begin{enumerate}
+\item Populate the training data. This includes a lot of 10-second sessions for measurements of the brainwave signals with extracting their features and storing them to the system. Our purpose is to get as much as samples as we can for the reasonable amount of time. It is crucial to switch between targets in order to get more balanced training dataset.
+\item Determine the baseline accuracy. That means performing machine learning techniques on the given training data. It involves training of a classifier and it's validation. In addition to that, applying voting systems with the main goal - improve the accuracy of prediction. Accordingly to Condorcet's jury theorem it is wise to find the method with the highest accuracy and use it as a baseline, since this will reduce the number of samples required further. Upon the best baseline accuracy will be found it will be calculated how many trials it will be required to get the desired accuracy.
+\item Populate the test data. Similarly to the first point it is required to measure a lot of brainwave signals and populate them into persistence storage. However, at that point the length of the session will depend on the one discovered using Condorcet's jury theorem. Likewise in the training data collecting, it is important to keep the set balanced. Needs to be noted that the actual target labels will be stored to the dataset as well to be used in the followed accuracy calculation.
+\item Analyse the multiple trial test data. In this stage the accuracy of multiple trial approach will be determined. The given results will observed and compared to the baseline. The dependency between the accuracy and different number of voters will be plotted for the better overview.
+\end{enumerate}
+
+\subsection{Targets}
+Every prediction task is an activity considered with a subject's concentration on a target. A target could be a tangible physical object or a picture. In that case concentration on the target will most probably mean staring it. But more common is that a concentration task (i.e mental activity) is done without having any visible objects, but rather by thinking or imaging the given target. 
+
+For the targets in the current system two classes were selected: 
+\begin{itemize}
+\item Relax - the mental task considering a subject to focus sight on a fixation cross and trying to meditate.
+\item Excitement - the high performance mental task considering a subject to try focusing on a fixation cross and calculate the mathematical expressions displayed by the application.
+\end{itemize}
+
+In the current context there are used graphical objects for the supporting reasons. Fixation cross is used in order to avoid target's eyes movement, what could cause undesirable brainwaves. Mathematical expressions are generated and shown as a high concentration task which needs to be solved with the subject's brain. The example of graphics seen by the target  during the measurement session is as follows:
+
 \begin{figure} [H]
 \begin{center}
-\includegraphics[width=1\textwidth]{prediction_single}
-\caption{Prediction tasks timeline using single trial. Different shapes mean different classes.}
+\includegraphics[width=0.7\textwidth]{test_ui}
+\caption{A dialog window displaying what a subject sees during a test for both target tasks. A red fixation cross is located at the center of the window. Mathematical expressions are printed as an Excitement task.}
 \label{fig:fnCompModel}
 \end{center}
 \end{figure}
 
-In multiple trial approach the final prediction result is calculated using intermediate prediction results which every trial gives. Multiple trial way takes more time to give the answer than a single, however the accuracy should be improved in case when single trial accuracy gave more than 50\%. Our goal is to understand how many trials $N$ (see Figure\ref{fig:prediction_multi}) it is required to get the accuracy 99.9\%.
-\begin{figure} [H]
-\begin{center}
-\includegraphics[width=1\textwidth]{prediction_multi}
-\caption{Prediction tasks timeline using multiple trials. Different shapes mean different classes.}
-\label{fig:prediction_multi}
-\end{center}
-\end{figure}
+At the very beginning of the experiments when it was not really clear what targets produce better classification results the motor activity signals were used as targets:
+\begin{itemize}
+\item Left - the motor task considering imaging movement of the left hand.
+\item Right - the motor task considering imaging movement of the right hand.
+\end{itemize}
+After some constant unsuccessful (near to random) results using the motor tasks it was decided that mental task could be divided on a high and low performance types. Hence, $Excitement$ and $Relax$ targets were selected and showed better statistics.
 
-A voting system is used to do the final target selection from the single trial classifier results. The following voting systems will be used in our implementation:
+With the several measurements and validations it was determined that 10 seconds is a suitable length for a measurement session. Taking into account that the short-time Fourier transformation extends the number of the input samples (since it uses sliding window), the single measurement session is containing 18 signal data samples.
+
+\subsection{Methods}
+With regard to determine final results from prediction data samples and establish baseline accuracies there are different techniques used. First of all various voting systems are tried out to do the final target selection:
 \begin{itemize}
 \item Majority voting - all the voters have the same influence on the final result.
-\item Weighted voting - individual voter influence on the final result is measured with a weight, which is updated depending on voter accuracy history. Final weight is set up for a classificator after training is done.
+\item Voting with a threshold - voting result depends on whether the score returned for the target exceeds the minimum threshold value. The score can be the number of occurrences for the target or any other value.
 \end{itemize}
+
+Data grouping
+
+
+\subsection{Implementation}
 
 To reach and test the given work approach the following plan should be covered:
 \begin{enumerate}
 \item Build a two-class BCI 
 \begin{enumerate}
 \item Implement Fourier preprocessing
-\item Split data on train, test and validation sets
+\item Split data on training and validation sets
 \item Machine learning process
 \item Get a meaningful prediction accuracy $X$
 \end{enumerate}
 \item Measure how many trials is it required to improve $X$ to 0.99 accuracy
 \item Try different voting schemas and plot their results
 \end{enumerate}
-
-\subsection{Condorcet's jury theorem}
-The rule to deal with >50\% accuracy classifiers comes from Condorcet's jury theorem definition. It states that in majority vote with two options available ($Option1$, $Option2$), if voters have independent probability $p$ for voting for $Option1$, then:
-\begin{itemize}
-\item If $p$ is higher than 50\%, then the more voters is participating, the higher probability for the majority decision for $Option1$ will be
-\item If $p$ is lower than 50\%, then the more voters is participating, the lower probability for the majority decision for $Option1$ will be
-\end{itemize}
-The Condorcet's jury theorem is defined by the following expression:
-\[ \mu = \sum_{i=m}^{N} (\frac{N!}{(N-i)!i!})(p)^i(1-p)^{N-i} \]
-where $N$ is the number of jurors, $p$ is the probability of the individual juror giving the true result, $\mu$ is the probability that a jury gives the true result.
-\begin{figure} [H]
-\begin{center}
-\includegraphics[width=1\textwidth]{condorcet}
-\caption{Plot showing the dependency between number of voters and probability result when a single voter probability is 75\%}
-\label{fig:condorcet}
-\end{center}
-\end{figure}
-
-
-\subsection{Implementation}
 
 For fulfilling goals in the related topic a custom application was written using Python 2.7 programming language. The application contains the following components:
 \begin{itemize}
@@ -422,7 +459,7 @@ This component is required to poll the Emotiv EPOC headset and store sent data t
 
 \subsubsection{Preprocessor}
 
-During preprocessing a set of raw samples is converted to a frequency domain representation. To do this the Short Time Fourier Transform is used with a sliding window. Sliding window technique allows to capture more precisely non-constant signals. Sliding window length equals to 1 s with 0.5 s overlapping. These factors increase the number of samples to $2*N-1$ where $N$ is the original number of samples. For example a BCI session with a duration of 1 minute will output 119 samples.
+During preprocessing a set of raw samples is converted to a frequency domain representation. To do this the Short Time Fourier Transform is used with a sliding window. Sliding window technique allows to capture more precisely non-constant signals. Sliding window length equals to 1 s with 0.5 s overlapping. These factors increase the number of samples to $2*N-2$ where $N$ is the original number of samples. For example a BCI session with a duration of 1 minute will output 119 samples.
 
 According to Emotiv EPOC specifications\cite{emotiv} 45 Hz is the maximum bandwidth value for the signal. In our implementation we use 1 - 45 Hz for the frequency range.
 
@@ -437,34 +474,13 @@ Train data could be separated from test data in different ways:
 \item Using cross-validation. This means selecting proportional test data chunks (e.g 20\%) from the whole dataset without overlapping and using the rest of samples as train data. This will result in training several classificators. A classificator with the highest accuracy will be chosen finally.
 \end{itemize}
 
-\subsection{Application modes}
-\subsubsection{Training mode}
-\subsubsection{Testing mode}
+\subsubsection{Application modes}
+\colorbox{yellow}{Describe here the application modes. Plan to describe flows and technical details fot the app modes. Currently I have 4 modes: 1. is training for collecting test samples, 2. is to build baseline statistics based on test data and calculate number of measurement sessions , 3. testing mode , where every session lasts longer with a final answer outputted after 4. Final analysis based on the giving test data}
+\subsubsection{Training data measuring mode}
+\subsubsection{Baseline training mode}
+\subsubsection{Test data measuring mode}
+\subsubsection{Final analyse mode}
 
-\subsection{Targets}
-For the targets in the current system two classes were selected: 
-\begin{itemize}
-\item Relax - the mental task considering a subject to focus sight on a fixation cross and trying to meditate.
-\item Excitement - the high performance mental task considering a subject to try focusing on a fixation cross and calculate the mathematical expressions provided by the system.
-\end{itemize}
-
-\begin{figure} [H]
-\begin{center}
-\includegraphics[width=0.7\textwidth]{test_ui}
-\caption{A dialog window displaying what a subject sees during a test for both target tasks. A red fixation cross is located at the center of the window}
-\label{fig:fnCompModel}
-\end{center}
-\end{figure}
-
-At the beginning of the classification experiments the motor activity signals were used as targets, upon it was made clear that Excitement and Relax are actually giving better prediction results. The motor activity signals:
-\begin{itemize}
-\item Left - the motor task considering imaging movement of the left hand.
-\item Right - the motor task considering imaging movement of the right hand.
-\end{itemize}
-
-The results connected to the motor tasks are also provided in the validation section.
-
-With the several measurements and verifications it was determined that 10 seconds is a suitable length for a measurement session. Taking into account that the short-time Fourier transformation extends the number of the input samples (since it uses sliding window) the provided period is containing 18 signal data samples. The classification result from this sample is calculated either using majority or weighted vote.
 \newpage
 \section{Validation}
 Before each training or testing session a signal quality check was performed in order to ensure that the headset sensors are well placed on a head and the signal quality is high. This check was done using Emotiv Epoc Control Panel software. The training data was collected multiple times within several days which means that there is no guarantee that headset sensor locations were all the time on the same place what is more close to realistic scenario. 
@@ -473,12 +489,12 @@ Random Forest classifier is set up to use 100 trees and the random seed is manua
 
 The following section is divided on the two main subsections:
 \begin{itemize}
-\item Baseline establishment - this section describes the process of finding the baseline accuracy (i.e single juror probability) and the results considering to it. 
-\item Validation of the multiple trial approach - this section compares expected prediction accuracy (calculated in the baseline establishment chapter) to the real one.
+\item Baseline establishment - this section describes the different techniques of finding the theoretical baseline accuracy (i.e single juror probability) along with the results obtained using these techniques. 
+\item Multiple trial approach result - this section shows the results of testing multiple trial measurement modes along with the results.
 \end{itemize}
 \subsection{Baseline establishment}
 
-During baseline establishment phase a classifier was trained and validated using 5-fold cross-validation. Every prediction answer from a classifier within 5 trials was recorded into one result set. This result set has been used to determine baselines for the next voting approaches.
+During baseline establishment phase a classifier was trained and validated using 5-fold cross-validation. Every prediction answer from a classifier within 5 trials was recorded into one result set. So in total the prediction result set is containing the same number of samples as the whole training data set has. This result set has been used to determine baselines for the next voting approaches.
 
 \subsubsection{Majority vote}
 After getting the prediction result from the cross-validation outputs the average prediction accuracy was determined as 66.0\%. Based on the prediction results the following contingency table was constructed:
@@ -517,6 +533,7 @@ Every session on the prediction task is being run for 10 seconds and this is con
 It could be clearly seen that this approach gave better results compared to the previous without dividing the data set on jurors, but it is still not good at prediction of $Relax$.
 
 \subsubsection{Weighted voting system}
+\colorbox{yellow}{What's the right name?}
 Since the previous techniques show relatively precise prediction results for $Excitement$ and on the other hand low accuracy for $Relax$ targets, prediction results could be balanced with using of a weighting or threshold systems. The following approach is based on calculating the thresholds which bring the higher accuracy. The thresholds are defined as the minimum number of occurrences for the exact target to make this target win in a vote. The vote is performed among 10 second data samples or the single juror samples (i.e every juror's decision is defined using that vote along with thresholds). Because of that the range for the thresholds values is $[0-18]$ with the step size of 1. 
 
 \colorbox{yellow}{Plot here dependency of weights and accuracy?}
@@ -545,7 +562,15 @@ The weights with the best classification accuracy of 80.9\% are:
 Usage of threshold has balanced False Negatives and True Negatives, however the error rate for the $Excitement$ has been grown compared to the majority vote with dividing on jurors technique.
 
 \subsubsection{Ensemble probability threshold system}
-The usage of weights
+
+Another technique to establish thresholds for the classes is to use the probabilities returned by Random Forests algorithm. These probabilities are calculated inside the algorithm implementation using ensemble voting among several decision trees. 
+
+The way of finding suitable thresholds is similar to finding the best weights described in the latter section. It was done with iterating through the range of probabilities $[0.00-1.00]$ and a step width of 0.01. Comparing the prediction accuracies using different thresholds and selecting the best combination gave the following probability thresholds:
+\begin{itemize}
+\item $Excitement$: 0.54
+\item $Relax$: 0.46
+\end{itemize}
+
 
 \begin{table}[H]
 \caption{Contingency table showing classifiers prediction performance used in cross-validation with dividing the data set on different jurors and using thresholds to define a juror decision} \label{tab:title} 
@@ -561,15 +586,29 @@ The usage of weights
 \end{center}
 \end{table}
 
+\colorbox{yellow}{Plot another cont. table for the voting without dividing on jurors}
+\colorbox{yellow}{Place here ROC curve? Describe AUC?}
+
+\subsubsection{Condorcet's rule based theoretical results}
+\colorbox{yellow}{Place here a table comparing different condorcet results between methods above}
+\colorbox{yellow}{Plot the dependency between number of jurors and accuracy}
+
+
+\subsection{Multiple trial approach result}
+
+\subsubsection{Majority vote}
+\colorbox{yellow}{Place here nearly the same structure as in the baseline establishment subsections?}
 
 \subsubsection{Weighted voting system}
-roc curve using RF \% and using and using voters, compare condorcet results with the theoretical
+\subsubsection{Ensemble probability threshold system}
+\subsubsection{Condorcet's rule based actual results}
 
-\newpage
 \section{Discussion}
+\colorbox{yellow}{Compare dependency curves on plot theoretical with obtained}
 
 \newpage
 \section{Conclusion}
+\colorbox{yellow}{About a one-page conclusion text.}
 
 \newpage
 \begin{thebibliography}{9}

@@ -1,7 +1,9 @@
+import numpy as np
+
 from analyzing.AccuracyCalculator import AccuracyCalculator
 from analyzing.voting.ProbabilitiesToClassesConverter import ProbabilitiesToClassesConverter
 from constants import constants
-import numpy as np
+
 
 class ProbabilityThresholdCalculator(object):
 

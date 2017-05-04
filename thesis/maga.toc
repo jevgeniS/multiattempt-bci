@@ -1,36 +1,45 @@
 \select@language {english}
 \select@language {english}
 \select@language {english}
-\contentsline {section}{\numberline {1}Introduction}{4}{section.1}
-\contentsline {paragraph}{Motivation}{4}{section*.2}
-\contentsline {paragraph}{Scope}{4}{section*.3}
-\contentsline {paragraph}{Research problem}{5}{section*.4}
-\contentsline {paragraph}{Contribution}{5}{section*.5}
-\contentsline {paragraph}{Structure}{5}{section*.6}
-\contentsline {section}{\numberline {2}Background / State of the Art}{6}{section.2}
-\contentsline {subsection}{\numberline {2.1}Brain-computer interface}{6}{subsection.2.1}
-\contentsline {paragraph}{}{6}{section*.7}
-\contentsline {subsection}{\numberline {2.2}Emotiv EPOC}{7}{subsection.2.2}
-\contentsline {subsection}{\numberline {2.3}Short Time Fourier Transform}{7}{subsection.2.3}
-\contentsline {subsection}{\numberline {2.4}Classification task}{8}{subsection.2.4}
-\contentsline {subsection}{\numberline {2.5}Random Forests algorithm}{8}{subsection.2.5}
-\contentsline {subsection}{\numberline {2.6}Collaborative Brain-Computer Interface}{9}{subsection.2.6}
-\contentsline {section}{\numberline {3}Contribution}{11}{section.3}
-\contentsline {subsection}{\numberline {3.1}Overview}{11}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Condorcet's jury theorem}{13}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}Implementation}{14}{subsection.3.3}
-\contentsline {subsubsection}{\numberline {3.3.1}Raw data reader}{15}{subsubsection.3.3.1}
-\contentsline {subsubsection}{\numberline {3.3.2}Preprocessor}{15}{subsubsection.3.3.2}
-\contentsline {subsubsection}{\numberline {3.3.3}Classificator}{16}{subsubsection.3.3.3}
-\contentsline {subsection}{\numberline {3.4}Application modes}{16}{subsection.3.4}
-\contentsline {subsubsection}{\numberline {3.4.1}Training mode}{16}{subsubsection.3.4.1}
-\contentsline {subsubsection}{\numberline {3.4.2}Testing mode}{16}{subsubsection.3.4.2}
-\contentsline {subsection}{\numberline {3.5}Targets}{16}{subsection.3.5}
-\contentsline {section}{\numberline {4}Validation}{18}{section.4}
-\contentsline {subsection}{\numberline {4.1}Baseline establishment}{18}{subsection.4.1}
-\contentsline {subsubsection}{\numberline {4.1.1}Majority vote}{18}{subsubsection.4.1.1}
-\contentsline {subsubsection}{\numberline {4.1.2}Weighted voting system}{19}{subsubsection.4.1.2}
-\contentsline {subsubsection}{\numberline {4.1.3}Weighted voting system}{20}{subsubsection.4.1.3}
-\contentsline {subsubsection}{\numberline {4.1.4}Weighted voting system}{20}{subsubsection.4.1.4}
-\contentsline {section}{\numberline {5}Discussion}{21}{section.5}
-\contentsline {section}{\numberline {6}Conclusion}{22}{section.6}
+\contentsline {section}{\numberline {1}Introduction}{5}{section.1}
+\contentsline {paragraph}{Motivation}{5}{section*.2}
+\contentsline {paragraph}{Scope}{5}{section*.3}
+\contentsline {paragraph}{Research problem}{6}{section*.4}
+\contentsline {paragraph}{Contribution}{6}{section*.5}
+\contentsline {paragraph}{Structure}{6}{section*.6}
+\contentsline {section}{\numberline {2}Background / State of the Art}{7}{section.2}
+\contentsline {subsection}{\numberline {2.1}Condorcet's jury theorem}{7}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Brain-computer interface}{8}{subsection.2.2}
+\contentsline {paragraph}{}{9}{section*.7}
+\contentsline {subsection}{\numberline {2.3}Emotiv EPOC}{10}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Short Time Fourier Transform}{10}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Classification task}{10}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.6}Random Forests algorithm}{11}{subsection.2.6}
+\contentsline {subsection}{\numberline {2.7}Collaborative Brain-Computer Interface}{12}{subsection.2.7}
+\contentsline {section}{\numberline {3}Contribution}{13}{section.3}
+\contentsline {subsection}{\numberline {3.1}Overview}{13}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Experimental design}{13}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Targets}{14}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Methods}{16}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}Implementation}{16}{subsection.3.5}
+\contentsline {subsubsection}{\numberline {3.5.1}Raw data reader}{17}{subsubsection.3.5.1}
+\contentsline {subsubsection}{\numberline {3.5.2}Preprocessor}{17}{subsubsection.3.5.2}
+\contentsline {subsubsection}{\numberline {3.5.3}Classificator}{18}{subsubsection.3.5.3}
+\contentsline {subsubsection}{\numberline {3.5.4}Application modes}{18}{subsubsection.3.5.4}
+\contentsline {subsubsection}{\numberline {3.5.5}Training data measuring mode}{18}{subsubsection.3.5.5}
+\contentsline {subsubsection}{\numberline {3.5.6}Baseline training mode}{18}{subsubsection.3.5.6}
+\contentsline {subsubsection}{\numberline {3.5.7}Test data measuring mode}{18}{subsubsection.3.5.7}
+\contentsline {subsubsection}{\numberline {3.5.8}Final analyse mode}{18}{subsubsection.3.5.8}
+\contentsline {section}{\numberline {4}Validation}{19}{section.4}
+\contentsline {subsection}{\numberline {4.1}Baseline establishment}{19}{subsection.4.1}
+\contentsline {subsubsection}{\numberline {4.1.1}Majority vote}{19}{subsubsection.4.1.1}
+\contentsline {subsubsection}{\numberline {4.1.2}Weighted voting system}{20}{subsubsection.4.1.2}
+\contentsline {subsubsection}{\numberline {4.1.3}Ensemble probability threshold system}{21}{subsubsection.4.1.3}
+\contentsline {subsubsection}{\numberline {4.1.4}Condorcet's rule based theoretical results}{22}{subsubsection.4.1.4}
+\contentsline {subsection}{\numberline {4.2}Multiple trial approach result}{22}{subsection.4.2}
+\contentsline {subsubsection}{\numberline {4.2.1}Majority vote}{22}{subsubsection.4.2.1}
+\contentsline {subsubsection}{\numberline {4.2.2}Weighted voting system}{22}{subsubsection.4.2.2}
+\contentsline {subsubsection}{\numberline {4.2.3}Ensemble probability threshold system}{22}{subsubsection.4.2.3}
+\contentsline {subsubsection}{\numberline {4.2.4}Condorcet's rule based actual results}{22}{subsubsection.4.2.4}
+\contentsline {section}{\numberline {5}Discussion}{22}{section.5}
+\contentsline {section}{\numberline {6}Conclusion}{23}{section.6}

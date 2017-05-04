@@ -1,5 +1,3 @@
-import operator
-
 import numpy as np
 
 from TrainingService import TrainingService
@@ -12,8 +10,8 @@ from analyzing.voting.MajorityProbabilitiesToClassesConverter import MajorityPro
 from analyzing.voting.MajorityVotingHandler import MajorityVotingHandler
 from analyzing.voting.ProbabilitiesToClassesConverter import ProbabilitiesToClassesConverter
 from analyzing.voting.ProbabilityThresholdCalculator import ProbabilityThresholdCalculator
-from analyzing.voting.WeightsVotingHandler import WeightsVotingHandler
 from analyzing.voting.WeightsCalculator import WeightsCalculator
+from analyzing.voting.WeightsVotingHandler import WeightsVotingHandler
 from constants import constants
 
 
@@ -131,52 +129,3 @@ class VoteTrainingService(TrainingService):
             CondorcetCalculator().calculate_number_of_voters(single_juror_avg_accuracy, required_p))
         ContingencyTableBuilder().build(MajorityVotingHandler().vote(result))
         print
-
-    def majority_vote_test(self, predicted_targets):
-        sessions = DataDivider().split_on_sessions(thr_vote_result)
-
-        vote_results = {}
-        for session_data in sessions:
-            for t in constants.TARGETS.values():
-                p = session_data.tolist().count(t) / float(len(session_data))
-                vote_results[t] = (vote_results.get(t, p) + p)/2.0
-
-        max_key = max(vote_results.iteritems(), key=operator.itemgetter(1))[0]
-
-        return (max_key, vote_results[max_key])
-
-
-
-    def weighted_vote_test(self, predicted_targets, weights):
-        results = []
-        sessions = DataDivider().split_on_sessions(predicted_targets)
-        for session_data in sessions:
-            results.append(self.vote_with_weights(session_data, weights))
-
-        vote_results={}
-        for t in constants.TARGETS.values():
-            p = results.count(t) / float(len(results))
-            vote_results[t] = p
-
-        max_key= max(vote_results.iteritems(), key=operator.itemgetter(1))[0]
-
-        return (max_key,vote_results[max_key])
-
-
-    def vote_with_weights_coef(self, predicted_targets, target_weights):
-        selected_target = None
-        max_accuracy = 0
-        for target in target_weights:
-            accuracy = predicted_targets.tolist().count(target) / float(len(predicted_targets))
-            accuracy_with_weight_applied = accuracy * target_weights[target]
-            if accuracy_with_weight_applied > max_accuracy:
-                selected_target = target
-                max_accuracy = accuracy_with_weight_applied
-        return selected_target
-
-
-
-
-
-
-
