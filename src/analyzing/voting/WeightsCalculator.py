@@ -8,7 +8,7 @@ from analyzing.DataDivider import DataDivider
 from analyzing.voting.MajorityProbabilitiesToClassesConverter import MajorityProbabilitiesToClassesConverter
 from analyzing.voting.WeightsVotingHandler import WeightsVotingHandler
 from constants import constants
-
+import matplotlib.pyplot as plt
 
 class WeightsCalculator(object):
 
@@ -18,6 +18,7 @@ class WeightsCalculator(object):
         return weights
 
     def calculate_weights1(self, training_data):
+        raise Exception("Deprecated")
         chunks = 3
         training_chunks = 2
         data_size = len(training_data)
@@ -51,19 +52,35 @@ class WeightsCalculator(object):
 
     def find_best_weights_for_target(self, prediction_result):
         number_of_samples = constants.SAMPLES_PER_TEST_SESSION
-        weights_to_test = [(x, number_of_samples - x) for x in range(number_of_samples)]
+        weights_to_test = [(x, number_of_samples - x) for x in range(number_of_samples+1)]
         #weights_to_test = [(x * 0.01, 200 * 0.01 - x * 0.01) for x in range(30, 170, 1)]
         max_accuracy = 0
         best_weights = None
+        accs=[]
+        t=[]
         for w in weights_to_test:
             weights = {prediction_result.keys()[0]: w[0], prediction_result.keys()[1]: w[1]}
             acc = self.find_accuracy_for_weights(prediction_result, weights)
+            accs.append(acc)
+            t.append(weights.values()[0])
             if acc > max_accuracy:
                 max_accuracy = acc
                 best_weights = weights
 
+        #self.plot(t, accs)
         return best_weights
 
     def find_accuracy_for_weights(self, prediction_result, weights):
         new_result = WeightsVotingHandler().vote_with_weights(prediction_result, weights)
         return AccuracyCalculator().get_accuracy(new_result)
+
+
+    def plot(self, thresholds, accuracies):
+
+        plt.bar(thresholds, accuracies)
+        plt.xticks([x + .5 for x in thresholds], thresholds)
+        plt.xlabel('Threshold', fontsize=14)
+        plt.ylabel('Accuracy', fontsize=14)
+        #plt.xticks(range(0,18,1))
+
+        plt.show()

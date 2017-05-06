@@ -265,7 +265,7 @@ Current thesis structure is as follows:
 \begin{itemize}
 \item Background / State of the Art - significant technologies used in current work are described along with comparison to similar projects
 \item Contribution - detailed overview of the idea, list of finished work, grouped by the domains of the system and followed with meaningful details
-\item Validation - test sessions with output results described
+\item Experimental results - test sessions with output results described
 \item Discussion - difference with the theoretical model and limitations of the system are provided
 \item Conclusion - sum up of the goal, expected and actual results with brief explanations and future adaptation prepositions
 \end{itemize}
@@ -369,7 +369,13 @@ A regular way of prediction considers a single prediction trial for a single pre
 
 In multiple trial approach the final prediction result is calculated using intermediate prediction results which every trial gives. Multiple trial way takes more time to give the answer than a single, however the accuracy should be improved in case when single trial accuracy gives more than 50\%. Our goal is to understand how many trials it is required to get the accuracy 99\% in theory and check it against the reality.
 
-\colorbox{yellow}{New pic}
+\begin{figure} [H]
+\begin{center}
+\includegraphics[height=9cm, width=1\textwidth]{main}
+\caption{A main concept of multiple trial approach. If single trial duration is 10s and it brings only one and the final result, then applying N trials will give several intermediate results where from the final will be selected}
+\label{fig:condorcet}
+\end{center}
+\end{figure}
 
 
 \subsection{Experimental design}
@@ -380,6 +386,10 @@ To provide an experimental platform for the research question a special system w
 \item Populate the test data. Similarly to the first point it is required to measure a lot of brainwave signals and populate them into persistence storage. However, at that point the length of the session will depend on the one discovered using Condorcet's jury theorem. Likewise in the training data collecting, it is important to keep the set balanced. Needs to be noted that the actual target labels will be stored to the dataset as well to be used in the followed accuracy calculation.
 \item Analyse the multiple trial test data. In this stage the accuracy of multiple trial approach will be determined. The given results will observed and compared to the baseline. The dependency between the accuracy and different number of voters will be plotted for the better overview.
 \end{enumerate}
+
+Before each training or testing session a signal quality check is performed in order to ensure that the headset sensors are well placed on a head and the signal quality is high. This check is done using Emotiv Epoc Control Panel software. The training data is collected multiple times within several days which means that there is no guarantee that headset sensor locations were all the time on the same place what is more close to realistic scenario. 
+
+Random Forest classifier is set up to use 100 trees and the random seed is manually specified in order to avoid different results within the different classification session runs. The classifier instance is set to return the probabilities of targets instead of the predicted targets. Processing continuous probabilities instead of discrete targets gives flexibility in voting systems applied in the current work.
 
 \subsection{Targets}
 Every prediction task is an activity considered with a subject's concentration on a target. A target could be a tangible physical object or a picture. In that case concentration on the target will most probably mean staring it. But more common is that a concentration task (i.e mental activity) is done without having any visible objects, but rather by thinking or imaging the given target. 
@@ -409,38 +419,44 @@ After some constant unsuccessful (near to random) results using the motor tasks 
 
 With the several measurements and validations it was determined that 10 seconds is a suitable length for a measurement session. Taking into account that the short-time Fourier transformation extends the number of the input samples (since it uses sliding window), the single measurement session is containing 18 signal data samples.
 
-\subsection{Methods}
-With regard to determine final results from prediction data samples and establish baseline accuracies there are different techniques used. First of all various voting systems are tried out to do the final target selection:
+\subsection{Methods} \label{methods}
+
+During the baseline establishment phase a classifier was trained and validated using 5-fold cross-validation, which means that a classifier has been trained and validated 5 times with a different validation sets. Every prediction answer from a classifier within 5 trials was recorded into one result set. So in total the prediction result set is containing the same number of samples as the whole training data set has. 
+
+For getting the accuracies there are used different methods for the calculation. As described before, different voting types are used within the methods to determine the intermediate answers (the answers from measurement sessions) before definition of the final average. The voting types used in the subsequent methods explained:
 \begin{itemize}
 \item Majority voting - all the voters have the same influence on the final result.
-\item Voting with a threshold - voting result depends on whether the score returned for the target exceeds the minimum threshold value. The score can be the number of occurrences for the target or any other value.
+\item Voting with a threshold - voting result depends on whether the score returned for the target exceeds the minimum threshold value. In our project the score is the number of occurrences for the class in the defined set. It will be defined for a target which usually appears more times in a set and consequently has higher accuracy. The threshold will be chosen dynamically, trying out available values and measuring their results. 
 \end{itemize}
 
-Data grouping
+The methods used to calculate the final accuracies and validate the final ensemble results could be divided on two groups:
+\begin{itemize}
+\item Sample based (voting-free) - in this case the accuracy is found with the number of correct predictions divided on the the total amount of the prediction attempts. This is applied on the whole training dataset, so neither grouping nor finding intermediate results is done before.
+\item Measurement session based (voting is applied) - in this case the accuracy is found with the number of correct intermediate predictions divided on the the total amount of the intermediate prediction attempts. The intermediate predictions are the voting results from single measurement sessions (in our case the result from 18 samples). There are different ways used in order to determine those answers, which will be covered in the next subsections.
+\end{itemize}
+
+In general we use the probabilities returned with a RF (Random Forests) classifier to choose the right class. In our binary classifier case, the standard case is that if the probability for a given class exceeds 50\%, then it will be considered as an answer. On the other hand, we have a different method, which labels the targets using the probability threshold for a highly recognizable class. The desired threshold is calculated iterating through all the possible threshold values from 0\% to 100\% (with a step of 1\%) and comparing the prediction accuracies, to select the best at the end.
+
+In summary we will apply the following 5 methods to determine the accuracies:
+
+\begin{enumerate}
+	\item Voting-free
+	\item Voting-free using RF probability threshold
+	\item Majority voting
+	\item Majority voting using RF probability threshold
+	\item Voting with a threshold
+\end{enumerate}
 
 
 \subsection{Implementation}
 
-To reach and test the given work approach the following plan should be covered:
-\begin{enumerate}
-\item Build a two-class BCI 
-\begin{enumerate}
-\item Implement Fourier preprocessing
-\item Split data on training and validation sets
-\item Machine learning process
-\item Get a meaningful prediction accuracy $X$
-\end{enumerate}
-\item Measure how many trials is it required to improve $X$ to 0.99 accuracy
-\item Try different voting schemas and plot their results
-\end{enumerate}
-
-For fulfilling goals in the related topic a custom application was written using Python 2.7 programming language. The application contains the following components:
+For fulfilling goals in the related topic a custom application was written using Python 2.7 programming language and open-source scientific libraries SciPy\cite{scipy} and NumPy\cite{numpy}. The application contains the following components:
 \begin{itemize}
 \item Raw data reader - connects to a BCI headset over Bluetooth and reads raw data
 \item Preprocessor -  does Short-time Fourier transform of a bulk raw data and determines signal amplitudes for desired frequencies (features)
 \item Data storer - stores preprocessed data to a file system (e.g CSV file)
 \item Classificator - a machine learning algorithm which teaches classificator and uses it to predict preprocessed a target based on features
-\item Voting handler - in case of multi-trial sessions it is used to select the right answer
+\item Voting handler - in case of multi-trial sessions it is used to select the single answer among the given set
 \item Main application - provides a command-line user interface to select application modes and run necessary components
 \end{itemize}
 
@@ -465,41 +481,25 @@ According to Emotiv EPOC specifications\cite{emotiv} 45 Hz is the maximum bandwi
 
 \subsubsection{Classificator}
 
-Classificator component is responsible for determination of a target (class) from the number of samples given by preprocessor component. Each sample (record) contains amplitudes for all the sensors and different frequencies which makes $14*45=630$ features. In addition to them we add a timestamp and a target name to each record. This records compose a dataset which is fed up to a classificator (machine learning algorithm) to train it. 
+Classificator component is responsible for determination of a target (class) from the number of samples given by preprocessor component. Each sample (record) contains amplitudes for all the sensors and different frequencies which makes $14*45=630$ features. In addition to them we add a timestamp and the actual target label to each record. The common timestamp is assigned to the samples coming from one measurement session. This records compose a dataset which is fed up to a classifier (machine learning algorithm) to train it. 
 
-Train data could be separated from test data in different ways:
-
-\begin{itemize}
-\item Using first majority of samples as train data and other as test data. For example it could be 70\% for train and 30\% for test data.
-\item Using cross-validation. This means selecting proportional test data chunks (e.g 20\%) from the whole dataset without overlapping and using the rest of samples as train data. This will result in training several classificators. A classificator with the highest accuracy will be chosen finally.
-\end{itemize}
+A 5-fold cross-validation is done in the given component. Technically this means selecting proportional validation data chunks (with a size of 20\% of the training dataset) from the whole dataset without overlapping and using the rest of the samples as training data. This will result in training several classifiers. These classifiers prediction outputs will be concatenated and used further as a training data prediction.
 
 \subsubsection{Application modes}
-\colorbox{yellow}{Describe here the application modes. Plan to describe flows and technical details fot the app modes. Currently I have 4 modes: 1. is training for collecting test samples, 2. is to build baseline statistics based on test data and calculate number of measurement sessions , 3. testing mode , where every session lasts longer with a final answer outputted after 4. Final analysis based on the giving test data}
-\subsubsection{Training data measuring mode}
-\subsubsection{Baseline training mode}
-\subsubsection{Test data measuring mode}
-\subsubsection{Final analyse mode}
+\colorbox{yellow}{Describe here the application modes?}
 
 \newpage
-\section{Validation}
-Before each training or testing session a signal quality check was performed in order to ensure that the headset sensors are well placed on a head and the signal quality is high. This check was done using Emotiv Epoc Control Panel software. The training data was collected multiple times within several days which means that there is no guarantee that headset sensor locations were all the time on the same place what is more close to realistic scenario. 
+\section{Experimental results}
 
-Random Forest classifier is set up to use 100 trees and the random seed is manually specified in order to avoid different results within the different classification session runs. The classifier instance is set to return the probabilities of targets instead of the predicted targets. Processing continuous probabilities instead of discrete targets gives flexibility in voting systems applied in the current work.
+The experimental results for the single and multiple trial approaches are described in the followed subsections. The result subsections are split by the techniques of measuring the final accuracies described in section \ref{methods}. Single trial statistics is based on the training data, while the multiple trial approach results are adjusted with the test dataset.
 
-The following section is divided on the two main subsections:
-\begin{itemize}
-\item Baseline establishment - this section describes the different techniques of finding the theoretical baseline accuracy (i.e single juror probability) along with the results obtained using these techniques. 
-\item Multiple trial approach result - this section shows the results of testing multiple trial measurement modes along with the results.
-\end{itemize}
-\subsection{Baseline establishment}
+\subsection{Single trial approach}
 
-During baseline establishment phase a classifier was trained and validated using 5-fold cross-validation. Every prediction answer from a classifier within 5 trials was recorded into one result set. So in total the prediction result set is containing the same number of samples as the whole training data set has. This result set has been used to determine baselines for the next voting approaches.
+\subsubsection{Voting-free}
 
-\subsubsection{Majority vote}
-After getting the prediction result from the cross-validation outputs the average prediction accuracy was determined as 66.0\%. Based on the prediction results the following contingency table was constructed:
+The average prediction accuracy for a testing data is determined as \textbf{67.1\%}. Based on the prediction results the following confusion matrix was constructed:
 \begin{table}[H]
-\caption{Contingency table showing classifiers prediction performance used in cross-validation} \label{tab:title} 
+\caption{Confusion matrix showing classifiers prediction performance used in cross-validation without vo} \label{tab:title} 
 \begin{center}
   \begin{tabular}{ | c | c | c | c | }
     \hline
@@ -512,12 +512,33 @@ After getting the prediction result from the cross-validation outputs the averag
 \end{center}
 \end{table}
 
-This table shows that $Excitement$ is being better recognized and has ~0.24 error rate. However, the target $Relax$ has almost 50\% accuracy.
+This table shows that $Excitement$ is being better recognized and has ~0.24 error rate, meanwhile the target $Relax$ has almost 50\% accuracy.
 
-Every session on the prediction task is being run for 10 seconds and this is considered to represent a single juror decision (i.e single juror decision is composed of 18 prediction result samples). To get a single juror decision 18 prediction answers should be processed in some way to get the one final result from them. In the following approach a majority voting was applied among these 18 prediction answers. After finding single voter answers, their average accuracy was determined as 76.9\%.
+\subsubsection{Voting-free using RF probability threshold}
+
+This technique is used in order to balance the prediction accuracies between the targets. Threshold or the minimum probability for the most frequent target is set up as a border between the two classes. Threshold is compared to the labels probabilities returned by Random Forests algorithm, which are calculated inside the algorithm implementation using ensemble voting among several decision trees. 
+
+Comparing the prediction accuracies using different thresholds and selecting the best combination gave the probability threshold 0.54 for the $Excitement$ target. Below are the prediction statistics regarding usage of it. The prediction accuracy is \textbf{68.4\%}.
 
 \begin{table}[H]
-\caption{Contingency table showing classifiers prediction performance used in cross-validation with dividing the data set on different jurors} \label{tab:title} 
+\caption{Confusion matrix showing classifiers prediction performance using voting-free strategy and 0.54 threshold for the Excitement class classification} \label{tab:title} 
+\begin{center}
+  \begin{tabular}{ | c | c | c | c | }
+    \hline
+     & Predicted Relax & Predicted Excitement & Total \\ \hline
+    Actually Relax & 754 & 413 & 1167 \\ \hline
+    Actually Excitement & 387 & 981 & 1368 \\ \hline
+    Total & 1141 & 1394 & 2535 \\ 
+    \hline
+  \end{tabular}
+\end{center}
+\end{table}
+
+\subsubsection{Majority voting}
+
+In the following technique a majority voting was applied among 18 prediction samples, to get the intermediate results. After finding single voter answers, their average accuracy was determined as \textbf{78.5\%}.
+\begin{table}[H]
+\caption{Confusion matrix showing classifiers prediction performance applying a majority voting within measurement sessions data} \label{tab:title} 
 \begin{center}
   \begin{tabular}{ | c | c | c | c | }
     \hline
@@ -530,81 +551,96 @@ Every session on the prediction task is being run for 10 seconds and this is con
 \end{center}
 \end{table}
 
-It could be clearly seen that this approach gave better results compared to the previous without dividing the data set on jurors, but it is still not good at prediction of $Relax$.
+\subsubsection{Majority voting using RF probability threshold}
 
-\subsubsection{Weighted voting system}
-\colorbox{yellow}{What's the right name?}
-Since the previous techniques show relatively precise prediction results for $Excitement$ and on the other hand low accuracy for $Relax$ targets, prediction results could be balanced with using of a weighting or threshold systems. The following approach is based on calculating the thresholds which bring the higher accuracy. The thresholds are defined as the minimum number of occurrences for the exact target to make this target win in a vote. The vote is performed among 10 second data samples or the single juror samples (i.e every juror's decision is defined using that vote along with thresholds). Because of that the range for the thresholds values is $[0-18]$ with the step size of 1. 
-
-\colorbox{yellow}{Plot here dependency of weights and accuracy?}
-
-The weights with the best classification accuracy of 80.9\% are:
-\begin{itemize}
-\item  $Excitement$: 12
-\item  $Relax$: 6
-\end{itemize}
-
+Using the same threshold as in voting-free strategy: 0.54 for the $Excitement$ target. The prediction accuracy is \textbf{83.6\%}.
 
 \begin{table}[H]
-\caption{Contingency table showing classifiers prediction performance used in cross-validation with dividing the data set on different jurors and using thresholds to define a juror decision} \label{tab:title} 
+\caption{Confusion matrix showing classifiers prediction performance using 0.54 threshold for the Excitement class classification with applying a majority voting within measurement sessions data} \label{tab:title} 
 \begin{center}
   \begin{tabular}{ | c | c | c | c | }
     \hline
      & Predicted Relax & Predicted Excitement & Total \\ \hline
-    Actually Relax & 48 & 16 & 64 \\ \hline
-    Actually Excitement & 10 & 66 & 76 \\ \hline
-    Total & 58 & 82 & 140 \\ 
+    Actually Relax & 49 & 15 & 64 \\ \hline
+    Actually Excitement & 8 & 68 & 76 \\ \hline
+    Total & 57 & 83 & 140 \\ 
     \hline
   \end{tabular}
 \end{center}
 \end{table}
 
-Usage of threshold has balanced False Negatives and True Negatives, however the error rate for the $Excitement$ has been grown compared to the majority vote with dividing on jurors technique.
-
-\subsubsection{Ensemble probability threshold system}
-
-Another technique to establish thresholds for the classes is to use the probabilities returned by Random Forests algorithm. These probabilities are calculated inside the algorithm implementation using ensemble voting among several decision trees. 
-
-The way of finding suitable thresholds is similar to finding the best weights described in the latter section. It was done with iterating through the range of probabilities $[0.00-1.00]$ and a step width of 0.01. Comparing the prediction accuracies using different thresholds and selecting the best combination gave the following probability thresholds:
-\begin{itemize}
-\item $Excitement$: 0.54
-\item $Relax$: 0.46
-\end{itemize}
-
-
-\begin{table}[H]
-\caption{Contingency table showing classifiers prediction performance used in cross-validation with dividing the data set on different jurors and using thresholds to define a juror decision} \label{tab:title} 
-\begin{center}
-  \begin{tabular}{ | c | c | c | c | }
-    \hline
-     & Predicted Relax & Predicted Excitement & Total \\ \hline
-    Actually Relax & 48 & 16 & 64 \\ \hline
-    Actually Excitement & 10 & 66 & 76 \\ \hline
-    Total & 58 & 82 & 140 \\ 
-    \hline
-  \end{tabular}
-\end{center}
-\end{table}
-
-\colorbox{yellow}{Plot another cont. table for the voting without dividing on jurors}
 \colorbox{yellow}{Place here ROC curve? Describe AUC?}
 
-\subsubsection{Condorcet's rule based theoretical results}
-\colorbox{yellow}{Place here a table comparing different condorcet results between methods above}
-\colorbox{yellow}{Plot the dependency between number of jurors and accuracy}
+\subsubsection{Voting with a threshold}
+
+The following approach is based on calculating the threshold which bring the higher accuracy. The threshold is defined as the minimum number of occurrences for the exact target to make this target win in a vote. In our case a threshold is applied to the $Excitement$ target since it is a high accuracy target. All the dependencies between the threshold values and accuracies is shown below.
+
+\begin{figure} [H]
+\begin{center}
+\includegraphics[width=1\textwidth]{threshold_accuracy_curve}
+\caption{Excitement threshold value dependency on the prediction accuracy}
+\label{fig:fnCompModel}
+\end{center}
+\end{figure}
+
+The threshold for a voting for $Excitement$ with the best classification accuracy of \textbf{81.4\%} is 11 and 12. In our implementation we take the first value, which is 11.
+
+\begin{table}[H]
+\caption{Confusion matrix showing classifiers prediction performance using 11 as a threshold for the Excitement class classification with applying a majority voting within measurement sessions data} \label{tab:title} 
+\begin{center}
+  \begin{tabular}{ | c | c | c | c | }
+    \hline
+     & Predicted Relax & Predicted Excitement & Total \\ \hline
+    Actually Relax & 45 & 19 & 64 \\ \hline
+    Actually Excitement & 7 & 69 & 76 \\ \hline
+    Total & 52 & 88 & 140 \\ 
+    \hline
+  \end{tabular}
+\end{center}
+\end{table}
+
+Usage of threshold has balanced False Negatives and True Negatives, however the error rate for the $Excitement$ has been grown compared to the majority voting strategy.
 
 
-\subsection{Multiple trial approach result}
+\subsubsection{Condorcet's rule based results}\label{condorcet1}
+The number of required measurement trials to reach the minimum average accuracy of 99\% is adjusted using Condorcet's jury theorem. The comparative table for the applied methods is shown below. The table is ordered by the single trial accuracies:
 
-\subsubsection{Majority vote}
-\colorbox{yellow}{Place here nearly the same structure as in the baseline establishment subsections?}
+\begin{table}[H]
+\caption{Different methods accuracies and the required trials number to get 99\%} \label{tab:title} 
+\begin{center}
+  \begin{tabular}{ | c | c | c | c | }
+    \hline
+    Method & \parbox[c]{1.8cm}{\raggedright Single trial accuracy (\%)} & Trials required\\ \hline
+    Majority voting using RF probability threshold & 83.6 & 9 \\ \hline
+    Voting with a threshold & 81.4 & 11 \\ \hline
+	Majority voting & 78.6 & 15 \\ \hline
+    Voting-free using RF probability threshold & 68.4 & 37\\ \hline
+    Voting-free & 67.1 & 43\\ \hline
+  \end{tabular}
+\end{center}
+\end{table}
 
-\subsubsection{Weighted voting system}
-\subsubsection{Ensemble probability threshold system}
-\subsubsection{Condorcet's rule based actual results}
+Based on the given results the majority voting using RF probability threshold is the best among the methods and using it will required 9 measurement sessions to get the desired accuracy.
 
+\begin{figure} [H]
+\begin{center}
+\includegraphics[width=1\textwidth]{condorcet_dependency_training}
+\caption{Correlation between the number of trials and the expected accuracy for different methods}
+\label{fig:fnCompModel}
+\end{center}
+\end{figure}
+
+\subsection{Multiple trial approach}
+
+The test data for the given approach was measured with another measurement session length, which is defined using the number of required trials from section \ref{condorcet1}. Since brainwave signal measurements is an energy and time consuming activity it was decided to set 9 trials (90 seconds) for the test session length. It will be enough to fully validate the majority voting using RF probability thresholds and partially validate the other methods.
+
+\colorbox{yellow}{Place here nearly the same structure as in the single approach?}
+
+\colorbox{yellow}{Or choose only top N methods and apply only them ?}
+
+\newpage
 \section{Discussion}
-\colorbox{yellow}{Compare dependency curves on plot theoretical with obtained}
+\colorbox{yellow}{Compare condorcet dependency curves expected vs actual?}
 
 \newpage
 \section{Conclusion}
@@ -641,6 +677,10 @@ Breiman, L. Machine Learning (2001) 45: 5.
 Wang, Yijun, and Tzyy-Ping Jung. ``A Collaborative Brain-Computer Interface for Improving Human Performance.'' Ed. Pedro Antonio Valdes-Sosa. PLoS ONE 6.5 (2011): e20422. PMC. Web. 10 Nov. 2016.
 \bibitem{emokit}
 Emokit SDK. https://github.com/openyou/emokit
+\bibitem{scipy}
+SciPy open-source software for mathematics, science, and engineering SDK. https://www.scipy.org/
+\bibitem{numpy}
+Numpy fundamental package for scientific computing. http://www.numpy.org/
 \end{thebibliography}
 
 %\bibliography{bachelor-thesis}
