@@ -25,12 +25,18 @@ class ProbabilityThresholdCalculator(object):
                 max_accuracy=accuracy
                 max_acc_threshold = thresholds
 
-        #self.plot(t,accs)
+        self.plot(t,accs)
 
         return max_acc_threshold
 
     def plot(self, thresholds, accuracies):
-        plt.plot(thresholds, accuracies)
+
+        #plt.hist(thresholds, bins=bins, weights=accuracies)
+        plt.hist(np.linspace(0, 1, 100), bins=np.linspace(0, 1, 101), weights=accuracies)
+        plt.axvline(0.5, color='r', linestyle='dashed', linewidth=2)
+        #plt.xticks([x + .05 for x in thresholds], thresholds)
         plt.xlabel('Threshold', fontsize=14)
         plt.ylabel('Accuracy', fontsize=14)
+        # plt.xticks(range(0,18,1))
+
         plt.show()

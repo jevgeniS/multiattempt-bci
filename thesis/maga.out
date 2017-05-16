@@ -1,30 +1,37 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
-\BOOKMARK [1][-]{section.2}{Background / State of the Art}{}% 2
+\BOOKMARK [1][-]{section.2}{Background and State of the Art}{}% 2
 \BOOKMARK [2][-]{subsection.2.1}{Condorcet's jury theorem}{section.2}% 3
 \BOOKMARK [2][-]{subsection.2.2}{Brain-computer interface}{section.2}% 4
 \BOOKMARK [2][-]{subsection.2.3}{Emotiv EPOC}{section.2}% 5
-\BOOKMARK [2][-]{subsection.2.4}{Short Time Fourier Transform}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.4}{Short-time Fourier transform}{section.2}% 6
 \BOOKMARK [2][-]{subsection.2.5}{Classification task}{section.2}% 7
-\BOOKMARK [2][-]{subsection.2.6}{Random Forests algorithm}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.6}{Random Forest algorithm}{section.2}% 8
 \BOOKMARK [2][-]{subsection.2.7}{Collaborative Brain-Computer Interface}{section.2}% 9
 \BOOKMARK [1][-]{section.3}{Contribution}{}% 10
 \BOOKMARK [2][-]{subsection.3.1}{Overview}{section.3}% 11
 \BOOKMARK [2][-]{subsection.3.2}{Experimental design}{section.3}% 12
-\BOOKMARK [2][-]{subsection.3.3}{Targets}{section.3}% 13
-\BOOKMARK [2][-]{subsection.3.4}{Methods}{section.3}% 14
-\BOOKMARK [2][-]{subsection.3.5}{Implementation}{section.3}% 15
-\BOOKMARK [3][-]{subsubsection.3.5.1}{Raw data reader}{subsection.3.5}% 16
-\BOOKMARK [3][-]{subsubsection.3.5.2}{Preprocessor}{subsection.3.5}% 17
-\BOOKMARK [3][-]{subsubsection.3.5.3}{Classificator}{subsection.3.5}% 18
-\BOOKMARK [3][-]{subsubsection.3.5.4}{Application modes}{subsection.3.5}% 19
-\BOOKMARK [1][-]{section.4}{Experimental results}{}% 20
-\BOOKMARK [2][-]{subsection.4.1}{Single trial approach}{section.4}% 21
-\BOOKMARK [3][-]{subsubsection.4.1.1}{Voting-free}{subsection.4.1}% 22
-\BOOKMARK [3][-]{subsubsection.4.1.2}{Voting-free using RF probability threshold}{subsection.4.1}% 23
-\BOOKMARK [3][-]{subsubsection.4.1.3}{Majority voting}{subsection.4.1}% 24
-\BOOKMARK [3][-]{subsubsection.4.1.4}{Majority voting using RF probability threshold}{subsection.4.1}% 25
-\BOOKMARK [3][-]{subsubsection.4.1.5}{Voting with a threshold}{subsection.4.1}% 26
-\BOOKMARK [3][-]{subsubsection.4.1.6}{Condorcet's rule based results}{subsection.4.1}% 27
-\BOOKMARK [2][-]{subsection.4.2}{Multiple trial approach}{section.4}% 28
-\BOOKMARK [1][-]{section.5}{Discussion}{}% 29
-\BOOKMARK [1][-]{section.6}{Conclusion}{}% 30
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Targets}{subsection.3.2}% 13
+\BOOKMARK [2][-]{subsection.3.3}{Implementation}{section.3}% 14
+\BOOKMARK [3][-]{subsubsection.3.3.1}{Raw data reader}{subsection.3.3}% 15
+\BOOKMARK [3][-]{subsubsection.3.3.2}{Preprocessor}{subsection.3.3}% 16
+\BOOKMARK [3][-]{subsubsection.3.3.3}{Classifier}{subsection.3.3}% 17
+\BOOKMARK [1][-]{section.4}{Methods}{}% 18
+\BOOKMARK [2][-]{subsection.4.1}{Sample-based action predictor}{section.4}% 19
+\BOOKMARK [3][-]{subsubsection.4.1.1}{1/2-probability threshold}{subsection.4.1}% 20
+\BOOKMARK [3][-]{subsubsection.4.1.2}{T-probability threshold}{subsection.4.1}% 21
+\BOOKMARK [2][-]{subsection.4.2}{Voting-based action predictor}{section.4}% 22
+\BOOKMARK [3][-]{subsubsection.4.2.1}{Majority voting}{subsection.4.2}% 23
+\BOOKMARK [3][-]{subsubsection.4.2.2}{Decision threshold voting}{subsection.4.2}% 24
+\BOOKMARK [2][-]{subsection.4.3}{Action prediction based on multiple attempts}{section.4}% 25
+\BOOKMARK [1][-]{section.5}{Experimental Results}{}% 26
+\BOOKMARK [2][-]{subsection.5.1}{Single attempt approach}{section.5}% 27
+\BOOKMARK [3][-]{subsubsection.5.1.1}{Without voting approach}{subsection.5.1}% 28
+\BOOKMARK [3][-]{subsubsection.5.1.2}{Majority voting}{subsection.5.1}% 29
+\BOOKMARK [3][-]{subsubsection.5.1.3}{Decision threshold voting}{subsection.5.1}% 30
+\BOOKMARK [2][-]{subsection.5.2}{Multiple attempt approach}{section.5}% 31
+\BOOKMARK [3][-]{subsubsection.5.2.1}{Condorcet's jury theorietical estimation}{subsection.5.2}% 32
+\BOOKMARK [3][-]{subsubsection.5.2.2}{Condorcet's jury empirical results}{subsection.5.2}% 33
+\BOOKMARK [3][-]{subsubsection.5.2.3}{Theoretical and empirical results comparison}{subsection.5.2}% 34
+\BOOKMARK [1][-]{section.6}{Discussion}{}% 35
+\BOOKMARK [1][-]{section.7}{Conclusion}{}% 36
+\BOOKMARK [1][-]{appendix.1}{Appendix 1}{}% 37

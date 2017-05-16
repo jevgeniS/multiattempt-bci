@@ -1,12 +1,14 @@
 import constants
 from LearningService import LearningService
 from TestingService import TestingService
+from analyzing.CondorcetCalculator import CondorcetCalculator
 from analyzing.CrossValidator import CrossValidator
 from trainers.VoteTrainingService import VoteTrainingService
 from util.DataStorer import DataStorer
 
 
 if __name__ == "__main__":
+
     modes = constants.constants.APP_MODES
     answer = raw_input("Choose mode: \n"+str(modes)+"\n")
     if answer in constants.constants.APP_MODES.keys():
