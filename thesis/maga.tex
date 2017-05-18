@@ -6,6 +6,8 @@
 \usepackage[a4paper]{geometry}
 \usepackage{float}
 \usepackage{xcolor}
+\usepackage{appendix}
+\usepackage{xfrac}
 % Use package babel for English or Estonian 
 % If you use Estonian make sure that Estonian hyphenation is installed 
 % - hypen-estonian or eehyp packages
@@ -49,7 +51,6 @@
 % Packages for getting clickable links in PDF file
 \usepackage{hyperref}
 \usepackage[all]{hypcap}
-
 
 % Packages for defining colourful text together with some colours
 \usepackage{color}
@@ -165,6 +166,7 @@
 
 \large
 UNIVERSITY OF TARTU\\[2mm]
+Faculty of Science and Technology\\
 Institute of Computer Science\\
 Computer Science Curriculum\\[2mm]
 
@@ -191,7 +193,7 @@ Computer Science Curriculum\\[2mm]
  \setlength{\extrarowheight}{5pt}
  \begin{tabular}{r l} 
   \sffamily Supervisor: & \sffamily Ilya Kuzovkin, MSc \\ 
-  \sffamily Supervisor: & \sffamily Raul Vicente, PhD 
+  \sffamily Co-supervisor: & \sffamily Raul Vicente, PhD 
  \end{tabular}
  }
 \end{flushright}
@@ -231,38 +233,43 @@ Computer Science Curriculum\\[2mm]
 \vspace*{2ex}
 {\flushleft{\textbf{Abstract:}} }
 
-Brain-computer interface (BCI) is a computer system for extracting brain electronic neural signals and using them to control computer applications. For the operation BCI requires a user to concentrate on some mental tasks. Besides measuring signals, BCI converts electric raw signal to digital representation data and maps the data to the exact computer commands. Unfortunately, the probability of the right command prediction usually is below 100\% and therefore there is a relatively low reliability of these systems.
+Brain-computer interface (BCI) is a computer system for extracting brain electric neural signals and using them to control computer applications. For the operation BCI requires a user to concentrate on some mental tasks. Besides measuring the signals, BCI converts raw electric signal to digital representation  and maps the data to computer commands. Unfortunately, the probability of predicting the right command is below 100\% and therefore the reliability of these systems is relatively low.
 
-Low reliability is a huge problem for BCI, since they will not be widely trusted and used, while the prediction accuracy is relatively low. The existing solutions usually trying to improve the prediction accuracy of BCI without changing the time what is required on a single user's concentration attempt. Instead, they rather apply different prediction models in order to raise the accuracy for single concentration attempt. However, our solution tries to discover how many user's concentration attempts should be done in a row (i.e how long does it take), to guarantee the prediction accuracy of 99\%.
+Low reliability is a huge problem for BCI, since they will not be widely trusted and used while the prediction accuracy is low. The existing solutions usually try to improve the prediction accuracy of BCI without focusing too much on the time what is required for a single user's concentration attempt. They apply different prediction models and signal processing techniques in order to raise the accuracy of prediction. Our solution goes the opposite way -- it tries to discover how many concentration attempts should be done in a row (i.e how long does it take), to guarantee the prediction accuracy of 99\%.
 
-The solution described in the thesis is based on Condorcet's jury theorem \cite{condorcets}. It states that if we have two options, we try many attempts to choose one of them randomly and we see that the first option is picked up more frequently than the second (probability is higher than 50\%), then if we will keep trying these attempts more, the probability of picking the first option again will rise with every new attempt. In this work we apply the main Condorcet's principle in a BCI perspective. Firstly by reaching the single concentration attempt's prediction accuracy to more than 50\% and lastly by using multiple concentration attempts to improve their average accuracy. We validate the obtained results to the expected ones and discuss them.
+The solution described in the thesis is based on Condorcet's jury theorem \cite{condorcets}. It states that if we have two options and the chance to pick $correct$ is larger than 50\%, then, if we make several attempts in a row, the probability to pick the correct option by majority vote is rising with the number of attempts. In this work we apply the main Condorcet's principle in a BCI perspective. First we develop a system that can reach the single concentration attempt's prediction accuracy to be more than 50\% and then we use multiple concentration attempts in a row to improve the overall accuracy. We expect that given enough attempts we can reach 99\% classification accuracy. We compare the empirical results with the theoretical estimates and discuss them.
 
-The BCI technology is relatively young field. In order to fully integrate it into our ordinary life, the contribution from the scientist and engineers is required for converting BCI to a reliable system. The following work contributes to reliability of BCI systems.
+The BCI technology is a relatively young field. In order to fully integrate it into our ordinary life, the contribution from scientists and engineers is required for converting BCI to a reliable system. The following work contributes to reliability of BCI systems.
 
 
 \vspace*{3ex}
 {\flushleft{\textbf{Keywords:}}}
 Brain-Computer Interface, Condorcet's Jury Theorem, Reliability
+{\flushleft{\textbf{CERCS:}}}
+P170
 \vspace*{3ex}
 
 \newpage
 \selectlanguage{estonian}
-\noindent\textbf{\large Tõhusa aju-arvutiliidese suunas: täiuslikku täpsuse saavutamine aja ohverdamisega}
+\noindent\textbf{\large Tõhusa aju-arvuti liidese suunas: täiuslikku täpsuse saavutamine aja ohverdamisega}
 \vspace*{2ex}
 {\flushleft{\textbf{Kokkuvõte:}} }
 
-Aju-arvutiliides (AAL) on süsteem aju elektrooniliste impulssite välja võtmiseks ja nende kasutumiseks arvuti tarkvara juhtimiseks. AAL opereerimiseks peab kasutaja kontsentreeruma mingile mõttelisele ülesandele. Lisaks impulsite mõõtmisele muudab AAL elekroonilisi signaale digitaalseks ja selle järgi tuvastab vastava arvuti käsu. Kahjuks on õige käsu tuvastamise tõenäosus alati alla
+Aju-arvuti liides (AAL) on süsteem aju elektriliste impulssite välja võtmiseks ja nende kasutumiseks arvuti tarkvara juhtimiseks. AAL opereerimiseks peab kasutaja kontsentreeruma mingile mõttelisele ülesandele. Lisaks impulsite mõõtmisele muudab AAL elekroonilisi signaale digitaalseks ja selle järgi tuvastab vastava arvuti käsu. Kahjuks on õige käsu tuvastamise tõenäosus alati alla
 100\%, mistõttu  AAL süsteemide tõhusus on võrdlemisi madal.
 
-Madal tõhusus on AAL-i jaoks suureks probleemiks, sest senikaua kuni need süsteemid pakuvad madalaid tuvastamise täpsuseid, jäävad need paljudes valdkondades ilma kasutamiseta. Antud probleemi lahendamiseks enamasti üritatakse tõsta AAL-i täpsust ühe kontsentreerimiskatse raames ilma katse ajakestvuse muutmiseta. Meie lähenemine aga põhineb arusaamisel, kui palju kontsentreerimiskatseid on vaja kasutajal järjest teostada (s.t kui kaua aega on nõutud), et saavutada 99\% täpsus.
+Madal tõhusus on AAL-i jaoks suureks probleemiks, sest senikaua kuni need süsteemid pakuvad madalaid tuvastamise täpsuseid, jäävad need paljudes valdkondades ilma kasutamiseta. Antud probleemi lahendamiseks enamasti üritatakse tõsta AAL-i täpsust ühe kontsentreerimiskatse raames ja ei pane tähelepanu kontsentreerimiskatse kestvusele. Meie lähenemine aga põhineb arusaamisel, kui palju kontsentreerimiskatseid on vaja kasutajal järjest teostada (s.t kui kaua aega on nõutud), et saavutada 99\% täpsus.
 
-Selles töös kirjeldatud lahendus põhineb Condorcet kohtu teoreemil \cite{condorcets}. Teoreem väidab, et kui on olemas kaks valikuvõimalust ja me proovime mitu korda valida ühte neist juhuslikult ning me näeme, et esimene valik satub sagedamini kui teine (tõenäosus on suurem kui 50\%), siis jätkates samamoodi tõuseb esimese valiku tõenäosus iga järgneva valikuga. Antud töös rakendasime põhilist Condorcet printsiipi aju-arvutiliidesele. Kõigepealt saavutati ühe mõttelise ülesande kontsentreerimiskatse täpsuseks rohkem kui 50\% ja seejärel prooviti läbi mitu kontsentreerimiskatset parandamaks keskmist täpsust.
+Selles töös kirjeldatud lahendus põhineb Condorcet kohtu teoreemil \cite{condorcets}. Teoreem väidab, et kui on olemas kaks valikuvõimalust ja tõenäosus valida $õiget$ on suurem kui 50\%, kui me teostame mitu valimiskatset järjest, siis tõenäosus, et valitakse õiget valikut tõuseb iga järgneva valimiskatsega. 
+Antud töös rakendasime põhilist Condorcet printsiipi aju-arvuti liidesele. Kõigepealt me arendame süsteemi mis on suuteline saavutada ühe mõttelise ülesande kontsentreerimiskatse täpsuseks rohkem kui 50\% ja seejärel proovime läbi mitu kontsentreerimiskatset parandamaks keskmist täpsust. Me eeldame, et kui kasutame piisava kontsentreerimiskatsete arvu, siis me jõuame 99\% klassifitseerimistäpsuseni. Me võrdleme teoreetilisi tulemusi eksperemendil saadud omadega ja arutleme neid.
 
 AAL tehnoloogia on võrdlemisi uus valdkond. Selle tehnoloogia täielik toomine meie igapäevaellu nõuab tugevat panust teadlastelt ja inseneeridelt, et muuta AAL usaldusväärseks süsteemiks. Antud töö eesmärk on panustada AAL süsteemi kindlusesse.
 
 \vspace*{3ex}
 {\flushleft{\textbf{Märksõnad:}}}
-Aju-arvutiliides, Condorcet kohtu teoreem, Tõhusus
+Aju-arvuti liides, Condorcet kohtu teoreem, Tõhusus
+{\flushleft{\textbf{CERCS:}}}
+P170
 \vspace*{3ex}
 
 
@@ -273,33 +280,35 @@ Aju-arvutiliides, Condorcet kohtu teoreem, Tõhusus
 \newpage
 \tableofcontents
 
+
 \newpage
-\section{Introduction}
+\section*{Introduction}
+\addcontentsline{toc}{section}{Introduction}
 \paragraph{Motivation}~\\
 
-Many health issues can disrupt the neuromuscular channels, which brain uses to communicate with different parts of organism. Channels are used to control muscles and pass the feelings. With these controls, a human can successfully participate in an ordinary life, controlling the surrounded environment. Amyotrophic lateral sclerosis (ALS), brainstem stroke, brain or spinal cord injury, cerebral palsy, muscular dystrophies, multiple sclerosis and other diseases cause problems in neural channels or the muscle control performance. There are three ways how to restore muscle disabilities. The first is increasing capability of the existing neural channels. That means using existing well-functioning muscles to fulfill suffering ones (e.g use of hand movements to produce artificial speech). The second is the use of control signal measurement systems (electromyography) in order to record signals sent to muscles, translate them and repeat the action in a prosthesis. And the latter is attaching a non-muscular communication module as a control channel to a brain, which is BCI. \cite{bci_jonathan}
+Many health issues can disrupt the neuromuscular channels, which brain uses to communicate with different parts of organism. Channels are used to control muscles and pass the feelings. With these controls, a human can successfully participate in an ordinary life, controlling the surrounding environment. Amyotrophic lateral sclerosis (ALS), brainstem stroke, brain or spinal cord injury, cerebral palsy, muscular dystrophies, multiple sclerosis and other diseases cause problems in neural channels or the muscle control performance. There are three ways how to restore muscle disabilities. The first is increasing capability of the existing neural channels. That means using existing well-functioning muscles to fulfill suffering ones (e.g use of hand movements to produce artificial speech). The second is the use of control signal measurement systems (electromyography) in order to record signals sent to muscles, translate them and repeat the action in a prosthesis. And the latter is attaching a non-muscular communication module as a control channel to a brain, which is BCI. \cite{bci_jonathan}
 
-Unfortunately, BCI systems have relatively low prediction accuracy, which nowadays makes their implementations less reliable. There are many ways how BCI data is handled in order to gain better results. Usually, the main problem what has been tried to resolve is the prediction accuracy improvement in scope of a single user's concentration attempt. That means that the existing research questions does not ask how long it should take for a user to concentrate on a mental task, but they rather try to improve the prediction accuracy for a single concentration attempt. As a rule, the existing approaches have their maximum prediction accuracies, which could not be jumped over on a regularly. From our side we introduce a way, which theoretically does not have the prediction accuracy limits, but on the other hand has its own time requirements.
+Unfortunately, BCI systems have relatively low prediction accuracy, which nowadays makes their implementations less reliable. There are many ways how BCI data is handled in order to gain better results. The main problem that is usually addressed in research is the prediction accuracy improvement in terms of a single concentration attempt. The existing approaches aim at maximizing prediction accuracies, but they have upper limits due to the quality of neuroimaging signal. We introduce a way which theoretically does not have prediction accuracy limits, but on the other hand has time requirements. We hope to steer the BCI community towards using the time needed to classify one action as their measure of success.
 
 \paragraph{Scope}~\\
 
-This work consists of creating a BCI application for prediction of distinct users thoughts. The application communicates with Emotiv EPOC headset \cite{emotiv} to record the brainwave signals while a user is concentrating on a specific mental task. After recordings, the algorithm learns the signals to construct the prediction model. Finally, it tries to classify user thoughts based on the signals learned before. The application works in two modes. The first, learning mode, for obtaining training data samples to ``teach'' an algorithm to better predict the upcoming test data and give more precise outputs for thoughts recognition in future. This is necessary step for every new user (subject). The second, testing mode, is for checking the accuracy of prediction made by the algorithm. Once the thoughts recognition accuracy based on a single attempt will be at a relatively high level, a multiple attempt approach is going to be run. A multiple attempt approach considers several classification results made in a row on the same mental task and decides the final single result based on them. We expect to get higher accuracy results with the increase of the number of classification attempts, this expectation is based on the Condorcet's jury theorem and described in more details in the following work. The results from single and multi-attempt sessions will be recorded and compared to the expected calculated using Condorecet's jury equation. The application will be able to work in offline (classification will be done after the dataset is recorded) and online (classification will be done instantly after sensors data is recorded) modes.
+This work consists of creating a BCI application for prediction of distinct users thoughts. The application communicates with Emotiv EPOC headset \cite{emotiv} to record the brain signals while a user is concentrating on a specific mental task. After recordings, an algorithm constructs the prediction model. Finally, it tries to classify user thoughts based on the signals learned before. The application works in two modes. The first, learning mode, for obtaining training data samples to ``teach'' an algorithm to predict the upcoming test data. This is a necessary step for every new user (subject). The second, testing mode, is for checking the accuracy of prediction made by the algorithm. Once the thought recognition accuracy based on a single attempt will be at a relatively high level, a multiple attempt approach is going to be run. A multiple attempt approach considers several classification results made in a row on the same mental task and decides the final single prediction result based on them. We expect to get higher accuracy results with the increase of the number of classification attempts, this expectation is based on the Condorcet's jury theorem and is described in more details in the following sections. The results from single and multiple attempt sessions will be recorded and compared to the expected -- calculated using Condorcet's jury equation. The application will be able to work in offline (classification will be done after the dataset is recorded) and online (classification will be done instantly after sensors data is recorded) modes.
 \paragraph{Research problem}~\\
 
-The BCI with multi-attempt approach could bring better prediction result than the BCI system based on single attempt. The main objective is to understand how long time (or a concentration attempts on a mental task) it is required from a user to promise him nearly the perfect accuracy of 99\%. For that reasons we are about to determine how multi-measurement mode's accuracies differ from single-measurement's and how the number of classification samples would improve the accuracies statistics. The empirical results will be compared to the theoretical expectations given by the Condorcet's jury theorem.
+The BCI with multi-attempt approach could bring better prediction result than the BCI system based on single attempt. The main objective is to understand how long time (or number of concentration attempts on one mental task) is required from a user to promise him the nearly perfect accuracy of 99\%. We determine how multi-attempt mode's accuracies differ from single attempt's and how accuracies depend on the number of classification attempts. The empirical results will be compared to the theoretical expectations given by the Condorcet's jury theorem.
 \paragraph{Contribution}~\\
 
-It has been implemented an application to provide a user different mental concentration tasks, communicate with a BCI headset and get the measured signal data. Recorded training data to estimate a prediction model. Tried out different techniques how to process and classify the prediction results, to determine the best ones. Calculated the theoretical prediction accuracy for multi-attempt sessions based on a single attempt session results. Recorded test data according to calculated minimum required number of concentration attempts to reach 99\% prediction accuracy. Run of multi-attempt data classification using best techniques for classification with validating results and comparing them to the theoretical values.
+We implemented an application to empirically demonstrate that accuracy of a BCI system based on imperfect classifier can be improved via repetition. We recorded the data needed to conduct the experiment. Tried out different techniques how to process the data, obtain prediction results and determined the best ones. Calculated the theoretical prediction accuracy for multi-attempt sessions based on a single attempt session results. Recorded test data according to calculated minimum required number of concentration attempts to reach 99\% prediction accuracy. Run multi-attempt data classification using best techniques for classification, validated results and compared them to the theoretical estimation.
 \paragraph{Structure}~\\
 Current thesis structure is as follows:
 
 \begin{itemize}
-\item Background and State of the Art - significant technologies used in current work are described along with comparison to similar projects
-\item Contribution - detailed overview of the idea, list of finished work, divided on the  main idea description and the required system design
-\item Methods - the overview of the empirical classification methods applied to determine classes for single or multiple data samples
-\item Experimental results - the list of the accuracy results obtained during using the different classification methods
-\item Discussion - difference with the theoretical model and limitations of the system are provided
-\item Conclusion - summary of the goal, expected and actual results with brief explanations and future adaptation propositions
+\item Background and State of the Art - significant technologies used in current work are described along with comparison to similar projects.
+\item Contribution - detailed overview of the idea, list of finished work, divided in the  main idea description and the required system design.
+\item Methods - the overview of the classification methods applied to determine classes for single or multiple data samples.
+\item Experimental results - the list of the accuracy results obtained by using different classification methods.
+\item Discussion - difference with the theoretical model and limitations of the system are provided.
+\item Conclusion - summary of the goal, expected and actual results with brief explanations and future adaptation propositions.
 \end{itemize}
 
 \newpage
@@ -371,9 +380,14 @@ In our experiments we used the provided software only to validate the signal qua
 
 \subsection{Short-time Fourier transform}
 
-To extract the features we decompose the raw signal into subwaves. Subwaves helps to construct a frequency domain representation of the signal where frequencies and their related amplitudes are described. Although in terms of spectral analysis Fourier Transform is dominating, in case of non-stationary signals where EEG signal belongs, better to use short-time Fourier transform (STFT). \cite{alfahoum_fft} That means that
+To extract the features we decompose the raw signal into subwaves. Subwaves helps to construct a frequency domain representation of the signal where frequencies and their related amplitudes are described. Although in terms of spectral analysis Fourier Transform is dominating, in case of non-stationary signals where EEG signal belongs, better to use short-time Fourier transform (STFT). \cite{alfahoum_fft}
 
-\colorbox{yellow}{Place a picture what is the signal representation before and after?}
+\begin{figure} [H]
+\begin{center}
+\includegraphics[width=1\textwidth]{fft}
+\caption{Signal time domain conversion to frequency domain. \cite{fft} Complex signal is decomposed to sinusoids with the different frequencies and their amplitudes are used to build a frequency domain representation. }
+\end{center}
+\end{figure}
 
 In STFT, a signal is split into frames of N samples each, where N is a window length. Frames overlap with some percent between each other. Before the Fourier transform a Hanning window is applied to reduce aliasing of the signal. Finally, after Fourier transform within STFT the result is outputted. It contains the spectral analysis or, in order words, the amplitudes for different frequencies.
 
@@ -396,6 +410,15 @@ Unsupervised algorithm is a good way to analyse the data without knowing how to 
 
 We will use Random Forest as a machine algorithm which is one of the most precise for the work with EEG data \cite{masso}. It shows better classification accuracy than other modern algorithms when applied on BCI signal data. 
 
+Random Forest algorithm uses the Decision tree building algorithm, which builds the intermediate decision trees using divide-and-conquer strategy. For choosing the tree node, a heuristic is used. Heuristic is a value defined for a feature what describes how the given feature values are good at discriminating between different classes. \cite{hyper-heur}
+
+\begin{figure} [H]
+\begin{center}
+\includegraphics[width=0.7\textwidth]{decisiontree}
+\caption{A sample decision tree model. It classifies whether the person will play outside for different weather conditions.}
+\end{center}
+\end{figure}
+
 A Random Forest is an adaptation of Decision Tree algorithm developed by Leo Breiman and Adele Cutler, where instead of using a single tree, a bunch of trees is used. Every one of these trees is generated by using randomly selected subsets of the existing data samples and features. Finally, each tree is handled separately to find out its predicted class and using ensemble technique a final result is obtained. \cite{breiman_rf}
 
 \subsection{Collaborative Brain-Computer Interface}
@@ -412,19 +435,19 @@ In case of multi-user approach a weighted voting system was used, where a subjec
 \section{Contribution}
 
 \subsection{Overview}
-The main idea of the given work is to increase BCI accuracy sacrificing time what a user requires to concentrate on the same mental task, thus making BCI system more reliable if the minimum concentration time circumstance is followed. It is planned to show how the BCI with an accuracy higher than 50\% will be increased to 99\%.
+The main idea of the given work is to increase BCI accuracy sacrificing time what a user requires to concentrate on the same mental task. Thus, making BCI system more reliable if the minimum concentration time circumstance is followed. It is planned to show how the BCI with an accuracy higher than 50\% will be increased to 99\%.
 The secondary idea is to show the effectiveness of a multiple attempt approach in a BCI system. 
-A regular way of prediction considers a single attempt prediction for a single user action. If there was noise in the recording due to technical issues or a subject was distracted and could not properly concentrate on the task during the attempt, then it will directly affect the classification result and dramatically reduce the accuracy. However, if we know that our system in the most cases works properly and gives the right answers, then we could compensate appearing of noisy and faulty predictions with the others with a better quality.
+Commonly, a regular way of prediction considers a single attempt prediction for a single user action. If there was noise in the recording due to technical issues or a subject was distracted and could not properly concentrate on the task during the attempt, then it will directly affect the classification result and dramatically reduce the accuracy. However, if we know that our system in the most cases works properly and gives the right answers, then we could compensate appearing of noisy and faulty predictions with the others with a better quality.
+
+In multiple attempt approach the final prediction result is estimated using a majority voting over the intermediate prediction results for every attempt. Since every attempt of concentration on a task takes time (10 seconds in our case), then a drawback of the multi-attempt approach is consuming longer time than in single attempt approach. However, the accuracy should be improved in case when single attempt accuracy gives more than 50\%. Our goal is to understand how many attempts it is required to get the accuracy of 99\% in theory and check it against the reality.
 
 \begin{figure} [H]
 \begin{center}
-\includegraphics[height=9cm, width=1\textwidth]{main}
+\includegraphics[height=12cm, width=1\textwidth]{main}
 \caption{A main concept of multiple attempt approach. If single attempt duration is 10s and it brings only one and the final result, then applying N attempts will give several intermediate results that are combined into the final prediction using majority voting}
 \label{fig:condorcet}
 \end{center}
 \end{figure}
-
-In multiple attempt approach the final prediction result is calculated using intermediate prediction results from every attempt. Since every attempt of concentration on a task takes time (10 seconds in our case), then a drawback of the multi-attempt approach is consuming longer time than in single attempt approach. However, the accuracy should be improved in case when single attempt accuracy gives more than 50\%. Our goal is to understand how many attempts it is required to get the accuracy of 99\% in theory and check it against the reality.
 
 \subsection{Experimental design}
 To provide an experimental platform for the research question a special system was designed and implemented along with the experimental flow. The general plan is to use a two-class (two-target) BCI system to collect the data necessary for the analysis. The flow for the experiment could be described as follows:
@@ -476,14 +499,13 @@ For fulfilling goals in the given work a custom application was written using Py
 \item Data storer - stores preprocessed data to a file system (e.g CSV\footnote{Comma-Separated Values \cite{csv} file})
 \item Classifier - a machine learning algorithm which teaches classifier and uses it to predict a target based on preprocessed features
 \item Voting handler - it is used to handle voting to select only one prediction result among several, a detailed explanation is written in the Methods section
-\item Main application - provides a command-line user interface to select application modes and run necessary components
 \end{itemize}
 
 Some of the major components are described in the following subsections.
 \begin{figure} [ht]
 \begin{center}
-\includegraphics[width=1\textwidth]{application}
-\caption{Application structure model}
+\includegraphics[width=1\textwidth]{maga_application}
+\caption{The system components usage flow, while recording the test data}
 \label{fig:fnCompModel}
 \end{center}
 \end{figure}
@@ -496,7 +518,7 @@ This component is required to poll the Emotiv EPOC headset and store sent data t
 
 During preprocessing a set of raw samples is converted to a frequency domain representation. To do this the Short Time Fourier Transform is used with a sliding window. Sliding window technique allows to capture more precisely non-constant signals. Sliding window length equals to 1 s with 0.5 s overlapping. These factors increase the number of samples to $2*N-2$ where $N$ is the original number of samples. For example a BCI session with a duration of 1 minute will output 119 samples.
 
-According to Emotiv EPOC specifications \cite{emotiv} 45 Hz is the maximum bandwidth value for the signal. In our implementation we use 1 -- 45 Hz for the frequency range.
+According to Emotiv EPOC specifications \cite{emotiv} 45 Hz is the maximum bandwidth value for the signal. In our implementation we use 1 -- 45 Hz for the frequency range. An example plot of obtained frequency domain values is shown in Appendix \ref{app:1}.
 
 \subsubsection{Data storer}
 
@@ -513,76 +535,81 @@ Instead of discrete class prediction labels what could be returned by Random For
 \newpage
 \section{Methods} \label{methods}
 
-The given section describes different techniques (predictors) what are used to determine one single prediction result from different sets of input data: single sample's RF class probabilities, multiple classified samples within a single concentration attempt and multiple classified samples within multiple concentration attempts. 
+The given section describes different techniques (predictors) what are used to determine one single prediction result at the different classification levels:
+\begin{itemize}
+\item Sample classification level - at this level a prediction class is being estimated for a single sample based on the class probabilities returned with a Random Forest classifier. A sample-based action predictor is used to do this.
+\item Attempt classification level - at this level a prediction class is being estimated based on multiple sample classes, which all belong to one concentration attempt. A voting-based action predictor  is used to do this.
+\item Multi-attempt classification level - at this level a prediction class is being estimated based on the classes estimated at a attempt classification level, where all concentration attempts belong to the same task (i.e concentration on one mental task using multiple attempts). A majority voting is applied at this level to estimate the prediction class.
+\end{itemize}
 
 \subsection{Sample-based action predictor}
 
-This predictor is used to determine what class label should be corresponded to the given RF class probability. It is called sample-based because it decides what prediction result should be for one sample (i.e sample level prediction). To make the sample-based prediction we are using probability threshold predictors help to determine sample's class.
+This predictor is used to determine what class label should be correspond to a given RF class probability. It is called sample-based because it decides what prediction result should be for one sample (i.e sample level prediction). To make the sample-based prediction we are using so-called \textit{probability threshold predictors} which are described as in Definition \ref{def:prb_thr}.
 \theoremstyle{definition}
 \begin{definition}
-Probability threshold predictor is a method for classifying single sample's class using probability estimated for all of the used classes with Random Forest algorithm, where one of the prediction classes could be selected only if it has probability higher than the probability threshold. 
+\label{def:prb_thr}
+Probability threshold predictor is a method for classifying a sample using class probability estimated with Random Forest algorithm, where one of the prediction classes could be selected only if it has probability higher than the probability threshold. 
 \end{definition}
-In this work we will use two different types o probability thresholds which are described as follows. 
-\subsubsection{1/2-probability threshold}
-This is a probability threshold of 50\% in two-class system. Basically, it is the probability threshold used as default within RF algorithm for estimating a class in two-class system. Using it, the class will be selected if its probability estimated by RF exceeds 50\% or 1/2.
+In this work we will use two different types of probability thresholds described subsequently. 
+\subsubsection{\sfrac{1}{2}-probability threshold}
+This is a probability threshold of 50\% in two-class system. Using it, the class will be selected if its probability estimated by RF exceeds 50\% or \sfrac{1}{2}.
 \subsubsection{$T$-probability threshold}
-For the given approach we dynamically calculate threshold $T$. If RF estimated probability for the first class exceeds $T$, then the first class will be the result of prediction, otherwise - the second. To adjust $T$ we set up different predictors with different thresholds in a range of 0-100\% with a step of 1\%. Finally, we compare the accuracies of these predictors, take one with the highest and use its threshold as $T$.
+For the given approach we dynamically calculate threshold $T$ for one distinct class. If RF estimated probability for this class exceeds $T$, then this class will be the result of the prediction, otherwise - the second. To find $T$ we set up different predictors with different thresholds in a range of 0-100\% with a step of 1\%. We compare the accuracies of these predictors and take one with the highest to use its threshold as $T$.
 
 \subsection{Voting-based action predictor}
-A single user concentration attempt lasts for 10 seconds, which produces 18 samples in total. After applying a sample-based predictor we will get 18 classes, each for one sample. To convert these 18 classes to a single answer (i.e the prediction answer for a single concentration attempt) a voting-based action predictor is used. This predictor is used to vote for a prediction result based on the 18 classes and the specific circumstances described in the following subsections.
+A single user concentration attempt lasts for 10 seconds, which produces 18 samples in total. After applying a sample-based predictor we will get 18 classes, each for one sample. To convert these 18 classes to a single answer (i.e find the prediction answer at the concentration attempt level) a voting-based action predictor is used. This predictor is used to vote for a prediction result based on the 18 classes. The following subsections describe the two variants of voting-based predictors.
 
 \subsubsection{Majority voting}
-This is a simple way, when the predicted class is voted for if it appears in the input set more than the other (i.e all the voters have the same influence on the final result).
+
+This is a rather simple way -- a class is selected as final prediction for the concentration attempt if it appears in the input set more than the other class. 
 
 \subsubsection{Decision threshold voting}
-In this case voting result depends on whether the number of occurrences for the class exceeds the minimum threshold value. The threshold is defined for a target which usually appears more times and consequently has higher accuracy. The threshold is chosen dynamically, trying out all available values from 1 to 18 with a step of 1 and measuring the final two-class accuracy to determine the best. 
+In this case the voting result depends on whether the number of occurrences for the class exceeds the minimum threshold value. The threshold is chosen dynamically by trying out all available values from 1 to 18 with a step of 1 and measuring the final two-class accuracy to determine the best. 
 
 \theoremstyle{definition}
 \begin{definition}
-Decision threshold voting is a method of estimating a final prediction result class from the given set of input classes, where one of the two prediction result classes could be selected only if it appears in the given set of input classes more times than is the number of threshold.
+Decision threshold voting is a method of estimating a final prediction result class from the given set of classes, where one of the prediction result classes could be selected only if it appears in the given set more times than is the number of threshold.
 \end{definition}
 
 \subsection{Action prediction based on multiple attempts}
-To fulfil the main objective for the work and check how we can increase the accuracy of a BCI system we:
-\begin{enumerate}
-\item tried out different sample-based and voting-based predictors to estimate the single concentration attempt accuracies (baseline accuracies)
-\item using Condorcet's jury theorem and the baseline accuracies calculated the minimum number of concentration attempts required to reach accuracy of 99\% for each predictor
-\item based on the previous step, selected the minimum number of concentration attempts required and carried out test data measurement according to the new length of concentration task
-\item used some of the predictors with the best accuracies, got their empirical classification accuracies for the multi-attempt approach and compared them to the estimated with Condorcet's jury theorem.
-\end{enumerate}
+In case of multiple attempt approach majority voting  is applied to the prediction results of individual attempts. For example, if a user should concentrate on a mental task for 5 attempts in a row, then as a result of applying sample-based and voting-based predictors there will be 5 classes -- each corresponds to a single attempt. To estimate a single class from them majority voting is used.
 
-To estimate the prediction accuracies for multiple attempt approach, we ask user to concentrate on a mental task $N$ attempts in a row. We apply classification technique regarding to used predictor for the each attempt separately, thus at the end we have $N$ classes estimated with a multi attempt approach and the prediction class will be estimated with a majority voting.
+To fulfil this approach and see how we can actually increase the accuracy of a BCI system we:
+\begin{enumerate}
+\item tried out different sample-based and voting-based predictors to estimate the single concentration attempt accuracies (baseline accuracies),
+\item using Condorcet's jury theorem and the baseline accuracies calculated the minimum number of concentration attempts required to reach accuracy of 99\% for each predictor,
+\item based on the previous step, selected the minimum number of concentration attempts required and carried out test data measurement according to the new length of concentration task,
+\item used some of the predictors with the best accuracies, got their empirical classification accuracies for the multi-attempt approach and compared them to the results estimated by Condorcet's jury theorem.
+\end{enumerate}
 
 \newpage
 \section{Experimental Results}
 
-The experimental result accuracies for the single and multiple attempt approaches are described in the followed subsections. Finally, multiple attempt approach is validated for the predictor with the best accuracy.
-
+The experimentally obtained accuracies for the single and multiple attempt approaches are described in the followed subsections. Finally, multiple attempt approach results are compared to the theoretical objections using different high-accuracy predictors.
 
 \subsection{Single attempt approach}
 
-In this section we describe the accuracies for single attempt approach using different predictors for different scopes: single sample scope (estimating a class for a single class) and multiple sample scope (converting multiple classes to one). Table \ref{tab:table1} shows the the techniques what we use to calculate the accuracy. 
+In this section we describe the accuracies for single attempt approach using different predictors for different levels: sample classification (estimating a class for a single sample) and attempt classification (estimating a class for prediction classes on one concentration attempt). Table \ref{tab:table1} summarizes the techniques that we use in the single attempt approach. 
 \begin{table}[H]
 \begin{center}
   \begin{tabular}{ | c | c | c | c | }
     \hline
-    \textbf{Single sample classification} & \textbf{Multiple sample classification} \\ \hline
-    1/2-probability threshold & Without voting \\ \hline
-	$T$-probability threshold & Majority voting \\ \hline
-	& Decision threshold voting \\ \hline
+    \textbf{Sample classification} & \textbf{Attempt classification} \\ \hline
+    \sfrac{1}{2}-probability threshold & Majority voting \\ \hline
+	$T$-probability threshold & Decision threshold voting\\ \hline
   \end{tabular}
 \end{center}
-\caption{Classification techniques used for different levels: sample-based and multiple sample based} \label{tab:table1} 
+\caption{Classification techniques used for different levels: sample classification and attempt classification.} \label{tab:table1} 
 \end{table}
-Note, that we also tried to calculate the prediction accuracy without using voting, what means that samples were not grouped together by their concentration session before finding the final accuracy. We tried out all the combinations for mixing up together different single sample classification and multiple sample classification techniques what gave us 6 different approaches. The followed subsections are split by these 6 different techniques.
+We also tried to calculate the prediction accuracy without using voting, that means that samples were not grouped together by their concentration attempt before finding the final accuracy. We tried to use all of the combinations of the predictors mixing up together different sample classification and attempt classification techniques. That gave us 6 different approaches in total including the sample classification techniques without voting. The following subsections are split into these 6 different techniques.
 
-\subsubsection{Without voting approach}\label{no-voting}
+\subsubsection{Sample classification without voting approach}\label{no-voting}
 
-In this approach only sample-based predictors are used, without using any of voting techniques. Single sample classes are predicted (using 1/2-probability threshold and $T$-probability threshold) and the average accuracy is measured among them. 
+In this approach only sample-based predictors are used, without using any of the voting techniques. Single sample classes are predicted (using \sfrac{1}{2}-probability threshold or $T$-probability threshold) and the average accuracy is measured among them. 
 
-\paragraph{1/2-probability threshold}~\\
+\paragraph{\sfrac{1}{2}-probability threshold}~\\
 
-The average prediction accuracy for a testing data is determined as \textbf{67.1\%}. Based on the prediction results the following confusion matrix was constructed:
+The average prediction accuracy on the test data is determined as \textbf{67.1\%}. Based on the prediction results the following confusion matrix is constructed:
 \begin{table}[H]
  \label{tab:title} 
 \begin{center}
@@ -595,20 +622,20 @@ The average prediction accuracy for a testing data is determined as \textbf{67.1
     \hline
   \end{tabular}
 \end{center}
-\caption{Confusion matrix showing classifier's prediction performance using 1/2-probability threshold without voting. The accuracy is 67.1\%.}
+\caption{Confusion matrix showing classifier's prediction performance using \sfrac{1}{2}-probability threshold without voting. The accuracy is 67.1\%.}
 \end{table}
 
-This table shows that $Excitement$ is being better recognized and has ~0.24 error rate, meanwhile the target $Relax$ has almost 50\% accuracy.
+This table shows that $Excitement$ is better recognized and has approximately 0.24 error rate, meanwhile the target $Relax$ has almost 50\% accuracy.
 
 \paragraph{$T$-probability threshold}~\\
 
-This technique is used in order to balance the prediction accuracies between the classes. Threshold or the minimum probability for the most frequent class is set up as a border between the two classes. Threshold is compared to the labels probabilities returned by Random Forest, which are calculated inside the algorithm implementation using ensemble voting among several decision trees. 
+This technique is used in order to balance the prediction accuracies between the classes. Threshold or the minimum probability for the most frequent class is set up as a border between the two classes. Threshold is compared to the labels probabilities returned by Random Forest, which are calculated inside the algorithm's implementation. 
 
-Since the $Excitement$ is the class, which appears more times in prediction results than $Relax$ and has higher prediction accuracy, it has the minimum probability threshold higher than 50\%. The dependency between different probability thresholds for the $Excitement$ and the prediction accuracies for the training data is shown on the Figure \ref{fig:probability_thresholds}
+Since the $Excitement$ is the class, which appears more times in prediction results than $Relax$ and has higher prediction accuracy, it is suitable candidate to have the minimum probability threshold, what is higher than 50\%. The dependency between different probability thresholds for the $Excitement$ and the prediction accuracies for the training data is shown on the Figure \ref{fig:probability_thresholds}.
 \begin{figure} [H]
 \begin{center}
 \includegraphics[width=1\textwidth]{probability_thresholds}
-\caption{Training data prediction accuracy dependency on the Excitement probability threshold value}
+\caption{Training data prediction accuracy dependency on the Excitement probability threshold value.}
 \label{fig:probability_thresholds}
 \end{center}
 \end{figure}
@@ -631,11 +658,11 @@ Comparing the prediction accuracies using different thresholds and selecting the
 
 \subsubsection{Majority voting}
 
-In the following technique a majority voting is applied among 18 prediction samples, which belongs to the common concentration attempt. After the voting only a single class is estimated from 18 samples (the one which appears more times) to get the intermediate prediction results or the prediction results for single attempts. Different sample-based predictors were used to determine sample's label.
+In the following technique a majority voting is applied to 18 prediction samples, which belong to one concentration attempt. After the voting, only a single class is estimated from each group of 18 samples (the one which appears more times) which corresponds to the prediction result of the given attempt. Different sample-based predictors are used to determine the labels of individual samples.
 
-\paragraph{1/2-probability threshold}~\\
+\paragraph{\sfrac{1}{2}-probability threshold}~\\
 
-Finding the average accuracy using 1/2-probability threshold and majority voting gives the accuracy of \textbf{78.5\%}.
+Finding the average accuracy using \sfrac{1}{2}-probability threshold and majority voting gives the accuracy of \textbf{78.5\%}.
 \begin{table}[H]
 \begin{center}
   \begin{tabular}{ | c | c | c | c | }
@@ -647,12 +674,12 @@ Finding the average accuracy using 1/2-probability threshold and majority voting
     \hline
   \end{tabular}
 \end{center}
-\caption{Confusion matrix showing classifier's prediction performance using 1/2-probability threshold with majority voting. The accuracy is 78.5\%.} 
+\caption{Confusion matrix showing classifier's prediction performance using \sfrac{1}{2}-probability threshold with majority voting. The accuracy is 78.5\%.} 
 \end{table}
 
 \paragraph{$T$-probability threshold}~\\
 
-Using the $T$ threshold what was determined in the Section \ref{no-voting} (0.54) for the $Excitement$ target, the prediction accuracy is \textbf{83.6\%}.
+Using the $T$ threshold ($T$=0.54) that was determined in the Section \ref{no-voting} for the $Excitement$ target, the prediction accuracy is \textbf{83.6\%}.
 
 \begin{table}[H]
 \begin{center}
@@ -670,7 +697,7 @@ Using the $T$ threshold what was determined in the Section \ref{no-voting} (0.54
 
 \subsubsection{Decision threshold voting}
 
-The following approach is based on calculated threshold which bring the higher accuracy. The decision threshold is defined as the minimum number of occurrences for the exact class to make this class win in a vote. In our case a threshold is applied to the $Excitement$ class, since it is a high accuracy target. All the dependencies between the threshold values and accuracies is shown on Figure \ref{fig:fnCompModel}.
+The following approach is based on calculating the voting threshold which brings the highest accuracy. The decision threshold is defined as the minimum number of occurrences of a class in a series of attempts to make this class win in a vote. In our case a threshold is applied to the $Excitement$ class, since it is a high-accuracy class. The dependency between the threshold value and the accuracy is shown on Figure \ref{fig:fnCompModel}.
 
 \begin{figure} [H]
 \begin{center}
@@ -682,9 +709,9 @@ The following approach is based on calculated threshold which bring the higher a
 
 According to the plot, the threshold for a voting for $Excitement$ with the best classification accuracy are 11 and 12. In our implementation we take the first value, which is 11.
 
-\paragraph{1/2-probability threshold}~\\
+\paragraph{\sfrac{1}{2}-probability threshold}~\\
 
-Using the 1/2-probability threshold to determine the single sample's class and decision threshold to determine single concentration attempt's class gives the accuracy of \textbf{81.4\%}.
+Using the \sfrac{1}{2}-probability threshold to determine the single sample's class and subsequently applying decision threshold to determine single concentration attempt's class gives the accuracy of \textbf{81.4\%}.
 \begin{table}[H]
 \begin{center}
   \begin{tabular}{ | c | c | c | c | }
@@ -696,10 +723,10 @@ Using the 1/2-probability threshold to determine the single sample's class and d
     \hline
   \end{tabular}
 \end{center}
-\caption{Confusion matrix showing classifier's prediction performance using 1/2-probability threshold with decision threshold voting, where decision threshold for $Excitement$ is 11. The accuracy is 81.4\%.} 
+\caption{Confusion matrix showing classifier's prediction performance using \sfrac{1}{2}-probability threshold with decision threshold voting, where decision threshold for $Excitement$ is 11. The accuracy is 81.4\%.} 
 \end{table}
 
-Usage of decision threshold has balanced False Negatives and True Negatives, however the error rate for the $Excitement$ has grown compared to the majority voting strategy.
+Usage of decision threshold has balanced false negatives and true negatives, however the error rate for the $Excitement$ has grown compared to the majority voting strategy.
 
 \paragraph{$T$-probability threshold}~\\
 
@@ -719,37 +746,37 @@ This approach uses $T$-probability threshold to estimate a class for a single sa
 \caption{Confusion matrix showing classifier's prediction performance using $T$-probability threshold with decision threshold voting, where decision threshold for $Excitement$ is 11 and $T$ for $Excitement$ is 0.54. The accuracy is 81.4\%.} 
 \end{table}
 
-Despite on that this approach gives different values in confusion matrix from the 1/2-probability threshold predictor using the same voting technique, their accuracies are equal.
+Despite that this approach gives different values in confusion matrix from the \sfrac{1}{2}-probability threshold predictor using the same voting technique, their accuracies are equal.
 
 \subsection{Multiple attempt approach}
 
 In this section we describe what are the estimated and actual accuracy results for multiple attempt approach. During the estimations single attempt accuracies are used.
 \subsubsection{Condorcet's jury theorietical estimation}\label{condorcet1}
-Based on predictor results for single attempt approach what are described in previous subsections we define how many attempts it is required to reach the minimum accuracy of 99\%. Using Condorcet's jury theorem we composed the following comparative table. The table is ordered by the prediction accuracies:
+Based on the predictors accuracy results for single attempt approach we define how many attempts it is required to reach the minimum accuracy of 99\%. Using Condorcet's jury theorem we have calculated the number of required attempts and composed the following comparative table. The table is ordered by the prediction values of the accuracies:
 
 \begin{table}[H]
 \label{tab:title} 
 \begin{center}
-  \begin{tabular}{ | c | c | c | c | }
+  \begin{tabular}{ | l | c | c | c | }
     \hline
     Method & \parbox[c]{1.8cm}{\raggedright Single attempt accuracy (\%)} &\parbox[c]{1.8cm}{\raggedright Attempts required}\\ \hline
     $T$-probability threshold with majority voting & 83.6 & 9 \\ \hline
-    1/2-probability threshold with decision threshold voting & 81.4 & 11 \\ \hline
+    \sfrac{1}{2}-probability threshold with decision threshold voting & 81.4 & 11 \\ \hline
 	$T$-probability threshold with decision threshold voting & 81.4 & 11 \\ \hline
-	1/2-probability threshold with majority voting & 78.6 & 15 \\ \hline
+	\sfrac{1}{2}-probability threshold with majority voting & 78.6 & 15 \\ \hline
     $T$-probability threshold without voting & 68.4 & 37\\ \hline
-    1/2-probability threshold without voting & 67.1 & 43\\ \hline
+    \sfrac{1}{2}-probability threshold without voting & 67.1 & 43\\ \hline
   \end{tabular}
 \end{center}
-\caption{Different predictor accuracies and the required number of attempts to get to 99\% accuracy}
+\caption{Different predictor accuracies and the required number of attempts to get to 99\% accuracy.}
 \end{table}
 
-According to the given results the $T$-probability threshold with majority voting is the best among the methods and it requires only 9 measurement attempts for a single concentration task to get the desired accuracy. We use this number of attempts in the subsequent multiple attempt approach to measure the test data.
+According to the given results the $T$-probability threshold with majority voting is the best among the methods and it requires only 9 measurement attempts for a single concentration task to get the desired accuracy. We use this number of attempts in the subsequent multiple attempt approach to measure the performance on test data.
 
 \begin{figure} [H]
 \begin{center}
 \includegraphics[width=1\textwidth]{condorcet_dependency_training}
-\caption{Theoretical estimate of the number of attempts and the expected accuracy for different predictors. Note: 1/2-probability threshold with decision threshold voting is overlapping with $T$-probability threshold with decision threshold voting.}
+\caption{Theoretical estimate of the number of attempts and the expected accuracy for different predictors. Note: \sfrac{1}{2}-probability threshold with decision threshold voting is overlapping with $T$-probability threshold with decision threshold voting.}
 \label{fig:fnCompModel}
 \end{center}
 \end{figure}
@@ -759,23 +786,23 @@ Along with $T$-probability threshold with majority voting predictor, we estimate
 \begin{table}[H]
 \label{tab:title} 
 \begin{center}
-  \begin{tabular}{ | c | c | c | c | }
+  \begin{tabular}{ | l | c | c | c | }
     \hline
     Method &\parbox[c]{1.8cm}{\raggedright Accuracy for 9 attempts (\%)}\\ \hline
     $T$-probability threshold with majority voting & 99.6 \\ \hline
-    1/2-probability threshold with decision threshold voting & 98.6 \\ \hline
+    \sfrac{1}{2}-probability threshold with decision threshold voting & 98.6 \\ \hline
 	$T$-probability threshold with decision threshold voting & 98.6 \\ \hline
-	1/2-probability threshold with majority voting & 97.4 \\ \hline
+	\sfrac{1}{2}-probability threshold with majority voting & 97.4 \\ \hline
   \end{tabular}
 \end{center}
-\caption{Different predictors expected accuracies in 9 attempts approach}
+\caption{Different predictor's expected accuracies in 9 attempts approach.}
 \end{table}
 
 \subsubsection{Condorcet's jury empirical results}
 
-We have selected the lowest number of attempts: 9 -- it was calculated with Condorcet's jury theorem and theoretically should be enough to produce 99\% accuracy for $T$-probability threshold with majority voting predictor. According to that number we run brain signal measurement sessions to record the test data, where each concentration task required 9 attempts (i.e it is 9 times longer than single attempt of concentration task).
+We have selected the lowest number of attempts: 9 -- it was calculated with Condorcet's jury theorem and theoretically should be enough to produce 99\% accuracy for $T$-probability threshold with majority voting predictor. According to that number we run brain signal measurement sessions to record the test data, where each concentration task requires 9 attempts (i.e it is 9 times longer than single attempt of concentration task).
 
-After the test data recording we applied a distinct technique defined by used predictor to each attempt data separately to get the 9 classes. To get the final class from 9 classes, we use always majority voting. In this work we calculated the actual prediction accuracies for the top 4 predictors and their results are described in the followed paragraphs.
+After the test data recording we applied a predictor to each attempt separately to get the 9 classes. To get the final class from 9 classes, we use majority voting. In this work we calculated the actual prediction accuracies for the 4 best predictors and their results are described in the followed paragraphs.
 
 \paragraph{$T$-probability threshold with majority voting}~\\
 
@@ -794,7 +821,7 @@ The given approach has the prediction accuracy of \textbf{88.1\%}.
 \caption{Confusion matrix showing classifier's prediction performance using $T$-probability threshold with majority voting predictor in 9 attempt approach. The accuracy is 88.1\%.} 
 \end{table}
 
-\paragraph{1/2-probability threshold with decision threshold voting}~\\
+\paragraph{\sfrac{1}{2}-probability threshold with decision threshold voting}~\\
 
 The given approach has the prediction accuracy of \textbf{90.5\%}.  
 \begin{table}[H]
@@ -808,7 +835,7 @@ The given approach has the prediction accuracy of \textbf{90.5\%}.
     \hline
   \end{tabular}
 \end{center}
-\caption{Confusion matrix showing classifier's prediction performance using 1/2-probability threshold with decision threshold voting predictor in 9 attempt approach. The accuracy is 90.5\%.} 
+\caption{Confusion matrix showing classifier's prediction performance using \sfrac{1}{2}-probability threshold with decision threshold voting predictor in 9 attempt approach. The accuracy is 90.5\%.} 
 \end{table}
 
 \paragraph{$T$-probability threshold with decision threshold voting}~\\
@@ -825,10 +852,10 @@ The given approach has the prediction accuracy of \textbf{95.2\%}.
     \hline
   \end{tabular}
 \end{center}
-\caption{Confusion matrix showing classifier's prediction performance using $T$-probability threshold with decision threshold voting predictor in 9 attempt approach. The accuracy is 95.2\%.} 
+\caption{Confusion matrix showing classifier's prediction performance using $T$-probability threshold with decision threshold voting predictor in 9 attempt approach. The accuracy is 95.2\%. Note that out of 42 task attempts only 2 were misclassified.}
 \end{table}
 
-\paragraph{1/2-probability threshold with majority voting}~\\
+\paragraph{\sfrac{1}{2}-probability threshold with majority voting}~\\
 
 The given approach has the prediction accuracy of \textbf{76.2\%}.  
 \begin{table}[H]
@@ -842,7 +869,7 @@ The given approach has the prediction accuracy of \textbf{76.2\%}.
     \hline
   \end{tabular}
 \end{center}
-\caption{Confusion matrix showing classifier's prediction performance using 1/2-probability threshold with majority voting predictor in 9 attempt approach. The accuracy is 76.2\%.} 
+\caption{Confusion matrix showing classifier's prediction performance using \sfrac{1}{2}-probability threshold with majority voting predictor in 9 attempt approach. The accuracy is 76.2\%.} 
 \end{table}
 
 \subsubsection{Theoretical and empirical results comparison}
@@ -850,24 +877,45 @@ The given approach has the prediction accuracy of \textbf{76.2\%}.
 To compare the theoretical and empirical results for the prediction accuracies based on 9 attempts the following table is built:
 \begin{table}[H]
 \begin{center}
-  \begin{tabular}{ | c | c | c | c | }
+  \begin{tabular}{ | l | c | c | c | }
     \hline
     Method &\parbox[c]{1.8cm}{\raggedright Expected accuracy for 9 attempts (\%)} &\parbox[c]{1.8cm}{\raggedright Actual accuracy for 9 attempts (\%)} &\parbox[c]{1.8cm}{\raggedright Difference (\%)}\\ \hline
     \parbox[c]{7cm}{\raggedright $T$-probability threshold with majority voting} & 99.6 & 88.1 & 11.5 \\ \hline
-    \parbox[c]{7cm}{1/2-probability threshold with decision threshold voting} & 98.6 & 90.5 & 8.1 \\ \hline
-	\parbox[c]{7cm}{$T$-probability threshold with decision threshold voting} & 98.6 & 95.2 & 3.4\\ \hline
-	\parbox[c]{7cm}{1/2-probability threshold with majority voting} & 97.4 & 76.2 & 21.2\\ \hline
+    \parbox[c]{7cm}{\sfrac{1}{2}-probability threshold with decision threshold voting} & 98.6 & 90.5 & 8.1 \\ \hline
+	\parbox[c]{7cm}{$T$-probability threshold with decision threshold voting} & 98.6 & \textbf{95.2} & 3.4\\ \hline
+	\parbox[c]{7cm}{\sfrac{1}{2}-probability threshold with majority voting} & 97.4 & 76.2 & 21.2\\ \hline
   \end{tabular}
 \end{center}
-\caption{Expected with actual prediction accuracies for 9 attempt approach}
+\caption{Expected and actual prediction accuracies for 9 attempt approach. Ordered by the expected accuracy values.}
 \end{table}
 
-It is clearly seen, that all the methods have the accuracy lower than it is expected. The predictor expected to get 99\% of accuracy ($T$-probability threshold with majority voting) got actually 88.1\% which is 11.5\% lower than the expected. The $T$-probability threshold with decision threshold voting predictor has the lowest difference from the expected accuracy -- 3.4\%. In addition, it has the highest prediction accuracy -- 95.2\%, what makes this method more reliable than the others.
-\newpage
-\section{Discussion}
+It can be seen, that all the methods have the accuracy lower than the expected theoretical estimate. The predictor that expected to get 99\% of accuracy ($T$-probability threshold with majority voting) got actually 88.1\% which is 11.5\% lower than the expected. The $T$-probability threshold with decision threshold voting predictor has the lowest difference from the expected accuracy -- 3.4\%. In addition, this method has the highest prediction accuracy -- 95.2\%, what makes it more reliable than others. According to the results, the methods which use decision threshold voting have lower difference between the expected and actual results.
+
+From these we conclude that repeating classification attempts using imperfect classifier does indeed improve the overall classification accuracy and can be considered as a path towards reliable BCI.
 
 \newpage
-\section{Conclusion}
+\section*{Conclusion}
+\addcontentsline{toc}{section}{Conclusion}
+
+
+\paragraph{Limitations}~\\
+
+The first major limitation for this work is the number of the attempts used in multi-attempt approach. Since concentration on a mental task is not really simple activity (especially on $Excitement$) and it requires 10 seconds of concentrating per each attempt, we used only 9 attempts, which is the smallest for the provided predictors. As the experimental results show with 9 attempts we were able to get only 95.2\% for the highest accuracy, which is lower on 3.8\% than our initial goal.
+
+Training and test data amount could be higher. In total we have measured 42 multi-attempt concentrations, what corresponds to the same number of classification results for multi-attempt approach. This number is used to calculate the average prediction accuracy of multi-attempt solution, what is obviously too small.
+Another limitation is considering the training data, where we are using only 2535 samples. Increase of this number should positively influence on the classifier's performance and thus it could be expected that test data would be predicted better.
+
+All the BCI recordings were done from the author of the thesis, what means that only one person was participating in the mental experiments. The accuracy numbers obtained for single and multiple attempt approaches could be different if the subject would be another person. It would be more precise to carry out these experiments on group of subjects and take their average results as final.
+
+\paragraph{Future work}~\\
+
+Considering that we did not reach our goal accuracy of 99\% in multi-attempt approach, it would be reasonable to try higher number of attempts for the concentration  and get actually know when the goal accuracy will be reached. 
+
+\paragraph{Conclusion}~\\
+
+Nowadays BCI system performance is mostly measured with a prediction accuracy. Using this parameter the systems could be compared between each other and selected regarding to certain business requirements. Due to the prediction accuracy boundaries there is no consistent way of having reliable BCI systems. Reliability is a key factor for the most of the technological or medical industries, what means that BCI systems are not very suitable to them. The approach proposed in the given work could leverage using time as a performance measurement unit instead of accuracy. Unlike former BCI systems, using the multi-attempt approach will not have meaningful limitations in prediction accuracy. Their accuracy could be always more than 99.9\%, what is high enough to  provide their spread to different industries and our daily life. However, that means that BCI systems will provide their own time requirements, what should fit into the business side's limitations. On the other hand, the given approach allows flexibility in the time sacrificing and accuracy selection -- users could regulate BCI performance with the time they apply to a concentration on a mental task.
+
+In order to make all this available it is required for each BCI system to provide its time/accuracy dependency model what will describe how the accuracy will be improved within applied time. 
 
 
 \newpage
@@ -876,13 +924,14 @@ It is clearly seen, that all the methods have the accuracy lower than it is expe
 \bibliography{maga-bbl}
 
 \newpage
+
 \appendix
-\section{Appendix 1}
-\label{}
+\section{}
+\label{app:1}
 \begin{figure} [H]
 \begin{center}
 \includegraphics[width=1\textwidth]{left_amplitudes}
-\caption{A sample frequency domain plot for a signal from concentration on "Left" mental task. Horizontal axis is measured in Hz. Vertical in $\mu$V.}
+\caption{A sample frequency domain plot for a signal from concentration on ``Left'' mental task. Horizontal axis is measured in Hz. Vertical in $\mu$V.}
 \end{center}
 \end{figure}
 

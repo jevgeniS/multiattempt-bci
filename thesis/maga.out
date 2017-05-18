@@ -1,37 +1,37 @@
-\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
-\BOOKMARK [1][-]{section.2}{Background and State of the Art}{}% 2
-\BOOKMARK [2][-]{subsection.2.1}{Condorcet's jury theorem}{section.2}% 3
-\BOOKMARK [2][-]{subsection.2.2}{Brain-computer interface}{section.2}% 4
-\BOOKMARK [2][-]{subsection.2.3}{Emotiv EPOC}{section.2}% 5
-\BOOKMARK [2][-]{subsection.2.4}{Short-time Fourier transform}{section.2}% 6
-\BOOKMARK [2][-]{subsection.2.5}{Classification task}{section.2}% 7
-\BOOKMARK [2][-]{subsection.2.6}{Random Forest algorithm}{section.2}% 8
-\BOOKMARK [2][-]{subsection.2.7}{Collaborative Brain-Computer Interface}{section.2}% 9
-\BOOKMARK [1][-]{section.3}{Contribution}{}% 10
-\BOOKMARK [2][-]{subsection.3.1}{Overview}{section.3}% 11
-\BOOKMARK [2][-]{subsection.3.2}{Experimental design}{section.3}% 12
-\BOOKMARK [3][-]{subsubsection.3.2.1}{Targets}{subsection.3.2}% 13
-\BOOKMARK [2][-]{subsection.3.3}{Implementation}{section.3}% 14
-\BOOKMARK [3][-]{subsubsection.3.3.1}{Raw data reader}{subsection.3.3}% 15
-\BOOKMARK [3][-]{subsubsection.3.3.2}{Preprocessor}{subsection.3.3}% 16
-\BOOKMARK [3][-]{subsubsection.3.3.3}{Classifier}{subsection.3.3}% 17
-\BOOKMARK [1][-]{section.4}{Methods}{}% 18
-\BOOKMARK [2][-]{subsection.4.1}{Sample-based action predictor}{section.4}% 19
-\BOOKMARK [3][-]{subsubsection.4.1.1}{1/2-probability threshold}{subsection.4.1}% 20
-\BOOKMARK [3][-]{subsubsection.4.1.2}{T-probability threshold}{subsection.4.1}% 21
-\BOOKMARK [2][-]{subsection.4.2}{Voting-based action predictor}{section.4}% 22
-\BOOKMARK [3][-]{subsubsection.4.2.1}{Majority voting}{subsection.4.2}% 23
-\BOOKMARK [3][-]{subsubsection.4.2.2}{Decision threshold voting}{subsection.4.2}% 24
-\BOOKMARK [2][-]{subsection.4.3}{Action prediction based on multiple attempts}{section.4}% 25
-\BOOKMARK [1][-]{section.5}{Experimental Results}{}% 26
-\BOOKMARK [2][-]{subsection.5.1}{Single attempt approach}{section.5}% 27
-\BOOKMARK [3][-]{subsubsection.5.1.1}{Without voting approach}{subsection.5.1}% 28
-\BOOKMARK [3][-]{subsubsection.5.1.2}{Majority voting}{subsection.5.1}% 29
-\BOOKMARK [3][-]{subsubsection.5.1.3}{Decision threshold voting}{subsection.5.1}% 30
-\BOOKMARK [2][-]{subsection.5.2}{Multiple attempt approach}{section.5}% 31
-\BOOKMARK [3][-]{subsubsection.5.2.1}{Condorcet's jury theorietical estimation}{subsection.5.2}% 32
-\BOOKMARK [3][-]{subsubsection.5.2.2}{Condorcet's jury empirical results}{subsection.5.2}% 33
-\BOOKMARK [3][-]{subsubsection.5.2.3}{Theoretical and empirical results comparison}{subsection.5.2}% 34
-\BOOKMARK [1][-]{section.6}{Discussion}{}% 35
-\BOOKMARK [1][-]{section.7}{Conclusion}{}% 36
-\BOOKMARK [1][-]{appendix.1}{Appendix 1}{}% 37
+\BOOKMARK [1][-]{section*.2}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.1}{Background and State of the Art}{}% 2
+\BOOKMARK [2][-]{subsection.1.1}{Condorcet's jury theorem}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.2}{Brain-computer interface}{section.1}% 4
+\BOOKMARK [2][-]{subsection.1.3}{Emotiv EPOC}{section.1}% 5
+\BOOKMARK [2][-]{subsection.1.4}{Short-time Fourier transform}{section.1}% 6
+\BOOKMARK [2][-]{subsection.1.5}{Classification task}{section.1}% 7
+\BOOKMARK [2][-]{subsection.1.6}{Random Forest algorithm}{section.1}% 8
+\BOOKMARK [2][-]{subsection.1.7}{Collaborative Brain-Computer Interface}{section.1}% 9
+\BOOKMARK [1][-]{section.2}{Contribution}{}% 10
+\BOOKMARK [2][-]{subsection.2.1}{Overview}{section.2}% 11
+\BOOKMARK [2][-]{subsection.2.2}{Experimental design}{section.2}% 12
+\BOOKMARK [3][-]{subsubsection.2.2.1}{Targets}{subsection.2.2}% 13
+\BOOKMARK [2][-]{subsection.2.3}{Implementation}{section.2}% 14
+\BOOKMARK [3][-]{subsubsection.2.3.1}{Raw data reader}{subsection.2.3}% 15
+\BOOKMARK [3][-]{subsubsection.2.3.2}{Preprocessor}{subsection.2.3}% 16
+\BOOKMARK [3][-]{subsubsection.2.3.3}{Data storer}{subsection.2.3}% 17
+\BOOKMARK [3][-]{subsubsection.2.3.4}{Classifier}{subsection.2.3}% 18
+\BOOKMARK [1][-]{section.3}{Methods}{}% 19
+\BOOKMARK [2][-]{subsection.3.1}{Sample-based action predictor}{section.3}% 20
+\BOOKMARK [3][-]{subsubsection.3.1.1}{12-probability threshold}{subsection.3.1}% 21
+\BOOKMARK [3][-]{subsubsection.3.1.2}{T-probability threshold}{subsection.3.1}% 22
+\BOOKMARK [2][-]{subsection.3.2}{Voting-based action predictor}{section.3}% 23
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Majority voting}{subsection.3.2}% 24
+\BOOKMARK [3][-]{subsubsection.3.2.2}{Decision threshold voting}{subsection.3.2}% 25
+\BOOKMARK [2][-]{subsection.3.3}{Action prediction based on multiple attempts}{section.3}% 26
+\BOOKMARK [1][-]{section.4}{Experimental Results}{}% 27
+\BOOKMARK [2][-]{subsection.4.1}{Single attempt approach}{section.4}% 28
+\BOOKMARK [3][-]{subsubsection.4.1.1}{Sample classification without voting approach}{subsection.4.1}% 29
+\BOOKMARK [3][-]{subsubsection.4.1.2}{Majority voting}{subsection.4.1}% 30
+\BOOKMARK [3][-]{subsubsection.4.1.3}{Decision threshold voting}{subsection.4.1}% 31
+\BOOKMARK [2][-]{subsection.4.2}{Multiple attempt approach}{section.4}% 32
+\BOOKMARK [3][-]{subsubsection.4.2.1}{Condorcet's jury theorietical estimation}{subsection.4.2}% 33
+\BOOKMARK [3][-]{subsubsection.4.2.2}{Condorcet's jury empirical results}{subsection.4.2}% 34
+\BOOKMARK [3][-]{subsubsection.4.2.3}{Theoretical and empirical results comparison}{subsection.4.2}% 35
+\BOOKMARK [1][-]{section*.20}{Conclusion}{}% 36
+\BOOKMARK [1][-]{appendix.1}{}{}% 37

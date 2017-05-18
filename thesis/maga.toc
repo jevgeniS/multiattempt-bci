@@ -2,57 +2,60 @@
 \select@language {english}
 \select@language {estonian}
 \select@language {english}
-\contentsline {section}{\numberline {1}Introduction}{6}{section.1}
-\contentsline {paragraph}{Motivation}{6}{section*.2}
-\contentsline {paragraph}{Scope}{6}{section*.3}
-\contentsline {paragraph}{Research problem}{7}{section*.4}
-\contentsline {paragraph}{Contribution}{7}{section*.5}
-\contentsline {paragraph}{Structure}{7}{section*.6}
-\contentsline {section}{\numberline {2}Background and State of the Art}{9}{section.2}
-\contentsline {subsection}{\numberline {2.1}Condorcet's jury theorem}{9}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}Brain-computer interface}{10}{subsection.2.2}
-\contentsline {paragraph}{}{11}{section*.7}
+\contentsline {section}{Introduction}{6}{section*.2}
+\contentsline {paragraph}{Motivation}{6}{section*.3}
+\contentsline {paragraph}{Scope}{6}{section*.4}
+\contentsline {paragraph}{Research problem}{7}{section*.5}
+\contentsline {paragraph}{Contribution}{7}{section*.6}
+\contentsline {paragraph}{Structure}{7}{section*.7}
+\contentsline {section}{\numberline {1}Background and State of the Art}{9}{section.1}
+\contentsline {subsection}{\numberline {1.1}Condorcet's jury theorem}{9}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Brain-computer interface}{10}{subsection.1.2}
 \contentsline {paragraph}{}{11}{section*.8}
-\contentsline {subsection}{\numberline {2.3}Emotiv EPOC}{12}{subsection.2.3}
-\contentsline {subsection}{\numberline {2.4}Short-time Fourier transform}{14}{subsection.2.4}
-\contentsline {subsection}{\numberline {2.5}Classification task}{14}{subsection.2.5}
-\contentsline {subsection}{\numberline {2.6}Random Forest algorithm}{15}{subsection.2.6}
-\contentsline {subsection}{\numberline {2.7}Collaborative Brain-Computer Interface}{15}{subsection.2.7}
-\contentsline {section}{\numberline {3}Contribution}{17}{section.3}
-\contentsline {subsection}{\numberline {3.1}Overview}{17}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Experimental design}{18}{subsection.3.2}
-\contentsline {subsubsection}{\numberline {3.2.1}Targets}{19}{subsubsection.3.2.1}
-\contentsline {subsection}{\numberline {3.3}Implementation}{21}{subsection.3.3}
-\contentsline {subsubsection}{\numberline {3.3.1}Raw data reader}{22}{subsubsection.3.3.1}
-\contentsline {subsubsection}{\numberline {3.3.2}Preprocessor}{22}{subsubsection.3.3.2}
-\contentsline {subsubsection}{\numberline {3.3.3}Classifier}{22}{subsubsection.3.3.3}
-\contentsline {section}{\numberline {4}Methods}{23}{section.4}
-\contentsline {subsection}{\numberline {4.1}Sample-based action predictor}{23}{subsection.4.1}
-\contentsline {subsubsection}{\numberline {4.1.1}1/2-probability threshold}{23}{subsubsection.4.1.1}
-\contentsline {subsubsection}{\numberline {4.1.2}$T$-probability threshold}{23}{subsubsection.4.1.2}
-\contentsline {subsection}{\numberline {4.2}Voting-based action predictor}{23}{subsection.4.2}
-\contentsline {subsubsection}{\numberline {4.2.1}Majority voting}{24}{subsubsection.4.2.1}
-\contentsline {subsubsection}{\numberline {4.2.2}Decision threshold voting}{24}{subsubsection.4.2.2}
-\contentsline {subsection}{\numberline {4.3}Action prediction based on multiple attempts}{24}{subsection.4.3}
-\contentsline {section}{\numberline {5}Experimental Results}{26}{section.5}
-\contentsline {subsection}{\numberline {5.1}Single attempt approach}{26}{subsection.5.1}
-\contentsline {subsubsection}{\numberline {5.1.1}Without voting approach}{26}{subsubsection.5.1.1}
-\contentsline {paragraph}{1/2-probability threshold}{26}{section*.9}
-\contentsline {paragraph}{$T$-probability threshold}{27}{section*.10}
-\contentsline {subsubsection}{\numberline {5.1.2}Majority voting}{29}{subsubsection.5.1.2}
-\contentsline {paragraph}{1/2-probability threshold}{29}{section*.11}
-\contentsline {paragraph}{$T$-probability threshold}{29}{section*.12}
-\contentsline {subsubsection}{\numberline {5.1.3}Decision threshold voting}{29}{subsubsection.5.1.3}
-\contentsline {paragraph}{1/2-probability threshold}{30}{section*.13}
-\contentsline {paragraph}{$T$-probability threshold}{31}{section*.14}
-\contentsline {subsection}{\numberline {5.2}Multiple attempt approach}{31}{subsection.5.2}
-\contentsline {subsubsection}{\numberline {5.2.1}Condorcet's jury theorietical estimation}{32}{subsubsection.5.2.1}
-\contentsline {subsubsection}{\numberline {5.2.2}Condorcet's jury empirical results}{34}{subsubsection.5.2.2}
-\contentsline {paragraph}{$T$-probability threshold with majority voting}{34}{section*.15}
-\contentsline {paragraph}{1/2-probability threshold with decision threshold voting}{34}{section*.16}
-\contentsline {paragraph}{$T$-probability threshold with decision threshold voting}{35}{section*.17}
-\contentsline {paragraph}{1/2-probability threshold with majority voting}{35}{section*.18}
-\contentsline {subsubsection}{\numberline {5.2.3}Theoretical and empirical results comparison}{36}{subsubsection.5.2.3}
-\contentsline {section}{\numberline {6}Discussion}{37}{section.6}
-\contentsline {section}{\numberline {7}Conclusion}{38}{section.7}
-\contentsline {section}{\numberline {A}Appendix 1}{42}{appendix.1}
+\contentsline {paragraph}{}{11}{section*.9}
+\contentsline {subsection}{\numberline {1.3}Emotiv EPOC}{12}{subsection.1.3}
+\contentsline {subsection}{\numberline {1.4}Short-time Fourier transform}{14}{subsection.1.4}
+\contentsline {subsection}{\numberline {1.5}Classification task}{14}{subsection.1.5}
+\contentsline {subsection}{\numberline {1.6}Random Forest algorithm}{15}{subsection.1.6}
+\contentsline {subsection}{\numberline {1.7}Collaborative Brain-Computer Interface}{16}{subsection.1.7}
+\contentsline {section}{\numberline {2}Contribution}{18}{section.2}
+\contentsline {subsection}{\numberline {2.1}Overview}{18}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Experimental design}{19}{subsection.2.2}
+\contentsline {subsubsection}{\numberline {2.2.1}Targets}{21}{subsubsection.2.2.1}
+\contentsline {subsection}{\numberline {2.3}Implementation}{22}{subsection.2.3}
+\contentsline {subsubsection}{\numberline {2.3.1}Raw data reader}{23}{subsubsection.2.3.1}
+\contentsline {subsubsection}{\numberline {2.3.2}Preprocessor}{23}{subsubsection.2.3.2}
+\contentsline {subsubsection}{\numberline {2.3.3}Data storer}{23}{subsubsection.2.3.3}
+\contentsline {subsubsection}{\numberline {2.3.4}Classifier}{24}{subsubsection.2.3.4}
+\contentsline {section}{\numberline {3}Methods}{25}{section.3}
+\contentsline {subsection}{\numberline {3.1}Sample-based action predictor}{25}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}\sfrac {1}{2}-probability threshold}{25}{subsubsection.3.1.1}
+\contentsline {subsubsection}{\numberline {3.1.2}$T$-probability threshold}{26}{subsubsection.3.1.2}
+\contentsline {subsection}{\numberline {3.2}Voting-based action predictor}{26}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {3.2.1}Majority voting}{26}{subsubsection.3.2.1}
+\contentsline {subsubsection}{\numberline {3.2.2}Decision threshold voting}{26}{subsubsection.3.2.2}
+\contentsline {subsection}{\numberline {3.3}Action prediction based on multiple attempts}{26}{subsection.3.3}
+\contentsline {section}{\numberline {4}Experimental Results}{28}{section.4}
+\contentsline {subsection}{\numberline {4.1}Single attempt approach}{28}{subsection.4.1}
+\contentsline {subsubsection}{\numberline {4.1.1}Sample classification without voting approach}{28}{subsubsection.4.1.1}
+\contentsline {paragraph}{\sfrac {1}{2}-probability threshold}{28}{section*.10}
+\contentsline {paragraph}{$T$-probability threshold}{29}{section*.11}
+\contentsline {subsubsection}{\numberline {4.1.2}Majority voting}{31}{subsubsection.4.1.2}
+\contentsline {paragraph}{\sfrac {1}{2}-probability threshold}{31}{section*.12}
+\contentsline {paragraph}{$T$-probability threshold}{31}{section*.13}
+\contentsline {subsubsection}{\numberline {4.1.3}Decision threshold voting}{31}{subsubsection.4.1.3}
+\contentsline {paragraph}{\sfrac {1}{2}-probability threshold}{32}{section*.14}
+\contentsline {paragraph}{$T$-probability threshold}{33}{section*.15}
+\contentsline {subsection}{\numberline {4.2}Multiple attempt approach}{33}{subsection.4.2}
+\contentsline {subsubsection}{\numberline {4.2.1}Condorcet's jury theorietical estimation}{34}{subsubsection.4.2.1}
+\contentsline {subsubsection}{\numberline {4.2.2}Condorcet's jury empirical results}{36}{subsubsection.4.2.2}
+\contentsline {paragraph}{$T$-probability threshold with majority voting}{36}{section*.16}
+\contentsline {paragraph}{\sfrac {1}{2}-probability threshold with decision threshold voting}{36}{section*.17}
+\contentsline {paragraph}{$T$-probability threshold with decision threshold voting}{37}{section*.18}
+\contentsline {paragraph}{\sfrac {1}{2}-probability threshold with majority voting}{37}{section*.19}
+\contentsline {subsubsection}{\numberline {4.2.3}Theoretical and empirical results comparison}{38}{subsubsection.4.2.3}
+\contentsline {section}{Conclusion}{39}{section*.20}
+\contentsline {paragraph}{Limitations}{39}{section*.21}
+\contentsline {paragraph}{Future work}{39}{section*.22}
+\contentsline {paragraph}{Conclusion}{39}{section*.23}
+\contentsline {section}{\numberline {A}}{43}{appendix.1}
