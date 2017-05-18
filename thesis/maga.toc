@@ -15,22 +15,22 @@
 \contentsline {paragraph}{}{11}{section*.9}
 \contentsline {subsection}{\numberline {1.3}Emotiv EPOC}{12}{subsection.1.3}
 \contentsline {subsection}{\numberline {1.4}Short-time Fourier transform}{14}{subsection.1.4}
-\contentsline {subsection}{\numberline {1.5}Classification task}{14}{subsection.1.5}
+\contentsline {subsection}{\numberline {1.5}Classification task}{15}{subsection.1.5}
 \contentsline {subsection}{\numberline {1.6}Random Forest algorithm}{15}{subsection.1.6}
 \contentsline {subsection}{\numberline {1.7}Collaborative Brain-Computer Interface}{16}{subsection.1.7}
 \contentsline {section}{\numberline {2}Contribution}{18}{section.2}
 \contentsline {subsection}{\numberline {2.1}Overview}{18}{subsection.2.1}
 \contentsline {subsection}{\numberline {2.2}Experimental design}{19}{subsection.2.2}
-\contentsline {subsubsection}{\numberline {2.2.1}Targets}{21}{subsubsection.2.2.1}
+\contentsline {subsubsection}{\numberline {2.2.1}Targets}{20}{subsubsection.2.2.1}
 \contentsline {subsection}{\numberline {2.3}Implementation}{22}{subsection.2.3}
-\contentsline {subsubsection}{\numberline {2.3.1}Raw data reader}{23}{subsubsection.2.3.1}
+\contentsline {subsubsection}{\numberline {2.3.1}Raw data reader}{22}{subsubsection.2.3.1}
 \contentsline {subsubsection}{\numberline {2.3.2}Preprocessor}{23}{subsubsection.2.3.2}
 \contentsline {subsubsection}{\numberline {2.3.3}Data storer}{23}{subsubsection.2.3.3}
-\contentsline {subsubsection}{\numberline {2.3.4}Classifier}{24}{subsubsection.2.3.4}
+\contentsline {subsubsection}{\numberline {2.3.4}Classifier}{23}{subsubsection.2.3.4}
 \contentsline {section}{\numberline {3}Methods}{25}{section.3}
 \contentsline {subsection}{\numberline {3.1}Sample-based action predictor}{25}{subsection.3.1}
 \contentsline {subsubsection}{\numberline {3.1.1}\sfrac {1}{2}-probability threshold}{25}{subsubsection.3.1.1}
-\contentsline {subsubsection}{\numberline {3.1.2}$T$-probability threshold}{26}{subsubsection.3.1.2}
+\contentsline {subsubsection}{\numberline {3.1.2}\textit {T}-probability threshold}{26}{subsubsection.3.1.2}
 \contentsline {subsection}{\numberline {3.2}Voting-based action predictor}{26}{subsection.3.2}
 \contentsline {subsubsection}{\numberline {3.2.1}Majority voting}{26}{subsubsection.3.2.1}
 \contentsline {subsubsection}{\numberline {3.2.2}Decision threshold voting}{26}{subsubsection.3.2.2}
@@ -47,7 +47,7 @@
 \contentsline {paragraph}{\sfrac {1}{2}-probability threshold}{32}{section*.14}
 \contentsline {paragraph}{$T$-probability threshold}{33}{section*.15}
 \contentsline {subsection}{\numberline {4.2}Multiple attempt approach}{33}{subsection.4.2}
-\contentsline {subsubsection}{\numberline {4.2.1}Condorcet's jury theorietical estimation}{34}{subsubsection.4.2.1}
+\contentsline {subsubsection}{\numberline {4.2.1}Condorcet's jury theoretical estimation}{34}{subsubsection.4.2.1}
 \contentsline {subsubsection}{\numberline {4.2.2}Condorcet's jury empirical results}{36}{subsubsection.4.2.2}
 \contentsline {paragraph}{$T$-probability threshold with majority voting}{36}{section*.16}
 \contentsline {paragraph}{\sfrac {1}{2}-probability threshold with decision threshold voting}{36}{section*.17}

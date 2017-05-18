@@ -152,11 +152,6 @@
 
 
 
-
-
-
-
-
 %%% BEGIN DOCUMENT
 \begin{document}
 
@@ -251,17 +246,17 @@ P170
 
 \newpage
 \selectlanguage{estonian}
-\noindent\textbf{\large Tõhusa aju-arvuti liidese suunas: täiuslikku täpsuse saavutamine aja ohverdamisega}
+\noindent\textbf{\large Tõhusa aju-arvuti liidese suunas: täiusliku täpsuse saavutamine aja ohverdamisega}
 \vspace*{2ex}
 {\flushleft{\textbf{Kokkuvõte:}} }
 
-Aju-arvuti liides (AAL) on süsteem aju elektriliste impulssite välja võtmiseks ja nende kasutumiseks arvuti tarkvara juhtimiseks. AAL opereerimiseks peab kasutaja kontsentreeruma mingile mõttelisele ülesandele. Lisaks impulsite mõõtmisele muudab AAL elekroonilisi signaale digitaalseks ja selle järgi tuvastab vastava arvuti käsu. Kahjuks on õige käsu tuvastamise tõenäosus alati alla
+Aju-arvuti liides (AAL) on süsteem aju elektriliste impulsite välja võtmiseks ja nende kasutamiseks arvuti tarkvara juhtimiseks. AAL opereerimiseks peab kasutaja kontsentreeruma mingile mõttelisele ülesandele. Lisaks impulsite mõõtmisele muudab AAL elekroonilisi signaale digitaalseks ja selle järgi tuvastab vastava arvuti käsu. Kahjuks on õige käsu tuvastamise tõenäosus alati alla
 100\%, mistõttu  AAL süsteemide tõhusus on võrdlemisi madal.
 
-Madal tõhusus on AAL-i jaoks suureks probleemiks, sest senikaua kuni need süsteemid pakuvad madalaid tuvastamise täpsuseid, jäävad need paljudes valdkondades ilma kasutamiseta. Antud probleemi lahendamiseks enamasti üritatakse tõsta AAL-i täpsust ühe kontsentreerimiskatse raames ja ei pane tähelepanu kontsentreerimiskatse kestvusele. Meie lähenemine aga põhineb arusaamisel, kui palju kontsentreerimiskatseid on vaja kasutajal järjest teostada (s.t kui kaua aega on nõutud), et saavutada 99\% täpsus.
+Madal tõhusus on AAL-i jaoks suureks probleemiks, sest senikaua kuni need süsteemid pakuvad madalaid tuvastamise täpsuseid, jäävad need paljudes valdkondades ilma kasutamiseta. Antud probleemi lahendamiseks enamasti üritatakse tõsta AAL-i täpsust ühe kontsentreerumiskatse raames ja ei pöörata tähelepanu kontsentreerumiskatse kestvusele. Meie lähenemine aga põhineb arusaamisel, kui palju kontsentreerumiskatseid on vaja kasutajal järjest teostada (s.t kui kaua aega on nõutud), et saavutada 99\% täpsus.
 
-Selles töös kirjeldatud lahendus põhineb Condorcet kohtu teoreemil \cite{condorcets}. Teoreem väidab, et kui on olemas kaks valikuvõimalust ja tõenäosus valida $õiget$ on suurem kui 50\%, kui me teostame mitu valimiskatset järjest, siis tõenäosus, et valitakse õiget valikut tõuseb iga järgneva valimiskatsega. 
-Antud töös rakendasime põhilist Condorcet printsiipi aju-arvuti liidesele. Kõigepealt me arendame süsteemi mis on suuteline saavutada ühe mõttelise ülesande kontsentreerimiskatse täpsuseks rohkem kui 50\% ja seejärel proovime läbi mitu kontsentreerimiskatset parandamaks keskmist täpsust. Me eeldame, et kui kasutame piisava kontsentreerimiskatsete arvu, siis me jõuame 99\% klassifitseerimistäpsuseni. Me võrdleme teoreetilisi tulemusi eksperemendil saadud omadega ja arutleme neid.
+Selles töös kirjeldatud lahendus põhineb Condorcet kohtu teoreemil \cite{condorcets}. Teoreem väidab, et kui on olemas kaks valikuvõimalust ja tõenäosus valida \textit{õiget} on suurem kui 50\%, kui me teostame mitu valimiskatset järjest, siis tõenäosus, et valitakse õiget valikut tõuseb iga järgneva valimiskatsega. 
+Antud töös rakendasime põhilist Condorcet printsiipi aju-arvuti liidesele. Kõigepealt me arendame süsteemi, mis on suuteline saavutama ühe mõttelise ülesande kontsentreerumiskatse täpsuseks rohkem kui 50\% ja seejärel proovime läbi mitme kontsentreerumiskatse parandada keskmist täpsust. Me eeldame, et kui kasutada piisavat kogust kontsentreerumiskatseid, siis me jõuame 99\% klassifitseerimistäpsuseni. Me võrdleme teoreetilisi tulemusi eksperimentaalsetega ning arutleme nende üle.
 
 AAL tehnoloogia on võrdlemisi uus valdkond. Selle tehnoloogia täielik toomine meie igapäevaellu nõuab tugevat panust teadlastelt ja inseneeridelt, et muuta AAL usaldusväärseks süsteemiks. Antud töö eesmärk on panustada AAL süsteemi kindlusesse.
 
@@ -306,9 +301,8 @@ Current thesis structure is as follows:
 \item Background and State of the Art - significant technologies used in current work are described along with comparison to similar projects.
 \item Contribution - detailed overview of the idea, list of finished work, divided in the  main idea description and the required system design.
 \item Methods - the overview of the classification methods applied to determine classes for single or multiple data samples.
-\item Experimental results - the list of the accuracy results obtained by using different classification methods.
-\item Discussion - difference with the theoretical model and limitations of the system are provided.
-\item Conclusion - summary of the goal, expected and actual results with brief explanations and future adaptation propositions.
+\item Experimental results - the list of the accuracy results obtained by using different classification methods with the difference between the theoretically estimated.
+\item Conclusion - summary of the goal, limitations of the system with future adaptation propositions. 
 \end{itemize}
 
 \newpage
@@ -328,7 +322,7 @@ The Condorcet's jury theorem is defined by the following expression:
 where $N$ is the number of jurors, $p$ is the probability of the individual juror giving the true result, $\mu$ is the probability that a jury gives the true result.
 Based on the formula, the higher initial probability (single juror's probability) is, the less jurors it is required to reach the absolute probability.
 
-Our main idea's aspect is to produce multiple so-called jurors to be used in a voting system to increase their common probability of giving the right answer. The right answer probability, in our case, means the increase in quality of the BCI system performance. Single juror's probability in the current work perspective is the average probability of the right classification (i.e accuracy) using a single attempt (i.e users concentration attempt on a mental task). Accordingly, multiple jurors means the usage of multiple attempts or, in other words, combining multiple probabilities together which increases the accuracy for the correct classification, but requires more time from the user to perform one action.
+Our main idea's aspect is to produce multiple so-called jurors to be used in a voting system to increase their common probability of giving the right answer. The right answer probability, in our case, means the increase in quality of the BCI system performance. Single juror's probability in the current work perspective is the average probability of the right classification (i.e prediction accuracy) using a single attempt (i.e user's concentration attempt on a mental task). Accordingly, multiple jurors means the usage of multiple attempts or, in other words, combining multiple probabilities together which increases the accuracy for the correct classification, but requires more time from the user to perform one action.
 \begin{figure} [H]
 \begin{center}
 \label{fig:condorcet123}
@@ -340,7 +334,7 @@ Our main idea's aspect is to produce multiple so-called jurors to be used in a v
 Figure \ref{fig:condorcet123} shows that with a single juror's accuracy of 75\% it is required approximately 21 jurors to reach the near maximum accuracy.
 \subsection{Brain-computer interface}
 
-Brain-computer interface (BCI) is an interface that requires mental control from user to communicate with a device. It requires user to concentrate on a distinct task. Task types itself could have a large variety, for example to imagine the movement of the left hand or to stare at the picture of an animal. The interface records electroencephalographic (EEG) signals from the scalp surface which represent our brain activity. These signals have low amplitude (usually measured in microvolts), whereas frequencies above 30 Hz have especially low values which are close to zero. \cite{bci_vidal}
+Brain-computer interface (BCI) is an interface that requires mental control from user to communicate with it. BCI requires user to concentrate on a distinct task. Task types itself could have a large variety, for example to imagine the movement of the left hand or to stare at the picture of an animal. The interface records electroencephalographic (EEG) signals from the scalp surface which represent our brain activity. These signals have low amplitude (usually measured in microvolts), whereas frequencies above 30 Hz have especially low values which are close to zero. \cite{bci_vidal}
 
 The signals could be translated into control commands for the external devices, what is especially useful for the people suffering from locked-in (e.g. Brainstem stroke, severe polyneuropathy) or muscle control diseases.  BCI systems could give such people a possibility to control the environment, perform word processing or even operate a neuroprosthetics or orthosis.
 There are two types of BCI available: one way and two way. In case of one way type, only a computer is accepting signals from the measuring device, however a two way system deals with a bi-directional exchange of information between a computer and a measuring device. \cite{bci_shivangi}
@@ -348,28 +342,28 @@ There are two types of BCI available: one way and two way. In case of one way ty
 BCI system structure could be divided into four modules \cite{bci_shivangi}:
 \begin{enumerate}
 \item Source Module:
-This module digitizes and saves signals coming from brain without handling them. The source module component knows how to obtain data from the sensors and store them to the specifically formatted file. In addition, every recorded signal has its own labelled source, determined by the physical location of a sensor on a head. These sensor labels are stored along with the data samples, because they could be useful in the proceeding operations. 
+This module digitizes and saves signals coming from brain without handling them. The source module component knows how to obtain data from the sensors and store them to the specifically formatted file. In addition, every recorded signal has its own labeled source, determined by the physical location of a sensor on a head. These sensor labels are stored along with the data samples, because they could be useful in the proceeding operations. 
 \item Signal Processing Module:
 This module is responsible for conversion of raw data signals into something more meaningful for the upcoming classification algorithm. Conversion is divided in two stages: feature extraction and feature translation. The extraction considers receiving data from the source module and preparing them for translation module, which means obtaining the signal properties, like frequency domain values for the given sensors. The feature translation is an algorithm, which determines the identity of the control signal sent with a given signal data.
 \item User Application Module:
 In addition to signal processing module, an application module takes the control signal to perform operations in the application. Usually the application has its own graphical interface, which allows the user to select and think about some sort of targets, like letters, images, icons or directions. The user could also give his feedback about the prediction validity through the application. The feedback could be given orally or tactilely. 
 \item Operator Module:
-It is a module, which defines system constants and parameters, like the length of a single concentration attempt, targets or any kind of signal processing variables. In addition, this module could contain the functionality for visualising the raw signals measured from a head or the features used in signal processing module.
+It is a module, which defines system constants and parameters, like the length of a single concentration attempt, targets or any kind of signal processing variables. In addition, this module could contain the functionality for visualizing the raw signals measured from a head or the features used in signal processing module.
 \end{enumerate}
 \paragraph{}
-BCI use is a skill, which requires practicing. An algorithm, which translates the signal features to the control signal, should ``learn'' to output with more accuracy. Learning is performed, based on the input (target selection) provided by the user. That means, the user should participate in the algorithm teaching for many sessions. In addition, during the sessions, the user should try to concentrate in the way he usually does it. It means that if the user used to imagine a specific object or a movement to fulfil some mental task, then he/she should keep to continue to imagine the same object during all the sessions. Otherwise, such ``different thinking'' might leave a negative impact on the algorithm performance, because the signal features related to the same mental task could be way more different from each others and the classification model will not be really effective. This negative factor could be caused with a distraction experienced during the attempt or a missed focus during long-time experiments. Generally speaking, mental tasks require concentration and it takes time to get used to it.
+BCI use is a skill, which requires practicing. An algorithm, which translates the signal features to the control signal, should ``learn'' to output with more accuracy. Learning is performed, based on the input (target selection) provided by the user. That means, the user should participate in the algorithm teaching for many sessions. In addition, during the sessions, the user should try to concentrate in the way he usually does it. It means that if the user used to imagine a specific object or a movement to fulfill some mental task, then he/she should keep to continue to imagine the same object during all the sessions. Otherwise, such ``different thinking'' might leave a negative impact on the algorithm performance, because the signal features related to the same mental task could be way more different from each others and the classification model will not be really effective. This negative factor could be caused with a distraction experienced during the attempt or a missed focus during long-time experiments. Generally speaking, mental tasks require concentration and it takes time to get used to it.
 
-Every prediction task is an activity considered with a subject's concentration on a mental task (target). A target could be a tangible physical object or a picture. In that case concentration on the target will most probably mean staring it. But more common is that a concentration task is done without having any visible objects, but rather by thinking or imaging the given target.
+Every prediction task is an activity considered with a subject's concentration on a mental task (target). A target could be a tangible physical object or a picture. In that case concentration on the target will most probably mean staring it. Commonly, a concentration task is done without having any visible objects, but rather by thinking or imaging the given target.
 
 To summarize, BCI is a complex system, what has different connected layers and requires some practical skill to use it.
 \subsection{Emotiv EPOC}
 
-In order to obtain raw signal data from the brain, we use Emotiv EPOC EEG headset. It is a multi-channel wireless (communicates using Bluetooth) headset with 14 channels (sensors) for the following international locations \cite{emotiv}: AF3, F7, F3, FC5, T7, P7, O1, O2, P8, T8, FC6, F4, F8, AF4. The device converts an analog signal to digital with 14 bits resolution and 128 Hz sampling rate. The bandwith is 0.2 - 45 Hz. \cite{emotiv}
+In order to obtain raw signal data from the brain, we use Emotiv EPOC EEG headset. It is a multi-channel wireless (communicates using Bluetooth) headset with 14 channels (sensors) for the following international locations \cite{emotiv}: AF3, F7, F3, FC5, T7, P7, O1, O2, P8, T8, FC6, F4, F8, AF4. The device converts an analog signal to digital with 14 bits resolution and 128 Hz sampling rate. The bandwidth is 0.2 - 45 Hz. \cite{emotiv}
 
 \begin{figure} [H]
 \begin{center}
 \includegraphics[width=0.7\textwidth]{emotiv_eeg}
-\caption{Emotiv EEG headset sensor locations map. \cite{emotiv_eeg_pic}}
+\caption{Emotiv EEG headset sensor locations schema.~\protect\cite{emotiv_eeg_pic}}
 \label{fig:emotiv_eeg}
 \end{center}
 \end{figure}
@@ -385,17 +379,17 @@ To extract the features we decompose the raw signal into subwaves. Subwaves help
 \begin{figure} [H]
 \begin{center}
 \includegraphics[width=1\textwidth]{fft}
-\caption{Signal time domain conversion to frequency domain. \cite{fft} Complex signal is decomposed to sinusoids with the different frequencies and their amplitudes are used to build a frequency domain representation. }
+\caption{Signal time domain conversion to frequency domain. \cite{fft} Complex signal (red) is decomposed to sinusoids (blue) with the different frequencies and their amplitudes are used to build a frequency domain representation. }
 \end{center}
 \end{figure}
 
-In STFT, a signal is split into frames of N samples each, where N is a window length. Frames overlap with some percent between each other. Before the Fourier transform a Hanning window is applied to reduce aliasing of the signal. Finally, after Fourier transform within STFT the result is outputted. It contains the spectral analysis or, in order words, the amplitudes for different frequencies.
+In STFT, a signal is split into frames of N samples each, where N is a window length. Frames overlap with some percent between each other. Before the Fourier transform a window function is applied to reduce aliasing of the signal. Finally, after Fourier transform within STFT the result is outputted. It contains the spectral analysis or, in order words, the amplitudes for different frequencies.
 
 \subsection{Classification task}
 
-Despite the fact that relationships between some brainwaves and subject's mental states has been established, these mental states are too common and non-descriptive. For example they can help to distinguish if the subject is relaxing or concentrating on something, but more specific mental states tracking like concentrating on a certain target, a unique model should be trained for each subject. Features got from a BCI signal should be divided on groups defined by target type (i.e grouped by prediction class labels). The similarities (patterns) within the groups should be found and used to predict new input data. To define similarities a classification should be executed.
+Despite the fact that relationships between some brain signals and subject's mental states has been established, these mental states are too common and non-descriptive. For example they can help to distinguish if the subject is relaxing or concentrating on something, but for more specific mental states tracking like concentrating on a certain target, a unique model should be trained for each subject. Features got from a BCI signal should be divided on groups defined by target type (i.e grouped by prediction class labels). The similarities (patterns) within the groups should be found and used to predict new input data. To define similarities a classification should be executed.
 
-Classification is the task of learning a target function $f$ that maps each attribute set $x$ to one of the predefined class labels $y$ \cite{classification_basics}. A model received as a result of a classification could help distinguish between different target classes. Attribute set $x$(also known as features or key characteristics) could contain continuous (e.g real numbers) as well as discrete values (e.g labels).
+Classification is the task of learning a target function $f$ that maps each attribute set $x$ to one of the predefined class labels $y$ \cite{classification_basics}. A model received as a result of a classification could help distinguish between different target classes. Attribute set $x$ (also known as features or key characteristics) could contain continuous (e.g real numbers) as well as discrete values (e.g labels).
 
 As described above, the goal of translation phase is to understand what control signal has been described with signal features received from the extraction phase. That means we should classify our data samples, where the classes would be a set of targets a user should concentrate on. For generating a classification model a machine learning algorithm should be applied. 
 
@@ -404,7 +398,7 @@ A machine learning algorithm is a data-driven algorithm, that predicts in which 
 \item Supervised - creates a model with labeled (classified) input data samples, so that groups of data have own class label
 \item Unsupervised - the algorithm does not know anything about the data as well as the classes
 \end{itemize}
-Unsupervised algorithm is a good way to analyse the data without knowing how to use it and on which potential groups it could be split. However, in our case we know that we should split data according to classes (targets) and thus, chose a supervised learning machine algorithm.
+Unsupervised algorithm is a good way to analyze the data without certain knowledge how to use it and on which potential groups it could be split. However, in our case we know that we should split data according to classes (targets) and thus, chose a supervised learning machine algorithm.
 
 \subsection{Random Forest algorithm}
 
@@ -429,7 +423,7 @@ The application shows them images with animals (target) and images without anima
 
 Every subject had to train the algorithm and test it in a single user mode. Subjects managed to reach mean classification accuracy of 75.8\% with using mean response time (reaction time) 377 ms. Already this pointed on reliable prediction with single attempt usage. A collaborative classification was tried considering 5,10,15 subjects simultaneously which resulted 91.4\%, 97.6\% and 99.1\% accuracy respectively. This clearly shows improvement over the single attempt classification. 
 
-In case of multi-user approach a weighted voting system was used, where a subject with a better prediction statistics got more weight and influenced the output result more in the future classifications. Our goal is to use multiple attempts of a single user instead of single attempt of several users as the related work tends to do. Our way is to use optimized Random Forest classification algorithm which according to \cite{masso} could bring more precise result, than support vector machine (SVM) algorithm which is used in animal classifications. Finally, a single user approach has wider fields of use and is less complex in implementation compared to the multi-user technique.
+In case of multi-user approach a weighted voting system was used, where a subject with a better prediction statistics got more weight and influenced the output result more in the future classifications. Our goal is to use multiple attempts of a single user instead of single attempt of several users as the related work tends to do. Our way is to use optimized Random Forest classification algorithm which according to \cite{masso} could bring more precise result, than support vector machine (SVM) algorithm which is used in animal classifications. Finally, the multi-attempt approach described in our work has wider fields of use and is less complex in implementation compared to the multi-user technique.
 
 \newpage
 \section{Contribution}
@@ -444,7 +438,7 @@ In multiple attempt approach the final prediction result is estimated using a ma
 \begin{figure} [H]
 \begin{center}
 \includegraphics[height=12cm, width=1\textwidth]{main}
-\caption{A main concept of multiple attempt approach. If single attempt duration is 10s and it brings only one and the final result, then applying N attempts will give several intermediate results that are combined into the final prediction using majority voting}
+\caption{A main concept of multiple attempt approach. If single attempt duration is 10s and it brings only one and the final result, then applying N attempts will give several intermediate results that are converted into the final prediction using majority voting}
 \label{fig:condorcet}
 \end{center}
 \end{figure}
@@ -452,30 +446,30 @@ In multiple attempt approach the final prediction result is estimated using a ma
 \subsection{Experimental design}
 To provide an experimental platform for the research question a special system was designed and implemented along with the experimental flow. The general plan is to use a two-class (two-target) BCI system to collect the data necessary for the analysis. The flow for the experiment could be described as follows:
 \begin{enumerate}
-\item Record the training data. This includes recording of 141 task concentration single attempts with a length of 10 second, extracting their features and storing them as a dataset along with class labels that corresponds to attempt tasks. Our purpose is to get as many samples as we can in the reasonable amount of time. It is crucial to switch between stimuli in order to get balanced training dataset.
+\item Record the training data. This includes recording of 141 task concentration single attempts with a length of 10 second, extracting their features and storing them as a dataset along with class labels that corresponds to attempt tasks. It is crucial to switch between stimuli in order to get balanced training dataset.
 \item Determine the baseline accuracy. That means applying machine learning techniques on the given training data. It involves training of a classifier and it's validation. Accordingly to Condorcet's jury theorem it is wise to find the method with the highest accuracy and use it as a base predictor, since this will reduce the number of samples required to obtain the target accuracy. 
 \item Calculate the number of required attempts. Use Condorcet's jury theorem and the base predictor's accuracy to calculate how many attempts it is required to reach 99\% accuracy.
 Upon the best baseline accuracy will be found it will be calculated how many attempts it will be required to get the desired accuracy.
-\item Record the test data. Similarly to the first step it is required to measure a lot of brainwave signals and store them as a separate dataset. However, at that point the length of each session will depend on the number of attempts estimated in step 3 using Condorcet's jury theorem. Likewise in the training data collecting, it is important to keep the set balanced. Needs to be noted that the actual target labels will be stored to the dataset as well to be used in the followed accuracy calculation.
-\item Analyse the multiple attempt test data. In this stage the accuracy of multiple attempt approach will be determined. The results will be observed and compared to the base predictor accuracy. The dependency between the accuracy and the number of voters will be plotted for better overview.
+\item Record the test data. Similarly to the first step it is required to measure a lot of brain signals and store them as a separate dataset. It is important to keep the set balanced. However, at that point the length of each session will depend on the number of attempts estimated in step 3 using Condorcet's jury theorem. Needs to be noted that the actual target labels will be stored to the dataset as well to be used in the followed accuracy calculation.
+\item Analyze the multiple attempt test data. In this stage the accuracy of multiple attempt approach will be determined. The results will be observed and compared to the base predictor accuracy.
 \end{enumerate}
 
 Before each training or testing session a signal quality check is performed in order to ensure that the headset sensors are well placed on a head and the signal quality is high. This check is done using Emotiv Epoc Control Panel software. The training data is collected multiple times within several days which means that there is no guarantee that headset sensor locations were all the time on exactly the same place. 
 
-Random Forest classifier is set up to use 100 trees and the random seed is manually specified in order to avoid different results within the different classification session runs. The classifier instance is set to return the probabilities of targets instead of the predicted targets. Processing continuous probabilities instead of discrete targets gives flexibility in voting systems applied in the current work.
+Random Forest classifier is set up to use 100 trees and the random seed is manually specified in order to avoid different results within the different classification session runs. The classifier instance is set to return the probabilities of targets instead of the predicted targets. Processing continuous probabilities instead of discrete targets gives flexibility what allows to use different voting systems applied in the current work.
 
 \subsubsection{Targets}
 Current system is a two-class BCI, which stands for using only two targets for concentration and prediction. For the targets in the system the following classes were selected: 
 \begin{itemize}
 \item Relax - the mental task is to focus sight on a fixation cross and trying to meditate.
-\item Excitement - the high performance mental task where subject is focusing on a fixation cross and calculates mathematical expressions displayed on the screen.
+\item Excitement - the high performance mental task where subject is focusing on a fixation cross and calculates mathematical expressions displayed on the screen. The mathematical expression is printed near the fixation cross, to reduce subject's eye movement.
 \end{itemize}
 
-PsychoPy \cite{psychopy} library was used for displaying the experiments window. It provides a fixation cross on the screen in order to avoid target's eyes movement, what could cause artefacts in EEG signal. The example of the graphical user interface during the measurement session is shown on Figure \ref{fig:fnCompModel}:
+PsychoPy \cite{psychopy} library was used for displaying the experiments window. It provides a fixation cross on the screen in order to avoid target's eyes movement, what could cause artifacts in EEG signal. The example of the graphical user interface during the measurement session is shown on Figure \ref{fig:test_ui}:
 
 \begin{figure} [H]
 \begin{center}
-\label{fig:fnCompModel}
+\label{fig:test_ui}
 \includegraphics[width=0.8\textwidth]{test_ui}
 \caption{A dialog window displaying what a subject sees during a test session for the Excitement task. A red fixation cross is located at the center of the window. Mathematical expressions are printed as an Excitement task.}
 \end{center}
@@ -483,10 +477,10 @@ PsychoPy \cite{psychopy} library was used for displaying the experiments window.
 
 At the very beginning of the experiments when it was not really clear what targets produce better classification results the motor activity signals were used as targets:
 \begin{itemize}
-\item Left - the motor task considering imaging movement of the left hand.
-\item Right - the motor task considering imaging movement of the right hand.
+\item Left - the mental task considering imaging movement of the left hand.
+\item Right - the mental task considering imaging movement of the right hand.
 \end{itemize}
-After some constant unsuccessful (near to random) results using the motor tasks it was decided that mental task could be divided on a high and low performance types. Hence, $Excitement$ and $Relax$ targets were selected and showed better statistics.
+After some constant unsuccessful (near to random) prediction results using the $Left$ and $Right$ tasks it was decided that mental task could be divided on a high and low performance types. Hence, $Excitement$ and $Relax$ targets were selected and showed better statistics.
 
 With the several measurements and validations it was determined that 10 seconds is a suitable length for a measurement session. Taking into account that the short-time Fourier transformation extends the number of the input samples (since it uses sliding window), the single measurement session is containing 18 contains samples.
 
@@ -506,7 +500,6 @@ Some of the major components are described in the following subsections.
 \begin{center}
 \includegraphics[width=1\textwidth]{maga_application}
 \caption{The system components usage flow, while recording the test data}
-\label{fig:fnCompModel}
 \end{center}
 \end{figure}
 
@@ -516,9 +509,9 @@ This component is required to poll the Emotiv EPOC headset and store sent data t
 
 \subsubsection{Preprocessor}
 
-During preprocessing a set of raw samples is converted to a frequency domain representation. To do this the Short Time Fourier Transform is used with a sliding window. Sliding window technique allows to capture more precisely non-constant signals. Sliding window length equals to 1 s with 0.5 s overlapping. These factors increase the number of samples to $2*N-2$ where $N$ is the original number of samples. For example a BCI session with a duration of 1 minute will output 119 samples.
+During preprocessing a set of raw samples is converted to a frequency domain representation. To do this the Short Time Fourier Transform is used with a sliding window (we use SciPy \cite{scipy} function for that). Sliding window technique allows to capture more precisely non-constant signals. Sliding window length equals to 1 s with 0.5 s overlapping. These factors increase the number of samples to $2*N-2$ where $N$ is the original number of samples. For example a BCI attempt with a duration of 1 minute will output 118 samples.
 
-According to Emotiv EPOC specifications \cite{emotiv} 45 Hz is the maximum bandwidth value for the signal. In our implementation we use 1 -- 45 Hz for the frequency range. An example plot of obtained frequency domain values is shown in Appendix \ref{app:1}.
+According to Emotiv EPOC specifications \cite{emotiv} 45 Hz is the maximum bandwidth value for the signal. In our implementation we use 1 -- 45 Hz for the frequency range. An example plot of obtained frequency domain values is shown in Appendix A.
 
 \subsubsection{Data storer}
 
@@ -526,11 +519,11 @@ This component is responsible for data recording into CSV files after the run of
 
 \subsubsection{Classifier}
 
-Classifier component is responsible for determining a target (class) from the number of samples given by preprocessor component. Each sample (record) contains 630 features. This records compose a dataset which is fed up to a classifier (machine learning algorithm) to train it. 
+Classifier component is responsible for determining a target (class) from the number of samples given by preprocessor component. Each sample (record) contains 630 features (columns). This records compose a dataset which is fed up to a classifier (machine learning algorithm) to train it. 
 
-A 5-fold cross-validation is done in the current component. Technically this means selecting proportional validation data chunks (with a size of 20\% of the training dataset) from the whole dataset without overlapping and using the rest of the samples as training data. This will result in training several classifiers. These classifiers prediction outputs will be concatenated and used further as a training data prediction.
+A 5-fold cross-validation is done in the current component. This means selecting proportional validation data chunks (with a size of 20\% of the training dataset) from the whole dataset without overlapping and using the rest of the samples as training data. This will result in training several classifiers. These classifiers prediction outputs will be concatenated and used further as a training data prediction.
 
-Instead of discrete class prediction labels what could be returned by Random Forest (RF), we rather ask RF to return the probabilities for the labels to be predicted. It gives us flexibility to apply various techniques described in the subsequent section. RF is set up to use 100 trees, what was considered as the optimal number to obtain precise prediction results with reasonable time.
+Instead of discrete class prediction labels what could be returned by Random Forest (RF), we rather ask RF to return the probabilities for the labels to be predicted. It gives us possibility to apply various techniques described in the subsequent section. RF is set up to use 100 trees, what was considered as the optimal number to obtain precise prediction results with reasonable time.
 
 \newpage
 \section{Methods} \label{methods}
@@ -544,16 +537,16 @@ The given section describes different techniques (predictors) what are used to d
 
 \subsection{Sample-based action predictor}
 
-This predictor is used to determine what class label should be correspond to a given RF class probability. It is called sample-based because it decides what prediction result should be for one sample (i.e sample level prediction). To make the sample-based prediction we are using so-called \textit{probability threshold predictors} which are described as in Definition \ref{def:prb_thr}.
+This predictor is used to determine what class label should correspond to a given RF class probability. It is called sample-based because it decides what prediction result should be for one sample (i.e sample level prediction). To make the sample-based prediction we are using so-called \textit{probability threshold predictors} which are described as in Definition \ref{def:prb_thr}.
 \theoremstyle{definition}
 \begin{definition}
 \label{def:prb_thr}
 Probability threshold predictor is a method for classifying a sample using class probability estimated with Random Forest algorithm, where one of the prediction classes could be selected only if it has probability higher than the probability threshold. 
 \end{definition}
 In this work we will use two different types of probability thresholds described subsequently. 
-\subsubsection{\sfrac{1}{2}-probability threshold}
-This is a probability threshold of 50\% in two-class system. Using it, the class will be selected if its probability estimated by RF exceeds 50\% or \sfrac{1}{2}.
-\subsubsection{$T$-probability threshold}
+\subsubsection{\texorpdfstring{\sfrac{1}{2}-probability threshold}{Lg}}
+This is a probability threshold of 50\% in a two-class system. Using it, the class will be selected if its probability estimated by RF exceeds 50\% or \sfrac{1}{2}.
+\subsubsection{\textit{T}-probability threshold}
 For the given approach we dynamically calculate threshold $T$ for one distinct class. If RF estimated probability for this class exceeds $T$, then this class will be the result of the prediction, otherwise - the second. To find $T$ we set up different predictors with different thresholds in a range of 0-100\% with a step of 1\%. We compare the accuracies of these predictors and take one with the highest to use its threshold as $T$.
 
 \subsection{Voting-based action predictor}
@@ -574,7 +567,7 @@ Decision threshold voting is a method of estimating a final prediction result cl
 \subsection{Action prediction based on multiple attempts}
 In case of multiple attempt approach majority voting  is applied to the prediction results of individual attempts. For example, if a user should concentrate on a mental task for 5 attempts in a row, then as a result of applying sample-based and voting-based predictors there will be 5 classes -- each corresponds to a single attempt. To estimate a single class from them majority voting is used.
 
-To fulfil this approach and see how we can actually increase the accuracy of a BCI system we:
+To fulfill this approach and see how we can actually increase the accuracy of a BCI system we:
 \begin{enumerate}
 \item tried out different sample-based and voting-based predictors to estimate the single concentration attempt accuracies (baseline accuracies),
 \item using Condorcet's jury theorem and the baseline accuracies calculated the minimum number of concentration attempts required to reach accuracy of 99\% for each predictor,
@@ -611,7 +604,6 @@ In this approach only sample-based predictors are used, without using any of the
 
 The average prediction accuracy on the test data is determined as \textbf{67.1\%}. Based on the prediction results the following confusion matrix is constructed:
 \begin{table}[H]
- \label{tab:title} 
 \begin{center}
   \begin{tabular}{ | c | c | c | c | }
     \hline
@@ -653,7 +645,7 @@ Comparing the prediction accuracies using different thresholds and selecting the
     \hline
   \end{tabular}
 \end{center}
-\caption{Confusion matrix showing classifier's prediction performance using $T$-probability threshold without voting, where $T$ for $Excitement$ is 0.54. The accuracy is 68.4\%.} \label{tab:title} 
+\caption{Confusion matrix showing classifier's prediction performance using $T$-probability threshold without voting, where $T$ for $Excitement$ is 0.54. The accuracy is 68.4\%.}
 \end{table}
 
 \subsubsection{Majority voting}
@@ -697,13 +689,13 @@ Using the $T$ threshold ($T$=0.54) that was determined in the Section \ref{no-vo
 
 \subsubsection{Decision threshold voting}
 
-The following approach is based on calculating the voting threshold which brings the highest accuracy. The decision threshold is defined as the minimum number of occurrences of a class in a series of attempts to make this class win in a vote. In our case a threshold is applied to the $Excitement$ class, since it is a high-accuracy class. The dependency between the threshold value and the accuracy is shown on Figure \ref{fig:fnCompModel}.
+The following approach is based on calculating the voting threshold which brings the highest accuracy. The decision threshold is defined as the minimum number of occurrences of a class in a series of attempts to make this class win in a vote. In our case a threshold is applied to the $Excitement$ class, since it is a high-accuracy class. The dependency between the threshold value and the accuracy is shown on Figure \ref{fig:threshold_accuracy_curve}.
 
 \begin{figure} [H]
 \begin{center}
 \includegraphics[width=1\textwidth]{threshold_accuracy_curve}
 \caption{Prediction accuracy dependency on the Excitement threshold value}
-\label{fig:fnCompModel}
+\label{fig:threshold_accuracy_curve}
 \end{center}
 \end{figure}
 
@@ -751,11 +743,10 @@ Despite that this approach gives different values in confusion matrix from the \
 \subsection{Multiple attempt approach}
 
 In this section we describe what are the estimated and actual accuracy results for multiple attempt approach. During the estimations single attempt accuracies are used.
-\subsubsection{Condorcet's jury theorietical estimation}\label{condorcet1}
+\subsubsection{Condorcet's jury theoretical estimation}\label{condorcet1}
 Based on the predictors accuracy results for single attempt approach we define how many attempts it is required to reach the minimum accuracy of 99\%. Using Condorcet's jury theorem we have calculated the number of required attempts and composed the following comparative table. The table is ordered by the prediction values of the accuracies:
 
 \begin{table}[H]
-\label{tab:title} 
 \begin{center}
   \begin{tabular}{ | l | c | c | c | }
     \hline
@@ -777,14 +768,12 @@ According to the given results the $T$-probability threshold with majority votin
 \begin{center}
 \includegraphics[width=1\textwidth]{condorcet_dependency_training}
 \caption{Theoretical estimate of the number of attempts and the expected accuracy for different predictors. Note: \sfrac{1}{2}-probability threshold with decision threshold voting is overlapping with $T$-probability threshold with decision threshold voting.}
-\label{fig:fnCompModel}
 \end{center}
 \end{figure}
 
 Along with $T$-probability threshold with majority voting predictor, we estimate the prediction accuracies for the other top 3 methods to compare their empirical results as well. Since they should have different accuracies for 9 attempts, we define the following table, where the expected accuracies for 9 attempts are defined.
 
 \begin{table}[H]
-\label{tab:title} 
 \begin{center}
   \begin{tabular}{ | l | c | c | c | }
     \hline
@@ -873,11 +862,11 @@ The given approach has the prediction accuracy of \textbf{76.2\%}.
 \end{table}
 
 \subsubsection{Theoretical and empirical results comparison}
-
+\renewcommand{\arraystretch}{2}
 To compare the theoretical and empirical results for the prediction accuracies based on 9 attempts the following table is built:
 \begin{table}[H]
 \begin{center}
-  \begin{tabular}{ | l | c | c | c | }
+  \begin{tabular}{ | c | c | c | c | }
     \hline
     Method &\parbox[c]{1.8cm}{\raggedright Expected accuracy for 9 attempts (\%)} &\parbox[c]{1.8cm}{\raggedright Actual accuracy for 9 attempts (\%)} &\parbox[c]{1.8cm}{\raggedright Difference (\%)}\\ \hline
     \parbox[c]{7cm}{\raggedright $T$-probability threshold with majority voting} & 99.6 & 88.1 & 11.5 \\ \hline
@@ -917,13 +906,13 @@ Considering that we did not reach our goal accuracy of 99\% in multi-attempt app
 
 \newpage
 \bibliographystyle{unsrt}
-\bibliography{maga-bbl}
+\bibliography{maga}
 
 \newpage
 
 \section*{Appendix A: Visualization of the signal in frequency space}
-\addcontentsline{toc}{section}{Appendix A}
 \label{app:1}
+\addcontentsline{toc}{section}{Appendix A}
 \begin{figure} [H]
 \begin{center}
 \includegraphics[width=1\textwidth]{left_amplitudes}
@@ -932,7 +921,7 @@ Considering that we did not reach our goal accuracy of 99\% in multi-attempt app
 \end{figure}
 
 \newpage
-\section*{Appendix B: Source code repository URL}
+\section*{Appendix B: Source code repository}
 The source code for the given implementation is stored in GitHub public repository:
 \url{https://github.com/jevgeniS/multiattempt-bci}
 \addcontentsline{toc}{section}{Appendix B}

@@ -2,13 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fca26db5-63ba-4520-b9df-cbed9f335992" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../thesis/bachelor-thesis.bib" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../thesis/bachelors-thesis-template.aux" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../thesis/bachelors-thesis-template.bbl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../thesis/bachelors-thesis-template.blg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../thesis/bachelors-thesis-template.out" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../thesis/bachelors-thesis-template.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../thesis/bachelors-thesis-template.synctex.gz" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../thesis/bachelors-thesis-template.tdo" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../thesis/bachelors-thesis-template.tex" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../thesis/bachelors-thesis-template.toc" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../thesis/maga.pdf" afterPath="$PROJECT_DIR$/../thesis/maga.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../thesis/maga.synctex.gz" afterPath="$PROJECT_DIR$/../thesis/maga.synctex.gz" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../thesis/maga.aux" afterPath="$PROJECT_DIR$/../thesis/maga.aux" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../thesis/maga.out" afterPath="$PROJECT_DIR$/../thesis/maga.out" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../thesis/maga.tex" afterPath="$PROJECT_DIR$/../thesis/maga.tex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../thesis/maga.toc" afterPath="$PROJECT_DIR$/../thesis/maga.toc" />
     </list>
     <ignored path="multiattempt-bci.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -131,6 +136,16 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="multiattempt-bci" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="multiattempt-bci" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="multiattempt-bci" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
