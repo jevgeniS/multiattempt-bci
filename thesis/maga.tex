@@ -6,7 +6,7 @@
 \usepackage[a4paper]{geometry}
 \usepackage{float}
 \usepackage{xcolor}
-\usepackage{appendix}
+\usepackage[titletoc,toc,title]{appendix}
 \usepackage{xfrac}
 % Use package babel for English or Estonian 
 % If you use Estonian make sure that Estonian hyphenation is installed 
@@ -897,6 +897,10 @@ From these we conclude that repeating classification attempts using imperfect cl
 \section*{Conclusion}
 \addcontentsline{toc}{section}{Conclusion}
 
+Nowadays BCI system performance is mostly measured with a prediction accuracy. State of the art prediction accuracies of modern BCIs are far from optimal and this prevents us from having reliable BCI systems. Reliability is a key factor for the most of the technological or medical industries, that means that current BCI systems are not suitable for most of the practical applications. The approach proposed in this work could leverage using time as a measure of performance instead of accuracy. Unlike former BCI systems, the multi-attempt approach does not have meaningful limitations in prediction accuracy. Their accuracy could be always more than 99.9\%, what is high enough to  provide their spread to different industries and our daily life. However, that means that BCI systems will provide their own time requirements, what should fit into the business side's limitations. On the other hand, the given approach allows flexibility in the time sacrificing and accuracy selection -- users could regulate BCI performance with the time they apply to a concentration on a mental task.
+
+In order to make all this available it is required for each BCI system to provide its time/accuracy dependency model what will describe how the accuracy will be improved within applied time. 
+
 
 \paragraph{Limitations}~\\
 
@@ -905,18 +909,11 @@ The first major limitation for this work is the number of the attempts used in m
 Training and test data amount could be higher. In total we have measured 42 multi-attempt concentrations, what corresponds to the same number of classification results for multi-attempt approach. This number is used to calculate the average prediction accuracy of multi-attempt solution, what is obviously too small.
 Another limitation is considering the training data, where we are using only 2535 samples. Increase of this number should positively influence on the classifier's performance and thus it could be expected that test data would be predicted better.
 
-All the BCI recordings were done from the author of the thesis, what means that only one person was participating in the mental experiments. The accuracy numbers obtained for single and multiple attempt approaches could be different if the subject would be another person. It would be more precise to carry out these experiments on group of subjects and take their average results as final.
+All the BCI recordings were done on the author of the thesis, that means that only one person was participating in the mental experiments. The accuracy numbers obtained for single and multiple attempt approaches could be different if the subject would be another person. It would be more precise to carry out these experiments on group of subjects and take their average results as final.
 
 \paragraph{Future work}~\\
 
-Considering that we did not reach our goal accuracy of 99\% in multi-attempt approach, it would be reasonable to try higher number of attempts for the concentration  and get actually know when the goal accuracy will be reached. 
-
-\paragraph{Conclusion}~\\
-
-Nowadays BCI system performance is mostly measured with a prediction accuracy. Using this parameter the systems could be compared between each other and selected regarding to certain business requirements. Due to the prediction accuracy boundaries there is no consistent way of having reliable BCI systems. Reliability is a key factor for the most of the technological or medical industries, what means that BCI systems are not very suitable to them. The approach proposed in the given work could leverage using time as a performance measurement unit instead of accuracy. Unlike former BCI systems, using the multi-attempt approach will not have meaningful limitations in prediction accuracy. Their accuracy could be always more than 99.9\%, what is high enough to  provide their spread to different industries and our daily life. However, that means that BCI systems will provide their own time requirements, what should fit into the business side's limitations. On the other hand, the given approach allows flexibility in the time sacrificing and accuracy selection -- users could regulate BCI performance with the time they apply to a concentration on a mental task.
-
-In order to make all this available it is required for each BCI system to provide its time/accuracy dependency model what will describe how the accuracy will be improved within applied time. 
-
+Considering that we did not reach our goal accuracy of 99\% in multi-attempt approach, it would be reasonable to try running in such a mode where the user has to repeat the attempts for as long as it takes to reach 99\% accuracy. Once this mode is implemented we will run the experiments on multiple test subjects to estimate the number of attempts and time per action required to reach 99\% accuracy.
 
 \newpage
 \input{maga-bbl.bbl}
@@ -925,8 +922,8 @@ In order to make all this available it is required for each BCI system to provid
 
 \newpage
 
-\appendix
-\section{}
+\section*{Appendix A: Visualization of the signal in frequency space}
+\addcontentsline{toc}{section}{Appendix A}
 \label{app:1}
 \begin{figure} [H]
 \begin{center}
@@ -934,6 +931,12 @@ In order to make all this available it is required for each BCI system to provid
 \caption{A sample frequency domain plot for a signal from concentration on ``Left'' mental task. Horizontal axis is measured in Hz. Vertical in $\mu$V.}
 \end{center}
 \end{figure}
+
+\newpage
+\section*{Appendix B: Source code repository URL}
+The source code for the given implementation is stored in GitHub public repository:
+\url{https://github.com/jevgeniS}
+\addcontentsline{toc}{section}{Appendix B}
 
 \pagebreak
 \section*{\small Non-exclusive licence to reproduce thesis and make thesis public}
@@ -967,7 +970,7 @@ I certify that granting the non-exclusive licence does not infringe the intellec
 \end{tabbing}
 
 \noindent
-Tartu, dd.mm.yyyy
+Tartu, 18.05.2017
 
 
 \end{document}
