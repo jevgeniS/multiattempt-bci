@@ -13,7 +13,7 @@ class DataStorer(object):
         self.f_name = f_name
 
     def file_path(self):
-        return "datasets/" + self.f_name
+        return "../../datasets/" + self.f_name
 
     def store(self, rows, timestamp):
         #TODO: writer leaves empty first line in the file
